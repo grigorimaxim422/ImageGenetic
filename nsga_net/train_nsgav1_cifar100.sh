@@ -1,0 +1,1 @@
+python3 -m validation.trainc100 --net_type macro --cutout --batch_size 128 --epochs 1 #--check_only

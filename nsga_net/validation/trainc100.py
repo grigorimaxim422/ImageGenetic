@@ -56,7 +56,7 @@ parser.add_argument('--check_only', action='store_true', default=False, help='Do
 parser.add_argument('--model_name', type=str, default='weight.pt', help='(options) use your model weight file')
 args = parser.parse_args()
 
-args.save = 'train-{}-{}'.format(args.save, time.strftime("%Y%m%d-%H%M%S"))
+args.save = '../saved_nsgav1-model-{}'.format(time.strftime("%Y%m%d%H%M%S"))
 utils.create_exp_dir(args.save)
 
 device = 'cuda'
