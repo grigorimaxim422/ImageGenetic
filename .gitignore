@@ -20,3 +20,5 @@ cifar100/cifar-*/
 
 !saved_model/first.pt
 !saved_model/second.pt
+!first.pt
+!second.pt
