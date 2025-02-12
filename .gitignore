@@ -1,12 +1,13 @@
 __pycache__/
 model/__pycache__/
 *.pyc
-wandb/
 cache/
 data/
 data100/
 data100v2/
 data100*/
+saved_model/
+saved_*/
 venv/
 env/
 nsga_net/train-EXP-*/

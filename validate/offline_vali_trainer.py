@@ -8,9 +8,20 @@ import logging
 import numpy as np
 import torch.backends.cudnn as cudnn
 import random
+import argparse
 import os
 import math
+import asyncio
+from validate.forward import *
 
+parser = argparse.ArgumentParser(description='PyTorch CIFAR100 Training')
+parser.add_argument('--epochs', type=int, default=600, help='num of training epochs')
+parser.add_argument('--validate_epochs', type=int, default=50, help='num of training epochs to test weight model and NAS algorithm')
+parser.add_argument('--learning_rate', type=float, default=0.025, help="learning rate")
+parser.add_argument('--model_path', type=str, default="saved_model/model.pt", help="path of saved torchscript model")
+args = parser.parse_args()
+    
+    
 class Cutout(object):
     def __init__(self, length):
         self.length = length
@@ -136,22 +147,7 @@ class OfflineValiTrainer:
 
                 # Test the model after each epoch
                 test_accuracy = self.test(model)
-
-            # Check for overfitting
-            # if epoch <= 13 and test_accuracy >= 90:
-            #     raise Exception(f"Overfit detected: Epoch {epoch + 1}, Test Accuracy {test_accuracy:.2f}%")
-
-            # if epoch <= 3 and test_accuracy >= 80:
-            #     raise Exception(f"Overfit detected: Epoch {epoch + 1}, Test Accuracy {test_accuracy:.2f}%")
-    
-            # if epoch == 49:
-            #     train_accuracy = 100 * correct / total  # Calculate final training accuracy
-            #     if abs(train_accuracy - test_accuracy) > 5:
-            #         raise Exception(f"Significant accuracy difference detected: Epoch {epoch + 1}, "
-            #                         f"Train Accuracy {train_accuracy:.2f}%, Test Accuracy {test_accuracy:.2f}%")
-
-            
-
+         
         return model
 
     def test(self, model):
@@ -203,29 +199,21 @@ logging.basicConfig(level=logging.INFO)
 
     
 async def main():
-    try:
-        
-        save_dir = "saved_model"        
-                
-        if not os.path.exists(save_dir):
-            os.makedirs(save_dir)
-            
-        if not os.path.exists("cache"):
-            os.makedirs("cache")
-            
-            
-        save_path = os.path.join(save_dir, 'model.pt')
-        model = torch.jit.load(save_path)
-        print(f"model loaded from {save_path}")
+    try:                    
+                    
+        model = torch.jit.load(args.model_path)
+        print(f"model loaded from {args.model_path}")
         
         params = sum(param.numel() for param in model.parameters())
         params = round_to_nearest_significant(params, 1)
         macs = calc_flops_onnx(model)
+        print("-------------------------------")
         print(f"A.🖥️ Params: {params/1000}K")    
-        print(f"A.🖥️ Flops: {macs/1000000}M")    
+        print(f"A.🖥️ Flops: {macs/1000000}M")   
+        print("-------------------------------") 
         await asyncio.sleep(5)        
         
-        trainer = OfflineValiTrainer(epochs=50, learning_rate=0.025)    
+        trainer = OfflineValiTrainer(epochs=args.validate_epochs, learning_rate=args.learning_rate)    
         trainer.initialize_weights(model)
         retrained_model = trainer.train(model)
         accuracy = math.floor(trainer.test(retrained_model))            
@@ -233,11 +221,13 @@ async def main():
         retrained_params = round_to_nearest_significant(retrained_params, 1)
         retrained_macs = calc_flops_onnx(retrained_model)
         
-        print(f"B.🖥️ Accuracy: {accuracy}")    
+        print("-------------------------------")
+        print(f"B.🖥️ Accuracy: {accuracy}%")    
         print(f"B.🖥️ Params: {retrained_params/1000}K")    
         print(f"B.🖥️ Flops: {retrained_macs/1000000}M")    
+        print("-------------------------------")
     except Exception as e:
         logging.error(f"Failed to advertise model on the chain: {e}")
 
-if __name__ == '__main__':        
+if __name__ == '__main__':            
     asyncio.run(main())

@@ -8,24 +8,26 @@ import os
 import sys
 import logging
 
-import argparse
 import requests
 import datetime as dt
 from model.dummy_trainer import DummyTrainer
 
-from model.offline_vali_trainer import OfflineValiTrainer
-from validator.forward import  *
+from validate.offline_vali_trainer import OfflineValiTrainer
+from validate.forward import  *
 
 logging.basicConfig(level=logging.INFO)
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR100 Training')
 parser.add_argument('--epochs', type=int, default=600, help='num of training epochs')
+parser.add_argument('--validate_epochs', type=int, default=50, help='num of training epochs')
+parser.add_argument('--learning_rate', type=float, default=0.025, help='learning rate')
+parser.add_argument('--model_path', type=str, default="saved_model/model.pt", help="path of saved torchscript model")
+
 args = parser.parse_args()
     
 async def main():
-    try:   
-        upload_dir = "saved_model"
-        save_dir = upload_dir
+    try:           
+        save_dir = os.path.basename(args.model_path)
                 
         trainer = DummyTrainer(epochs=args.epochs)
         trainer.train()
@@ -35,9 +37,8 @@ async def main():
             
         if not os.path.exists("cache"):
             os.makedirs("cache")
-            
-            
-        save_path = os.path.join(save_dir, 'model.pt')
+                                    
+        save_path = args.model_path
         scripted_model = torch.jit.script(model)
         scripted_model.save(save_path)
         print(f"model saved into {save_path}")
@@ -50,7 +51,7 @@ async def main():
         await asyncio.sleep(5)
         
         model = torch.jit.load(save_path)
-        trainer = OfflineValiTrainer(epochs=50, learning_rate=0.025)    
+        trainer = OfflineValiTrainer(epochs=args.validate_epochs, learning_rate=args.learning_rate)    
         trainer.initialize_weights(model)
         retrained_model = trainer.train(model)
         accuracy = math.floor(trainer.test(retrained_model))            

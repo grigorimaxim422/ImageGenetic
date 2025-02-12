@@ -1,1 +1,0 @@
-python3 -m nsga_net.validation.trainc100 --net_type macro --cutout --batch_size 128 --epochs 350 --check_only
