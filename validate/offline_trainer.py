@@ -28,12 +28,13 @@ args = parser.parse_args()
 async def main():
     try:           
         save_dir = os.path.basename(args.model_path)
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
                 
         trainer = DummyTrainer(epochs=args.epochs)
         trainer.train()
         model = trainer.get_model()    
-        if not os.path.exists(save_dir):
-            os.makedirs(save_dir)
+        
             
         if not os.path.exists("cache"):
             os.makedirs("cache")

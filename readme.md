@@ -33,6 +33,7 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 # Install required dependencies
 pip install -r requirements.txt
+chmod +x ./*.sh
 
 ```
 
@@ -51,13 +52,21 @@ pip install -r requirements.txt
 ### Train an NSGA-Net V1 Model(Non-TorchScript)
 
 ```
-./train_offline.sh
+cd nsga_net
+chmod +x ./train_nsgav1_cifar100.sh
+./train_nsgav1_cifar100.sh
+```
+
+### Train an NSGA-Net V2 Model(Non-TorchScript)
+
+```
+./train_nsgav2_offline.sh
 ```
 
 
 ## 4. Goal
 
- Currently, NSGA-Net delivers excellent training results, but it cannot be used to train a TorchScript model. The challenge is to redesign the NSGA-Net architecture to produce a TorchScript-compatible model while maintaining a balance at pareto frontier between accuracy, parameter size, and FLOPs.
+ Currently, NSGA-Net and NSGA-Net V2 deliver excellent training results, but it cannot be used to train a TorchScript model. The challenge is to redesign the NSGA-Net or NSGA-Net V2 architecture to produce a TorchScript-compatible model while maintaining a balance at ideal pareto frontier between accuracy, parameter size, and FLOPs.
 
 ### Target Metrics:
 ````

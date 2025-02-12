@@ -17,8 +17,8 @@ cifar100/cifar-*/
 *.pth
 *.jpg
 *.png
+*.config
+log.txt
 
 !saved_model/first.pt
 !saved_model/second.pt
-!first.pt
-!second.pt
