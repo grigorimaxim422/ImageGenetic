@@ -6,7 +6,7 @@ data/
 data100/
 data100v2/
 data100*/
-saved_model/
+saved_model/*
 saved_*/
 venv/
 env/
