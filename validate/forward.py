@@ -44,6 +44,13 @@ def round_flops_to_nearest_significant(flops):
 
         return round(flops / factor, n-1) * factor
 
+def calc_flops(model):
+    dummy_input = torch.randn(1, 3, 32, 32).cuda()
+    with profile(activities=[ProfilerActivity.CPU], record_shapes=True,with_flops=True) as prof:
+        with record_function("model_inference"):
+            model(dummy_input)
+    total_mflops = round(prof.key_averages().total_average().flops / 1e6)
+    return total_mflops
 
 def calc_flops_onnx(model):
     fixed_dummy_input = torch.randn(1, 3, 32, 32).cuda()

@@ -158,7 +158,7 @@ def main():
         _, valid_acc = infer(valid_queue, net, criterion)
 
         if valid_acc > best_acc:
-            utils.save_jit(net, os.path.join(args.save, args.model_name))
+            utils.save(net, os.path.join(args.save, args.model_name))
             best_acc = valid_acc
 
 

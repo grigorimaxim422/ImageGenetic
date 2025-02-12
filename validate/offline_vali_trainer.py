@@ -206,10 +206,10 @@ async def main():
         
         params = sum(param.numel() for param in model.parameters())
         params = round_to_nearest_significant(params, 1)
-        macs = calc_flops_onnx(model)
+        macs = calc_flops(model)
         print("-------------------------------")
         print(f"A.🖥️ Params: {params/1000}K")    
-        print(f"A.🖥️ Flops: {macs/1000000}M")   
+        print(f"A.🖥️ Flops: {macs} (Inaccur)")   
         print("-------------------------------") 
         await asyncio.sleep(5)        
         

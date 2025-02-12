@@ -15,6 +15,13 @@ This project aims to train the optimal TorchScript model that not only maximizes
 
 - The trained model should be a **TorchScript model**.
 
+- Accuracy: More than 75%, but less than 90% (to prevent overfitting)
+
+- Parameter Size: Ideally 300K–400K
+
+- FLOPs: Ideally 30M–40M
+
+
 ## 2. Installation
 
 Follow these steps to set up the environment:

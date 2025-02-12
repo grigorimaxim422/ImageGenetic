@@ -1,1 +1,2 @@
 python3 -m validation.trainc100 --net_type macro --cutout --batch_size 128 --epochs 1 #--check_only
+#python3 -m validation.train --net_type macro --cutout --batch_size 128 --epochs 350  #train cifar10 set
