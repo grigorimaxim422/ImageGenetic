@@ -7,7 +7,7 @@ data100/
 data100v2/
 data100*/
 saved_model/*
-saved_*/
+saved_nsgav1*/
 venv/
 env/
 nsga_net/train-EXP-*/
