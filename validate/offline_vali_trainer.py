@@ -12,9 +12,15 @@ import argparse
 import os
 import math
 import asyncio
+import time
 from validate.forward import *
+from torchinfo import summary 
 
-
+def check(net):
+    logging.info("----------------------------------------------")
+    summary(net, input_size=(1, 3, 32, 32), col_names=("input_size", "output_size", "num_params", "mult_adds"))
+    logging.info("----------------------------------------------")
+    
     
 class Cutout(object):
     def __init__(self, length):
@@ -205,6 +211,9 @@ async def main(args):
         model = torch.jit.load(args.model_path)
         
         print(f"model loaded from {args.model_path}")
+        check(model)
+        print("evaluate training is starting...")
+        time.sleep(10)
         
         params = sum(param.numel() for param in model.parameters())
         params = round_to_nearest_significant(params, 1)
