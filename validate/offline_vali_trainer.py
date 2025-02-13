@@ -14,13 +14,7 @@ import math
 import asyncio
 from validate.forward import *
 
-parser = argparse.ArgumentParser(description='PyTorch CIFAR100 Training')
-parser.add_argument('--epochs', type=int, default=600, help='num of training epochs')
-parser.add_argument('--validate_epochs', type=int, default=50, help='num of training epochs to test weight model and NAS algorithm')
-parser.add_argument('--learning_rate', type=float, default=0.025, help="learning rate")
-parser.add_argument('--model_path', type=str, default="saved_model/model.pt", help="path of saved torchscript model")
-args = parser.parse_args()
-    
+
     
 class Cutout(object):
     def __init__(self, length):
@@ -52,8 +46,9 @@ class OfflineValiTrainer:
         self.weight_decay = weight_decay
         self.cutout_length = cutout_length
         self.grad_clip = grad_clip
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
+        print(f"device={self.device}")
         # Data loading and normalization
         transform_train = transforms.Compose([
             transforms.RandomCrop(32, padding=4),
@@ -107,6 +102,8 @@ class OfflineValiTrainer:
     def train(self, model):
         self.set_seed(0)        
         model = model.to(self.device)        
+        model.cuda()
+        
         criterion = nn.CrossEntropyLoss()        
         parameters = filter(lambda p: p.requires_grad, model.parameters()) ## added this 
         optimizer = optim.SGD(parameters, lr=self.learning_rate, momentum=self.momentum, weight_decay=self.weight_decay)
@@ -124,6 +121,7 @@ class OfflineValiTrainer:
                 for i, data in enumerate(self.trainloader, 0):
                     inputs, labels = data
                     inputs, labels = inputs.to(self.device), labels.to(self.device)
+                    # inputs, labels = inputs.cuda(self.device), labels.to(self.device)
 
                     optimizer.zero_grad()
                     outputs = model(inputs)
@@ -198,10 +196,14 @@ class OfflineValiTrainer:
 logging.basicConfig(level=logging.INFO)
 
     
-async def main():
+async def main(args):
     try:                    
-                    
+        if not os.path.exists("cache"):
+            os.makedirs("cache")
+                                    
+        # model = torch.jit.load(args.model_path, map_location="cpu")
         model = torch.jit.load(args.model_path)
+        
         print(f"model loaded from {args.model_path}")
         
         params = sum(param.numel() for param in model.parameters())
@@ -227,7 +229,15 @@ async def main():
         print(f"B.🖥️ Flops: {retrained_macs/1000000}M")    
         print("-------------------------------")
     except Exception as e:
-        logging.error(f"Failed to advertise model on the chain: {e}")
+        logging.error(f"O-Failed to advertise model on the chain: {e}")
 
 if __name__ == '__main__':            
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description='PyTorch CIFAR100 Training')
+    parser.add_argument('--epochs', type=int, default=600, help='num of training epochs')
+    parser.add_argument('--validate_epochs', type=int, default=50, help='num of training epochs to test weight model and NAS algorithm')
+    parser.add_argument('--learning_rate', type=float, default=0.025, help="learning rate")
+    parser.add_argument('--model_path', type=str, default="saved_model/model.pt", help="path of saved torchscript model")
+    parser.add_argument('--net_name', type=str, default='dummy', help='learning rate')
+    args = parser.parse_args()
+        
+    asyncio.run(main(args))

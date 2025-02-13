@@ -10,6 +10,10 @@ import numpy as np
 import torch.backends.cudnn as cudnn
 import random
 import math
+from torchinfo import summary
+
+from model.simplecnn import SimpleCNN
+from model.efficient01A import EfficientNet01A
 
 class Cutout(object):
     def __init__(self, length):
@@ -32,25 +36,24 @@ class Cutout(object):
         img *= mask
         return img
 
-class SimpleCNN(nn.Module):
-    def __init__(self):
-        super(SimpleCNN, self).__init__()
-        self.conv1 = nn.Conv2d(3, 32, 3, padding=1)
-        self.conv2 = nn.Conv2d(32, 64, 3, padding=1)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(64 * 8 * 8, 256)
-        self.fc2 = nn.Linear(256, 100)
-
-    def forward(self, x):
-        x = self.pool(torch.relu(self.conv1(x)))
-        x = self.pool(torch.relu(self.conv2(x)))
-        x = x.view(-1, 64 * 8 * 8)
-        x = torch.relu(self.fc1(x))
-        x = self.fc2(x)
-        return x
-
+def get_network(network):
+    """ return given network
+    """
+    if network=='simplecnn':
+        net = SimpleCNN()    
+    elif network == 'efficient01A':
+        net = EfficientNet01A()    
+    else:
+        net = SimpleCNN()
+    
+    return net
+def check(net):
+    logging.info("----------------------------------------------")
+    summary(net, input_size=(1, 3, 32, 32), col_names=("input_size", "output_size", "num_params", "mult_adds"))
+    logging.info("----------------------------------------------")
+    
 class DummyTrainer:
-    def __init__(self, epochs=50, batch_size=128, learning_rate=0.025, momentum=0.9, weight_decay=3e-4, cutout_length=16):
+    def __init__(self, epochs=50, batch_size=128, learning_rate=0.025, momentum=0.9, weight_decay=3e-4, cutout_length=16, network='simplecnn'):
         self.epochs = epochs
         self.batch_size = batch_size
         self.learning_rate = learning_rate
@@ -58,10 +61,14 @@ class DummyTrainer:
         self.weight_decay = weight_decay
         self.cutout_length = cutout_length
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.model = SimpleCNN().to(self.device)
+        self.network=network
+        
+        self.model = get_network(network)
+        self.model = self.model.to(self.device)
+        
         self.criterion = nn.CrossEntropyLoss()
         self.optimizer = optim.SGD(self.model.parameters(), lr=self.learning_rate, momentum=self.momentum, weight_decay=self.weight_decay)
-        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, self.epochs)
+        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, self.epochs,eta_min=0.0001)
 
         # Data loading and normalization
         transform_train = transforms.Compose([
@@ -109,9 +116,10 @@ class DummyTrainer:
         torch.backends.cudnn.benchmark = False
         torch.manual_seed(seed)
     
-    def train(self):
+    def train(self, save_path):
         self.set_seed(0)
         self.initialize_weights(self.model)
+        best_acc = 0
         for epoch in range(self.epochs):
             self.scheduler.step()
             logging.info(f"Epoch {epoch}, LR: {self.scheduler.get_lr()[0]}")
@@ -134,7 +142,20 @@ class DummyTrainer:
                     print(f'Epoch [{epoch + 1}, {i + 1}] loss: {running_loss / 100:.3f}')
                     running_loss = 0.0
 
-            self.test()
+            acc = self.test()
+            if acc > best_acc:
+                best_acc = acc
+                if acc > 50.:
+                    best_acc = acc
+                    scripted_model = torch.jit.script(self.model)
+                    scripted_model.save(f"{save_path}.best")
+                    print(f"model saved into {save_path}.best...")
+            
+            
+            if epoch>0 and epoch % 5 == 1:                
+                check(self.model)
+                print(f"current best_acc = {best_acc} %")
+                
 
     def test(self):
         self.model.eval()
@@ -150,8 +171,10 @@ class DummyTrainer:
                 _, predicted = torch.max(outputs.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
-
-        print(f'Accuracy of the network on the 10000 test images: {100 * correct / total:.2f}%')
+                
+        acc = 100 * correct / total
+        print(f'({self.network}): Accuracy of the network on the 10000 test images: {100 * correct / total:.2f}%')
+        return acc
 
     def get_model(self):
         return self.model

@@ -17,29 +17,32 @@ from validate.forward import  *
 
 logging.basicConfig(level=logging.INFO)
 
+
 parser = argparse.ArgumentParser(description='PyTorch CIFAR100 Training')
 parser.add_argument('--epochs', type=int, default=600, help='num of training epochs')
 parser.add_argument('--validate_epochs', type=int, default=50, help='num of training epochs')
 parser.add_argument('--learning_rate', type=float, default=0.025, help='learning rate')
+parser.add_argument('--net_name', type=str, default='dummy', help='learning rate')
 parser.add_argument('--model_path', type=str, default="saved_model/model.pt", help="path of saved torchscript model")
 
 args = parser.parse_args()
     
 async def main():
     try:           
-        save_dir = os.path.basename(args.model_path)
+        save_dir = os.path.basename(args.model_path)        
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
+        save_path = args.model_path
                 
-        trainer = DummyTrainer(epochs=args.epochs)
-        trainer.train()
+        trainer = DummyTrainer(epochs=args.epochs, network=args.net_name)
+        trainer.train(save_path)
         model = trainer.get_model()    
         
             
         if not os.path.exists("cache"):
             os.makedirs("cache")
                                     
-        save_path = args.model_path
+        
         scripted_model = torch.jit.script(model)
         scripted_model.save(save_path)
         print(f"model saved into {save_path}")
@@ -64,7 +67,7 @@ async def main():
         print(f"B.🖥️ Params: {retrained_params/1000}K")    
         print(f"B.🖥️ Flops: {retrained_macs/1000000}M")    
     except Exception as e:
-        logging.error(f"Failed to advertise model on the chain: {e}")
+        logging.error(f"Failed to advertise model on the chain: {e}", exc_info=True)
 
 if __name__ == '__main__':        
     asyncio.run(main())
