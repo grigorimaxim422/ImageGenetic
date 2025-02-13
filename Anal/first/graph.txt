@@ -1,0 +1,30 @@
+graph(%self.1 : __torch__.utils_general_v2.___torch_mangle_6860.MobileNetECA,
+      %x.1 : Tensor):
+  %50 : NoneType = prim::Constant()
+  %49 : bool = prim::Constant[value=0]()
+  %45 : int = prim::Constant[value=2]() # /root/NASChainC100/utils_general_v2.py:272:8
+  %46 : int = prim::Constant[value=3]() # /root/NASChainC100/utils_general_v2.py:272:8
+  %stem.1 : __torch__.torch.nn.modules.container.___torch_mangle_408.Sequential = prim::GetAttr[name="stem"](%self.1)
+  %x0.1 : Tensor = prim::CallMethod[name="forward"](%stem.1, %x.1) # /root/NASChainC100/utils_general_v2.py:271:12
+  %layers.1 : __torch__.torch.nn.modules.container.___torch_mangle_6857.ModuleList = prim::GetAttr[name="layers"](%self.1)
+  %_0 : __torch__.utils_general_v2.___torch_mangle_6852.InvertedResidual = prim::GetAttr[name="0"](%layers.1)
+  %_1 : __torch__.utils_general_v2.___torch_mangle_422.InvertedResidual = prim::GetAttr[name="1"](%layers.1)
+  %_2 : __torch__.utils_general_v2.___torch_mangle_6854.InvertedResidual = prim::GetAttr[name="2"](%layers.1)
+  %_3 : __torch__.utils_general_v2.___torch_mangle_2151.InvertedResidual = prim::GetAttr[name="3"](%layers.1)
+  %_4 : __torch__.utils_general_v2.___torch_mangle_6856.InvertedResidual = prim::GetAttr[name="4"](%layers.1)
+  %_5 : __torch__.utils_general_v2.___torch_mangle_1796.InvertedResidual = prim::GetAttr[name="5"](%layers.1)
+  %_6 : __torch__.utils_general_v2.___torch_mangle_1975.InvertedResidual = prim::GetAttr[name="6"](%layers.1)
+  %x1.1 : Tensor = prim::CallMethod[name="forward"](%_0, %x0.1) # /root/NASChainC100/utils_general_v2.py:273:16
+  %x2.1 : Tensor = prim::CallMethod[name="forward"](%_1, %x1.1) # /root/NASChainC100/utils_general_v2.py:273:16
+  %x3.1 : Tensor = prim::CallMethod[name="forward"](%_2, %x2.1) # /root/NASChainC100/utils_general_v2.py:273:16
+  %x4.1 : Tensor = prim::CallMethod[name="forward"](%_3, %x3.1) # /root/NASChainC100/utils_general_v2.py:273:16
+  %x5.1 : Tensor = prim::CallMethod[name="forward"](%_4, %x4.1) # /root/NASChainC100/utils_general_v2.py:273:16
+  %x6.1 : Tensor = prim::CallMethod[name="forward"](%_5, %x5.1) # /root/NASChainC100/utils_general_v2.py:273:16
+  %x7.1 : Tensor = prim::CallMethod[name="forward"](%_6, %x6.1) # /root/NASChainC100/utils_general_v2.py:273:16
+  %47 : int[] = prim::ListConstruct(%45, %46)
+  %x8.1 : Tensor = aten::mean(%x7.1, %47, %49, %50) # /root/NASChainC100/utils_general_v2.py:274:12
+  %dropout.1 : __torch__.torch.nn.modules.dropout.___torch_mangle_6858.Dropout = prim::GetAttr[name="dropout"](%self.1)
+  %x9.1 : Tensor = prim::CallMethod[name="forward"](%dropout.1, %x8.1) # /root/NASChainC100/utils_general_v2.py:275:12
+  %classifier.1 : __torch__.torch.nn.modules.linear.Linear = prim::GetAttr[name="classifier"](%self.1)
+  %61 : Tensor = prim::CallMethod[name="forward"](%classifier.1, %x9.1) # /root/NASChainC100/utils_general_v2.py:276:12
+  return (%61)

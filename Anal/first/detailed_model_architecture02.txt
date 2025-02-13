@@ -1,0 +1,574 @@
+### TorchScript Model Architecture ###
+
+Module: stem
+  Type: Sequential
+  Trainable Parameters: 870
+
+Module: stem.0
+  Type: Conv2d
+  Trainable Parameters: 810
+  In Channels: 3, Out Channels: 30
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stem.1
+  Type: BatchNorm2d
+  Trainable Parameters: 60
+
+Module: stem.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers
+  Type: ModuleList
+  Trainable Parameters: 437759
+
+Module: layers.0
+  Type: InvertedResidual
+  Trainable Parameters: 5748
+  Stride: 1
+
+Module: layers.0.conv
+  Type: Sequential
+  Trainable Parameters: 5748
+
+Module: layers.0.conv.0
+  Type: Conv2d
+  Trainable Parameters: 1800
+  In Channels: 30, Out Channels: 60
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.0.conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 120
+
+Module: layers.0.conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.0.conv.3
+  Type: Conv2d
+  Trainable Parameters: 540
+  In Channels: 60, Out Channels: 60
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: layers.0.conv.4
+  Type: BatchNorm2d
+  Trainable Parameters: 120
+
+Module: layers.0.conv.5
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.0.conv.6
+  Type: ECABlock
+  Trainable Parameters: 2238
+
+Module: layers.0.conv.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 1098
+  In Channels: 60, Out Channels: 18
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.0.conv.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 1140
+  In Channels: 18, Out Channels: 60
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.0.conv.6.sigmoid
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: layers.0.conv.7
+  Type: Conv2d
+  Trainable Parameters: 900
+  In Channels: 60, Out Channels: 15
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.0.conv.8
+  Type: BatchNorm2d
+  Trainable Parameters: 30
+
+Module: layers.1
+  Type: InvertedResidual
+  Trainable Parameters: 11525
+  Stride: 2
+
+Module: layers.1.conv
+  Type: Sequential
+  Trainable Parameters: 11525
+
+Module: layers.1.conv.0
+  Type: Conv2d
+  Trainable Parameters: 1575
+  In Channels: 15, Out Channels: 105
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.1.conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 210
+
+Module: layers.1.conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.1.conv.3
+  Type: Conv2d
+  Trainable Parameters: 2625
+  In Channels: 105, Out Channels: 105
+  Kernel Size: (5, 5)
+  Stride: (2, 2)
+  Padding: (2, 2)
+
+Module: layers.1.conv.4
+  Type: BatchNorm2d
+  Trainable Parameters: 210
+
+Module: layers.1.conv.5
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.1.conv.6
+  Type: ECABlock
+  Trainable Parameters: 3481
+
+Module: layers.1.conv.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 1696
+  In Channels: 105, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.1.conv.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 1785
+  In Channels: 16, Out Channels: 105
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.1.conv.6.sigmoid
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: layers.1.conv.7
+  Type: Conv2d
+  Trainable Parameters: 3360
+  In Channels: 105, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.1.conv.8
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: layers.2
+  Type: InvertedResidual
+  Trainable Parameters: 12562
+  Stride: 1
+
+Module: layers.2.conv
+  Type: Sequential
+  Trainable Parameters: 12562
+
+Module: layers.2.conv.0
+  Type: Conv2d
+  Trainable Parameters: 3072
+  In Channels: 32, Out Channels: 96
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.2.conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: layers.2.conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.2.conv.3
+  Type: Conv2d
+  Trainable Parameters: 2400
+  In Channels: 96, Out Channels: 96
+  Kernel Size: (5, 5)
+  Stride: (1, 1)
+  Padding: (2, 2)
+
+Module: layers.2.conv.4
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: layers.2.conv.5
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.2.conv.6
+  Type: ECABlock
+  Trainable Parameters: 3570
+
+Module: layers.2.conv.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 1746
+  In Channels: 96, Out Channels: 18
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.2.conv.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 1824
+  In Channels: 18, Out Channels: 96
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.2.conv.6.sigmoid
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: layers.2.conv.7
+  Type: Conv2d
+  Trainable Parameters: 3072
+  In Channels: 96, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.2.conv.8
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: layers.3
+  Type: InvertedResidual
+  Trainable Parameters: 33740
+  Stride: 2
+
+Module: layers.3.conv
+  Type: Sequential
+  Trainable Parameters: 33740
+
+Module: layers.3.conv.0
+  Type: Conv2d
+  Trainable Parameters: 7168
+  In Channels: 32, Out Channels: 224
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.3.conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 448
+
+Module: layers.3.conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.3.conv.3
+  Type: Conv2d
+  Trainable Parameters: 5600
+  In Channels: 224, Out Channels: 224
+  Kernel Size: (5, 5)
+  Stride: (2, 2)
+  Padding: (2, 2)
+
+Module: layers.3.conv.4
+  Type: BatchNorm2d
+  Trainable Parameters: 448
+
+Module: layers.3.conv.5
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.3.conv.6
+  Type: ECABlock
+  Trainable Parameters: 5612
+
+Module: layers.3.conv.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 2700
+  In Channels: 224, Out Channels: 12
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.3.conv.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 2912
+  In Channels: 12, Out Channels: 224
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.3.conv.6.sigmoid
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: layers.3.conv.7
+  Type: Conv2d
+  Trainable Parameters: 14336
+  In Channels: 224, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.3.conv.8
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: layers.4
+  Type: InvertedResidual
+  Trainable Parameters: 60944
+  Stride: 1
+
+Module: layers.4.conv
+  Type: Sequential
+  Trainable Parameters: 60944
+
+Module: layers.4.conv.0
+  Type: Conv2d
+  Trainable Parameters: 20480
+  In Channels: 64, Out Channels: 320
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.4.conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 640
+
+Module: layers.4.conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.4.conv.3
+  Type: Conv2d
+  Trainable Parameters: 8000
+  In Channels: 320, Out Channels: 320
+  Kernel Size: (5, 5)
+  Stride: (1, 1)
+  Padding: (2, 2)
+
+Module: layers.4.conv.4
+  Type: BatchNorm2d
+  Trainable Parameters: 640
+
+Module: layers.4.conv.5
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.4.conv.6
+  Type: ECABlock
+  Trainable Parameters: 10576
+
+Module: layers.4.conv.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 5136
+  In Channels: 320, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.4.conv.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 5440
+  In Channels: 16, Out Channels: 320
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.4.conv.6.sigmoid
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: layers.4.conv.7
+  Type: Conv2d
+  Trainable Parameters: 20480
+  In Channels: 320, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.4.conv.8
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: layers.5
+  Type: InvertedResidual
+  Trainable Parameters: 142320
+  Stride: 1
+
+Module: layers.5.conv
+  Type: Sequential
+  Trainable Parameters: 142320
+
+Module: layers.5.conv.0
+  Type: Conv2d
+  Trainable Parameters: 40960
+  In Channels: 64, Out Channels: 640
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.5.conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 1280
+
+Module: layers.5.conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.5.conv.3
+  Type: Conv2d
+  Trainable Parameters: 5760
+  In Channels: 640, Out Channels: 640
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: layers.5.conv.4
+  Type: BatchNorm2d
+  Trainable Parameters: 1280
+
+Module: layers.5.conv.5
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.5.conv.6
+  Type: ECABlock
+  Trainable Parameters: 21136
+
+Module: layers.5.conv.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 10256
+  In Channels: 640, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.5.conv.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 10880
+  In Channels: 16, Out Channels: 640
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.5.conv.6.sigmoid
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: layers.5.conv.7
+  Type: Conv2d
+  Trainable Parameters: 71680
+  In Channels: 640, Out Channels: 112
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.5.conv.8
+  Type: BatchNorm2d
+  Trainable Parameters: 224
+
+Module: layers.6
+  Type: InvertedResidual
+  Trainable Parameters: 170920
+  Stride: 1
+
+Module: layers.6.conv
+  Type: Sequential
+  Trainable Parameters: 170920
+
+Module: layers.6.conv.0
+  Type: Conv2d
+  Trainable Parameters: 75264
+  In Channels: 112, Out Channels: 672
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.6.conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 1344
+
+Module: layers.6.conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.6.conv.3
+  Type: Conv2d
+  Trainable Parameters: 6048
+  In Channels: 672, Out Channels: 672
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: layers.6.conv.4
+  Type: BatchNorm2d
+  Trainable Parameters: 1344
+
+Module: layers.6.conv.5
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: layers.6.conv.6
+  Type: ECABlock
+  Trainable Parameters: 11432
+
+Module: layers.6.conv.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 5384
+  In Channels: 672, Out Channels: 8
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.6.conv.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 6048
+  In Channels: 8, Out Channels: 672
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.6.conv.6.sigmoid
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: layers.6.conv.7
+  Type: Conv2d
+  Trainable Parameters: 75264
+  In Channels: 672, Out Channels: 112
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: layers.6.conv.8
+  Type: BatchNorm2d
+  Trainable Parameters: 224
+
+Module: dropout
+  Type: Dropout
+  Trainable Parameters: 0
+
+Module: classifier
+  Type: Linear
+  Trainable Parameters: 11300
+  Input Features: 112, Output Features: 100
+

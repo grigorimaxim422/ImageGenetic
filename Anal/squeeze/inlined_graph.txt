@@ -1,0 +1,1334 @@
+graph(%self.1 : __torch__.selfic.squeezenet.SqueezeNet,
+      %x.1 : Tensor):
+  %2 : int = prim::Constant[value=1]()
+  %3 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/selfic/squeezenet.py:92:26
+  %4 : int = prim::Constant[value=-1]() # /workspace/ImageGenetic/selfic/squeezenet.py:92:30
+  %stem.1 : __torch__.torch.nn.modules.container.Sequential = prim::GetAttr[name="stem"](%self.1)
+  %37 : bool = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:219:22
+  %38 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %39 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %40 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %41 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %42 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:22
+  %43 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %44 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %45 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:33
+  %_0.2 : __torch__.torch.nn.modules.conv.Conv2d = prim::GetAttr[name="0"](%stem.1)
+  %_1.2 : __torch__.torch.nn.modules.batchnorm.BatchNorm2d = prim::GetAttr[name="1"](%stem.1)
+  %weight.4 : Tensor = prim::GetAttr[name="weight"](%_0.2)
+  %bias.4 : Tensor? = prim::GetAttr[name="bias"](%_0.2)
+  %50 : int[] = prim::ListConstruct(%45, %45)
+  %51 : int[] = prim::ListConstruct(%45, %45)
+  %52 : int[] = prim::ListConstruct(%45, %45)
+  %input0.3 : Tensor = aten::conv2d(%x.1, %weight.4, %bias.4, %50, %51, %52, %45) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.3 : bool = prim::GetAttr[name="training"](%_1.2)
+   = prim::If(%training.3) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.3 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.2)
+      %56 : Tensor = aten::add_(%num_batches_tracked.3, %45, %45) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.5 : bool = prim::GetAttr[name="training"](%_1.2)
+  %running_mean.3 : Tensor = prim::GetAttr[name="running_mean"](%_1.2)
+  %running_var.3 : Tensor = prim::GetAttr[name="running_var"](%_1.2)
+  %weight.6 : Tensor = prim::GetAttr[name="weight"](%_1.2)
+  %bias.6 : Tensor = prim::GetAttr[name="bias"](%_1.2)
+   = prim::If(%training.5) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %62 : int[] = aten::size(%input0.3) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.3 : int = aten::__getitem__(%62, %42) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %64 : int = aten::len(%62) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %65 : int = aten::sub(%64, %43) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.2 : int = prim::Loop(%65, %44, %size_prods.3) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.3 : int, %size_prods0.9 : int):
+          %69 : int = aten::add(%i.3, %43) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %70 : int = aten::__getitem__(%62, %69) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.3 : int = aten::mul(%size_prods0.9, %70) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%44, %size_prods1.3)
+      %72 : bool = aten::eq(%size_prods0.2, %45) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%72) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %73 : str = aten::format(%41, %62) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%73, %40) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.3 : Tensor = aten::batch_norm(%input0.3, %weight.6, %bias.6, %running_mean.3, %running_var.3, %training.5, %38, %39, %44) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.1 : Tensor = aten::relu_(%input1.3) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %76 : int[] = prim::ListConstruct(%43, %43)
+  %77 : int[] = prim::ListConstruct(%43, %43)
+  %78 : int[] = prim::ListConstruct(%42, %42)
+  %79 : int[] = prim::ListConstruct(%45, %45)
+  %x0.4 : Tensor = aten::max_pool2d(%input2.1, %76, %77, %78, %79, %37) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:830:11
+  %fire2.1 : __torch__.selfic.squeezenet.Fire = prim::GetAttr[name="fire2"](%self.1)
+  %81 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %82 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %83 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %84 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %85 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %86 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %87 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %88 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.2 : __torch__.torch.nn.modules.container.___torch_mangle_2.Sequential = prim::GetAttr[name="squeeze"](%fire2.1)
+  %_0.4 : __torch__.torch.nn.modules.conv.___torch_mangle_0.Conv2d = prim::GetAttr[name="0"](%squeeze.2)
+  %_1.4 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_1.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.2)
+  %weight.8 : Tensor = prim::GetAttr[name="weight"](%_0.4)
+  %bias.8 : Tensor? = prim::GetAttr[name="bias"](%_0.4)
+  %94 : int[] = prim::ListConstruct(%88, %88)
+  %95 : int[] = prim::ListConstruct(%81, %81)
+  %96 : int[] = prim::ListConstruct(%88, %88)
+  %input0.5 : Tensor = aten::conv2d(%x0.4, %weight.8, %bias.8, %94, %95, %96, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.7 : bool = prim::GetAttr[name="training"](%_1.4)
+   = prim::If(%training.7) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.5 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.4)
+      %100 : Tensor = aten::add_(%num_batches_tracked.5, %88, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.9 : bool = prim::GetAttr[name="training"](%_1.4)
+  %running_mean.5 : Tensor = prim::GetAttr[name="running_mean"](%_1.4)
+  %running_var.5 : Tensor = prim::GetAttr[name="running_var"](%_1.4)
+  %weight.10 : Tensor = prim::GetAttr[name="weight"](%_1.4)
+  %bias.10 : Tensor = prim::GetAttr[name="bias"](%_1.4)
+   = prim::If(%training.9) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %106 : int[] = aten::size(%input0.5) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.5 : int = aten::__getitem__(%106, %81) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %108 : int = aten::len(%106) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %109 : int = aten::sub(%108, %83) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.11 : int = prim::Loop(%109, %82, %size_prods.5) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.5 : int, %size_prods0.13 : int):
+          %113 : int = aten::add(%i.5, %83) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %114 : int = aten::__getitem__(%106, %113) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.5 : int = aten::mul(%size_prods0.13, %114) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%82, %size_prods1.5)
+      %116 : bool = aten::eq(%size_prods0.11, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%116) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %117 : str = aten::format(%84, %106) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%117, %85) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.5 : Tensor = aten::batch_norm(%input0.5, %weight.10, %bias.10, %running_mean.5, %running_var.5, %training.9, %87, %86, %82) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x3.1 : Tensor = aten::relu_(%input1.5) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.2 : __torch__.torch.nn.modules.container.___torch_mangle_5.Sequential = prim::GetAttr[name="expand_1x1"](%fire2.1)
+  %_0.6 : __torch__.torch.nn.modules.conv.___torch_mangle_3.Conv2d = prim::GetAttr[name="0"](%expand_1x1.2)
+  %_1.6 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_4.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.2)
+  %weight.12 : Tensor = prim::GetAttr[name="weight"](%_0.6)
+  %bias.12 : Tensor? = prim::GetAttr[name="bias"](%_0.6)
+  %125 : int[] = prim::ListConstruct(%88, %88)
+  %126 : int[] = prim::ListConstruct(%81, %81)
+  %127 : int[] = prim::ListConstruct(%88, %88)
+  %input0.7 : Tensor = aten::conv2d(%x3.1, %weight.12, %bias.12, %125, %126, %127, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.11 : bool = prim::GetAttr[name="training"](%_1.6)
+   = prim::If(%training.11) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.7 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.6)
+      %131 : Tensor = aten::add_(%num_batches_tracked.7, %88, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.13 : bool = prim::GetAttr[name="training"](%_1.6)
+  %running_mean.7 : Tensor = prim::GetAttr[name="running_mean"](%_1.6)
+  %running_var.7 : Tensor = prim::GetAttr[name="running_var"](%_1.6)
+  %weight.14 : Tensor = prim::GetAttr[name="weight"](%_1.6)
+  %bias.14 : Tensor = prim::GetAttr[name="bias"](%_1.6)
+   = prim::If(%training.13) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %137 : int[] = aten::size(%input0.7) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.7 : int = aten::__getitem__(%137, %81) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %139 : int = aten::len(%137) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %140 : int = aten::sub(%139, %83) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.15 : int = prim::Loop(%140, %82, %size_prods.7) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.7 : int, %size_prods0.17 : int):
+          %144 : int = aten::add(%i.7, %83) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %145 : int = aten::__getitem__(%137, %144) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.7 : int = aten::mul(%size_prods0.17, %145) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%82, %size_prods1.7)
+      %147 : bool = aten::eq(%size_prods0.15, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%147) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %148 : str = aten::format(%84, %137) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%148, %85) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.7 : Tensor = aten::batch_norm(%input0.7, %weight.14, %bias.14, %running_mean.7, %running_var.7, %training.13, %87, %86, %82) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.3 : Tensor = aten::relu_(%input1.7) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.2 : __torch__.torch.nn.modules.container.___torch_mangle_7.Sequential = prim::GetAttr[name="expand_3x3"](%fire2.1)
+  %_0.8 : __torch__.torch.nn.modules.conv.___torch_mangle_6.Conv2d = prim::GetAttr[name="0"](%expand_3x3.2)
+  %_1.8 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_4.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.2)
+  %weight.16 : Tensor = prim::GetAttr[name="weight"](%_0.8)
+  %bias.16 : Tensor? = prim::GetAttr[name="bias"](%_0.8)
+  %156 : int[] = prim::ListConstruct(%88, %88)
+  %157 : int[] = prim::ListConstruct(%88, %88)
+  %158 : int[] = prim::ListConstruct(%88, %88)
+  %input0.9 : Tensor = aten::conv2d(%x3.1, %weight.16, %bias.16, %156, %157, %158, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.15 : bool = prim::GetAttr[name="training"](%_1.8)
+   = prim::If(%training.15) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.9 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.8)
+      %162 : Tensor = aten::add_(%num_batches_tracked.9, %88, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.17 : bool = prim::GetAttr[name="training"](%_1.8)
+  %running_mean.9 : Tensor = prim::GetAttr[name="running_mean"](%_1.8)
+  %running_var.9 : Tensor = prim::GetAttr[name="running_var"](%_1.8)
+  %weight.18 : Tensor = prim::GetAttr[name="weight"](%_1.8)
+  %bias.18 : Tensor = prim::GetAttr[name="bias"](%_1.8)
+   = prim::If(%training.17) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %168 : int[] = aten::size(%input0.9) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.9 : int = aten::__getitem__(%168, %81) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %170 : int = aten::len(%168) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %171 : int = aten::sub(%170, %83) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.19 : int = prim::Loop(%171, %82, %size_prods.9) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.9 : int, %size_prods0.21 : int):
+          %175 : int = aten::add(%i.9, %83) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %176 : int = aten::__getitem__(%168, %175) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.9 : int = aten::mul(%size_prods0.21, %176) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%82, %size_prods1.9)
+      %178 : bool = aten::eq(%size_prods0.19, %88) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%178) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %179 : str = aten::format(%84, %168) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%179, %85) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.9 : Tensor = aten::batch_norm(%input0.9, %weight.18, %bias.18, %running_mean.9, %running_var.9, %training.17, %87, %86, %82) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.5 : Tensor = aten::relu_(%input1.9) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %182 : Tensor[] = prim::ListConstruct(%result.3, %result.5)
+  %f2.1 : Tensor = aten::cat(%182, %88) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %fire3.1 : __torch__.selfic.squeezenet.___torch_mangle_10.Fire = prim::GetAttr[name="fire3"](%self.1)
+  %184 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %185 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %186 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %187 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %188 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %189 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %190 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %191 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.4 : __torch__.torch.nn.modules.container.___torch_mangle_9.Sequential = prim::GetAttr[name="squeeze"](%fire3.1)
+  %_0.10 : __torch__.torch.nn.modules.conv.___torch_mangle_8.Conv2d = prim::GetAttr[name="0"](%squeeze.4)
+  %_1.10 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_1.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.4)
+  %weight.20 : Tensor = prim::GetAttr[name="weight"](%_0.10)
+  %bias.20 : Tensor? = prim::GetAttr[name="bias"](%_0.10)
+  %197 : int[] = prim::ListConstruct(%191, %191)
+  %198 : int[] = prim::ListConstruct(%184, %184)
+  %199 : int[] = prim::ListConstruct(%191, %191)
+  %input0.11 : Tensor = aten::conv2d(%f2.1, %weight.20, %bias.20, %197, %198, %199, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.19 : bool = prim::GetAttr[name="training"](%_1.10)
+   = prim::If(%training.19) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.11 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.10)
+      %203 : Tensor = aten::add_(%num_batches_tracked.11, %191, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.21 : bool = prim::GetAttr[name="training"](%_1.10)
+  %running_mean.11 : Tensor = prim::GetAttr[name="running_mean"](%_1.10)
+  %running_var.11 : Tensor = prim::GetAttr[name="running_var"](%_1.10)
+  %weight.22 : Tensor = prim::GetAttr[name="weight"](%_1.10)
+  %bias.22 : Tensor = prim::GetAttr[name="bias"](%_1.10)
+   = prim::If(%training.21) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %209 : int[] = aten::size(%input0.11) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.11 : int = aten::__getitem__(%209, %184) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %211 : int = aten::len(%209) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %212 : int = aten::sub(%211, %186) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.23 : int = prim::Loop(%212, %185, %size_prods.11) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.11 : int, %size_prods0.25 : int):
+          %216 : int = aten::add(%i.11, %186) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %217 : int = aten::__getitem__(%209, %216) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.11 : int = aten::mul(%size_prods0.25, %217) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%185, %size_prods1.11)
+      %219 : bool = aten::eq(%size_prods0.23, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%219) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %220 : str = aten::format(%187, %209) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%220, %188) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.11 : Tensor = aten::batch_norm(%input0.11, %weight.22, %bias.22, %running_mean.11, %running_var.11, %training.21, %190, %189, %185) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.6 : Tensor = aten::relu_(%input1.11) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.4 : __torch__.torch.nn.modules.container.___torch_mangle_5.Sequential = prim::GetAttr[name="expand_1x1"](%fire3.1)
+  %_0.12 : __torch__.torch.nn.modules.conv.___torch_mangle_3.Conv2d = prim::GetAttr[name="0"](%expand_1x1.4)
+  %_1.12 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_4.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.4)
+  %weight.24 : Tensor = prim::GetAttr[name="weight"](%_0.12)
+  %bias.24 : Tensor? = prim::GetAttr[name="bias"](%_0.12)
+  %228 : int[] = prim::ListConstruct(%191, %191)
+  %229 : int[] = prim::ListConstruct(%184, %184)
+  %230 : int[] = prim::ListConstruct(%191, %191)
+  %input0.13 : Tensor = aten::conv2d(%x0.6, %weight.24, %bias.24, %228, %229, %230, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.23 : bool = prim::GetAttr[name="training"](%_1.12)
+   = prim::If(%training.23) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.13 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.12)
+      %234 : Tensor = aten::add_(%num_batches_tracked.13, %191, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.25 : bool = prim::GetAttr[name="training"](%_1.12)
+  %running_mean.13 : Tensor = prim::GetAttr[name="running_mean"](%_1.12)
+  %running_var.13 : Tensor = prim::GetAttr[name="running_var"](%_1.12)
+  %weight.26 : Tensor = prim::GetAttr[name="weight"](%_1.12)
+  %bias.26 : Tensor = prim::GetAttr[name="bias"](%_1.12)
+   = prim::If(%training.25) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %240 : int[] = aten::size(%input0.13) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.13 : int = aten::__getitem__(%240, %184) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %242 : int = aten::len(%240) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %243 : int = aten::sub(%242, %186) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.27 : int = prim::Loop(%243, %185, %size_prods.13) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.13 : int, %size_prods0.29 : int):
+          %247 : int = aten::add(%i.13, %186) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %248 : int = aten::__getitem__(%240, %247) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.13 : int = aten::mul(%size_prods0.29, %248) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%185, %size_prods1.13)
+      %250 : bool = aten::eq(%size_prods0.27, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%250) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %251 : str = aten::format(%187, %240) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%251, %188) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.13 : Tensor = aten::batch_norm(%input0.13, %weight.26, %bias.26, %running_mean.13, %running_var.13, %training.25, %190, %189, %185) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.7 : Tensor = aten::relu_(%input1.13) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.4 : __torch__.torch.nn.modules.container.___torch_mangle_7.Sequential = prim::GetAttr[name="expand_3x3"](%fire3.1)
+  %_0.14 : __torch__.torch.nn.modules.conv.___torch_mangle_6.Conv2d = prim::GetAttr[name="0"](%expand_3x3.4)
+  %_1.14 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_4.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.4)
+  %weight.28 : Tensor = prim::GetAttr[name="weight"](%_0.14)
+  %bias.28 : Tensor? = prim::GetAttr[name="bias"](%_0.14)
+  %259 : int[] = prim::ListConstruct(%191, %191)
+  %260 : int[] = prim::ListConstruct(%191, %191)
+  %261 : int[] = prim::ListConstruct(%191, %191)
+  %input0.15 : Tensor = aten::conv2d(%x0.6, %weight.28, %bias.28, %259, %260, %261, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.27 : bool = prim::GetAttr[name="training"](%_1.14)
+   = prim::If(%training.27) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.15 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.14)
+      %265 : Tensor = aten::add_(%num_batches_tracked.15, %191, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.29 : bool = prim::GetAttr[name="training"](%_1.14)
+  %running_mean.15 : Tensor = prim::GetAttr[name="running_mean"](%_1.14)
+  %running_var.15 : Tensor = prim::GetAttr[name="running_var"](%_1.14)
+  %weight.30 : Tensor = prim::GetAttr[name="weight"](%_1.14)
+  %bias.30 : Tensor = prim::GetAttr[name="bias"](%_1.14)
+   = prim::If(%training.29) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %271 : int[] = aten::size(%input0.15) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.15 : int = aten::__getitem__(%271, %184) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %273 : int = aten::len(%271) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %274 : int = aten::sub(%273, %186) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.31 : int = prim::Loop(%274, %185, %size_prods.15) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.15 : int, %size_prods0.33 : int):
+          %278 : int = aten::add(%i.15, %186) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %279 : int = aten::__getitem__(%271, %278) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.15 : int = aten::mul(%size_prods0.33, %279) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%185, %size_prods1.15)
+      %281 : bool = aten::eq(%size_prods0.31, %191) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%281) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %282 : str = aten::format(%187, %271) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%282, %188) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.15 : Tensor = aten::batch_norm(%input0.15, %weight.30, %bias.30, %running_mean.15, %running_var.15, %training.29, %190, %189, %185) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.9 : Tensor = aten::relu_(%input1.15) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %285 : Tensor[] = prim::ListConstruct(%result.7, %result.9)
+  %x1.4 : Tensor = aten::cat(%285, %191) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %f3.1 : Tensor = aten::add(%x1.4, %f2.1, %2) # /workspace/ImageGenetic/selfic/squeezenet.py:78:13
+  %fire4.1 : __torch__.selfic.squeezenet.___torch_mangle_19.Fire = prim::GetAttr[name="fire4"](%self.1)
+  %287 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %288 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %289 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %290 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %291 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %292 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %293 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %294 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.6 : __torch__.torch.nn.modules.container.___torch_mangle_13.Sequential = prim::GetAttr[name="squeeze"](%fire4.1)
+  %_0.16 : __torch__.torch.nn.modules.conv.___torch_mangle_11.Conv2d = prim::GetAttr[name="0"](%squeeze.6)
+  %_1.16 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_12.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.6)
+  %weight.32 : Tensor = prim::GetAttr[name="weight"](%_0.16)
+  %bias.32 : Tensor? = prim::GetAttr[name="bias"](%_0.16)
+  %300 : int[] = prim::ListConstruct(%294, %294)
+  %301 : int[] = prim::ListConstruct(%287, %287)
+  %302 : int[] = prim::ListConstruct(%294, %294)
+  %input0.17 : Tensor = aten::conv2d(%f3.1, %weight.32, %bias.32, %300, %301, %302, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.31 : bool = prim::GetAttr[name="training"](%_1.16)
+   = prim::If(%training.31) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.17 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.16)
+      %306 : Tensor = aten::add_(%num_batches_tracked.17, %294, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.33 : bool = prim::GetAttr[name="training"](%_1.16)
+  %running_mean.17 : Tensor = prim::GetAttr[name="running_mean"](%_1.16)
+  %running_var.17 : Tensor = prim::GetAttr[name="running_var"](%_1.16)
+  %weight.34 : Tensor = prim::GetAttr[name="weight"](%_1.16)
+  %bias.34 : Tensor = prim::GetAttr[name="bias"](%_1.16)
+   = prim::If(%training.33) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %312 : int[] = aten::size(%input0.17) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.17 : int = aten::__getitem__(%312, %287) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %314 : int = aten::len(%312) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %315 : int = aten::sub(%314, %289) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.35 : int = prim::Loop(%315, %288, %size_prods.17) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.17 : int, %size_prods0.37 : int):
+          %319 : int = aten::add(%i.17, %289) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %320 : int = aten::__getitem__(%312, %319) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.17 : int = aten::mul(%size_prods0.37, %320) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%288, %size_prods1.17)
+      %322 : bool = aten::eq(%size_prods0.35, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%322) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %323 : str = aten::format(%290, %312) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%323, %291) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.17 : Tensor = aten::batch_norm(%input0.17, %weight.34, %bias.34, %running_mean.17, %running_var.17, %training.33, %293, %292, %288) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.8 : Tensor = aten::relu_(%input1.17) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.6 : __torch__.torch.nn.modules.container.___torch_mangle_16.Sequential = prim::GetAttr[name="expand_1x1"](%fire4.1)
+  %_0.18 : __torch__.torch.nn.modules.conv.___torch_mangle_14.Conv2d = prim::GetAttr[name="0"](%expand_1x1.6)
+  %_1.18 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_15.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.6)
+  %weight.36 : Tensor = prim::GetAttr[name="weight"](%_0.18)
+  %bias.36 : Tensor? = prim::GetAttr[name="bias"](%_0.18)
+  %331 : int[] = prim::ListConstruct(%294, %294)
+  %332 : int[] = prim::ListConstruct(%287, %287)
+  %333 : int[] = prim::ListConstruct(%294, %294)
+  %input0.19 : Tensor = aten::conv2d(%x0.8, %weight.36, %bias.36, %331, %332, %333, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.35 : bool = prim::GetAttr[name="training"](%_1.18)
+   = prim::If(%training.35) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.19 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.18)
+      %337 : Tensor = aten::add_(%num_batches_tracked.19, %294, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.37 : bool = prim::GetAttr[name="training"](%_1.18)
+  %running_mean.19 : Tensor = prim::GetAttr[name="running_mean"](%_1.18)
+  %running_var.19 : Tensor = prim::GetAttr[name="running_var"](%_1.18)
+  %weight.38 : Tensor = prim::GetAttr[name="weight"](%_1.18)
+  %bias.38 : Tensor = prim::GetAttr[name="bias"](%_1.18)
+   = prim::If(%training.37) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %343 : int[] = aten::size(%input0.19) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.19 : int = aten::__getitem__(%343, %287) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %345 : int = aten::len(%343) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %346 : int = aten::sub(%345, %289) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.39 : int = prim::Loop(%346, %288, %size_prods.19) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.19 : int, %size_prods0.41 : int):
+          %350 : int = aten::add(%i.19, %289) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %351 : int = aten::__getitem__(%343, %350) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.19 : int = aten::mul(%size_prods0.41, %351) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%288, %size_prods1.19)
+      %353 : bool = aten::eq(%size_prods0.39, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%353) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %354 : str = aten::format(%290, %343) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%354, %291) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.19 : Tensor = aten::batch_norm(%input0.19, %weight.38, %bias.38, %running_mean.19, %running_var.19, %training.37, %293, %292, %288) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.11 : Tensor = aten::relu_(%input1.19) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.6 : __torch__.torch.nn.modules.container.___torch_mangle_18.Sequential = prim::GetAttr[name="expand_3x3"](%fire4.1)
+  %_0.20 : __torch__.torch.nn.modules.conv.___torch_mangle_17.Conv2d = prim::GetAttr[name="0"](%expand_3x3.6)
+  %_1.20 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_15.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.6)
+  %weight.40 : Tensor = prim::GetAttr[name="weight"](%_0.20)
+  %bias.40 : Tensor? = prim::GetAttr[name="bias"](%_0.20)
+  %362 : int[] = prim::ListConstruct(%294, %294)
+  %363 : int[] = prim::ListConstruct(%294, %294)
+  %364 : int[] = prim::ListConstruct(%294, %294)
+  %input0.21 : Tensor = aten::conv2d(%x0.8, %weight.40, %bias.40, %362, %363, %364, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.39 : bool = prim::GetAttr[name="training"](%_1.20)
+   = prim::If(%training.39) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.21 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.20)
+      %368 : Tensor = aten::add_(%num_batches_tracked.21, %294, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.41 : bool = prim::GetAttr[name="training"](%_1.20)
+  %running_mean.21 : Tensor = prim::GetAttr[name="running_mean"](%_1.20)
+  %running_var.21 : Tensor = prim::GetAttr[name="running_var"](%_1.20)
+  %weight.42 : Tensor = prim::GetAttr[name="weight"](%_1.20)
+  %bias.42 : Tensor = prim::GetAttr[name="bias"](%_1.20)
+   = prim::If(%training.41) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %374 : int[] = aten::size(%input0.21) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.21 : int = aten::__getitem__(%374, %287) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %376 : int = aten::len(%374) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %377 : int = aten::sub(%376, %289) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.43 : int = prim::Loop(%377, %288, %size_prods.21) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.21 : int, %size_prods0.45 : int):
+          %381 : int = aten::add(%i.21, %289) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %382 : int = aten::__getitem__(%374, %381) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.21 : int = aten::mul(%size_prods0.45, %382) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%288, %size_prods1.21)
+      %384 : bool = aten::eq(%size_prods0.43, %294) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%384) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %385 : str = aten::format(%290, %374) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%385, %291) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.21 : Tensor = aten::batch_norm(%input0.21, %weight.42, %bias.42, %running_mean.21, %running_var.21, %training.41, %293, %292, %288) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.13 : Tensor = aten::relu_(%input1.21) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %388 : Tensor[] = prim::ListConstruct(%result.11, %result.13)
+  %f4.1 : Tensor = aten::cat(%388, %294) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %maxpool.1 : __torch__.torch.nn.modules.pooling.MaxPool2d = prim::GetAttr[name="maxpool"](%self.1)
+  %390 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:218:12
+  %391 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:217:12
+  %392 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:215:12
+  %393 : bool = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:219:22
+  %394 : int[] = prim::ListConstruct(%392, %392)
+  %395 : int[] = prim::ListConstruct(%392, %392)
+  %396 : int[] = prim::ListConstruct(%391, %391)
+  %397 : int[] = prim::ListConstruct(%390, %390)
+  %f40.1 : Tensor = aten::max_pool2d(%f4.1, %394, %395, %396, %397, %393) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:830:11
+  %fire5.1 : __torch__.selfic.squeezenet.___torch_mangle_22.Fire = prim::GetAttr[name="fire5"](%self.1)
+  %399 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %400 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %401 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %402 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %403 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %404 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %405 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %406 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.8 : __torch__.torch.nn.modules.container.___torch_mangle_21.Sequential = prim::GetAttr[name="squeeze"](%fire5.1)
+  %_0.22 : __torch__.torch.nn.modules.conv.___torch_mangle_20.Conv2d = prim::GetAttr[name="0"](%squeeze.8)
+  %_1.22 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_12.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.8)
+  %weight.44 : Tensor = prim::GetAttr[name="weight"](%_0.22)
+  %bias.44 : Tensor? = prim::GetAttr[name="bias"](%_0.22)
+  %412 : int[] = prim::ListConstruct(%406, %406)
+  %413 : int[] = prim::ListConstruct(%399, %399)
+  %414 : int[] = prim::ListConstruct(%406, %406)
+  %input0.23 : Tensor = aten::conv2d(%f40.1, %weight.44, %bias.44, %412, %413, %414, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.43 : bool = prim::GetAttr[name="training"](%_1.22)
+   = prim::If(%training.43) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.23 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.22)
+      %418 : Tensor = aten::add_(%num_batches_tracked.23, %406, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.45 : bool = prim::GetAttr[name="training"](%_1.22)
+  %running_mean.23 : Tensor = prim::GetAttr[name="running_mean"](%_1.22)
+  %running_var.23 : Tensor = prim::GetAttr[name="running_var"](%_1.22)
+  %weight.46 : Tensor = prim::GetAttr[name="weight"](%_1.22)
+  %bias.46 : Tensor = prim::GetAttr[name="bias"](%_1.22)
+   = prim::If(%training.45) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %424 : int[] = aten::size(%input0.23) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.23 : int = aten::__getitem__(%424, %399) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %426 : int = aten::len(%424) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %427 : int = aten::sub(%426, %401) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.47 : int = prim::Loop(%427, %400, %size_prods.23) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.23 : int, %size_prods0.49 : int):
+          %431 : int = aten::add(%i.23, %401) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %432 : int = aten::__getitem__(%424, %431) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.23 : int = aten::mul(%size_prods0.49, %432) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%400, %size_prods1.23)
+      %434 : bool = aten::eq(%size_prods0.47, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%434) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %435 : str = aten::format(%402, %424) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%435, %403) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.23 : Tensor = aten::batch_norm(%input0.23, %weight.46, %bias.46, %running_mean.23, %running_var.23, %training.45, %405, %404, %400) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.10 : Tensor = aten::relu_(%input1.23) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.8 : __torch__.torch.nn.modules.container.___torch_mangle_16.Sequential = prim::GetAttr[name="expand_1x1"](%fire5.1)
+  %_0.24 : __torch__.torch.nn.modules.conv.___torch_mangle_14.Conv2d = prim::GetAttr[name="0"](%expand_1x1.8)
+  %_1.24 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_15.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.8)
+  %weight.48 : Tensor = prim::GetAttr[name="weight"](%_0.24)
+  %bias.48 : Tensor? = prim::GetAttr[name="bias"](%_0.24)
+  %443 : int[] = prim::ListConstruct(%406, %406)
+  %444 : int[] = prim::ListConstruct(%399, %399)
+  %445 : int[] = prim::ListConstruct(%406, %406)
+  %input0.25 : Tensor = aten::conv2d(%x0.10, %weight.48, %bias.48, %443, %444, %445, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.47 : bool = prim::GetAttr[name="training"](%_1.24)
+   = prim::If(%training.47) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.25 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.24)
+      %449 : Tensor = aten::add_(%num_batches_tracked.25, %406, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.49 : bool = prim::GetAttr[name="training"](%_1.24)
+  %running_mean.25 : Tensor = prim::GetAttr[name="running_mean"](%_1.24)
+  %running_var.25 : Tensor = prim::GetAttr[name="running_var"](%_1.24)
+  %weight.50 : Tensor = prim::GetAttr[name="weight"](%_1.24)
+  %bias.50 : Tensor = prim::GetAttr[name="bias"](%_1.24)
+   = prim::If(%training.49) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %455 : int[] = aten::size(%input0.25) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.25 : int = aten::__getitem__(%455, %399) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %457 : int = aten::len(%455) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %458 : int = aten::sub(%457, %401) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.51 : int = prim::Loop(%458, %400, %size_prods.25) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.25 : int, %size_prods0.53 : int):
+          %462 : int = aten::add(%i.25, %401) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %463 : int = aten::__getitem__(%455, %462) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.25 : int = aten::mul(%size_prods0.53, %463) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%400, %size_prods1.25)
+      %465 : bool = aten::eq(%size_prods0.51, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%465) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %466 : str = aten::format(%402, %455) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%466, %403) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.25 : Tensor = aten::batch_norm(%input0.25, %weight.50, %bias.50, %running_mean.25, %running_var.25, %training.49, %405, %404, %400) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.15 : Tensor = aten::relu_(%input1.25) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.8 : __torch__.torch.nn.modules.container.___torch_mangle_18.Sequential = prim::GetAttr[name="expand_3x3"](%fire5.1)
+  %_0.26 : __torch__.torch.nn.modules.conv.___torch_mangle_17.Conv2d = prim::GetAttr[name="0"](%expand_3x3.8)
+  %_1.26 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_15.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.8)
+  %weight.52 : Tensor = prim::GetAttr[name="weight"](%_0.26)
+  %bias.52 : Tensor? = prim::GetAttr[name="bias"](%_0.26)
+  %474 : int[] = prim::ListConstruct(%406, %406)
+  %475 : int[] = prim::ListConstruct(%406, %406)
+  %476 : int[] = prim::ListConstruct(%406, %406)
+  %input0.27 : Tensor = aten::conv2d(%x0.10, %weight.52, %bias.52, %474, %475, %476, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.51 : bool = prim::GetAttr[name="training"](%_1.26)
+   = prim::If(%training.51) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.27 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.26)
+      %480 : Tensor = aten::add_(%num_batches_tracked.27, %406, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.53 : bool = prim::GetAttr[name="training"](%_1.26)
+  %running_mean.27 : Tensor = prim::GetAttr[name="running_mean"](%_1.26)
+  %running_var.27 : Tensor = prim::GetAttr[name="running_var"](%_1.26)
+  %weight.54 : Tensor = prim::GetAttr[name="weight"](%_1.26)
+  %bias.54 : Tensor = prim::GetAttr[name="bias"](%_1.26)
+   = prim::If(%training.53) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %486 : int[] = aten::size(%input0.27) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.27 : int = aten::__getitem__(%486, %399) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %488 : int = aten::len(%486) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %489 : int = aten::sub(%488, %401) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.55 : int = prim::Loop(%489, %400, %size_prods.27) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.27 : int, %size_prods0.57 : int):
+          %493 : int = aten::add(%i.27, %401) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %494 : int = aten::__getitem__(%486, %493) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.27 : int = aten::mul(%size_prods0.57, %494) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%400, %size_prods1.27)
+      %496 : bool = aten::eq(%size_prods0.55, %406) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%496) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %497 : str = aten::format(%402, %486) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%497, %403) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.27 : Tensor = aten::batch_norm(%input0.27, %weight.54, %bias.54, %running_mean.27, %running_var.27, %training.53, %405, %404, %400) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.17 : Tensor = aten::relu_(%input1.27) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %500 : Tensor[] = prim::ListConstruct(%result.15, %result.17)
+  %x1.6 : Tensor = aten::cat(%500, %406) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %f5.1 : Tensor = aten::add(%x1.6, %f40.1, %2) # /workspace/ImageGenetic/selfic/squeezenet.py:82:13
+  %fire6.1 : __torch__.selfic.squeezenet.___torch_mangle_31.Fire = prim::GetAttr[name="fire6"](%self.1)
+  %502 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %503 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %504 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %505 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %506 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %507 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %508 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %509 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.10 : __torch__.torch.nn.modules.container.___torch_mangle_25.Sequential = prim::GetAttr[name="squeeze"](%fire6.1)
+  %_0.28 : __torch__.torch.nn.modules.conv.___torch_mangle_23.Conv2d = prim::GetAttr[name="0"](%squeeze.10)
+  %_1.28 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_24.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.10)
+  %weight.56 : Tensor = prim::GetAttr[name="weight"](%_0.28)
+  %bias.56 : Tensor? = prim::GetAttr[name="bias"](%_0.28)
+  %515 : int[] = prim::ListConstruct(%509, %509)
+  %516 : int[] = prim::ListConstruct(%502, %502)
+  %517 : int[] = prim::ListConstruct(%509, %509)
+  %input0.29 : Tensor = aten::conv2d(%f5.1, %weight.56, %bias.56, %515, %516, %517, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.55 : bool = prim::GetAttr[name="training"](%_1.28)
+   = prim::If(%training.55) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.29 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.28)
+      %521 : Tensor = aten::add_(%num_batches_tracked.29, %509, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.57 : bool = prim::GetAttr[name="training"](%_1.28)
+  %running_mean.29 : Tensor = prim::GetAttr[name="running_mean"](%_1.28)
+  %running_var.29 : Tensor = prim::GetAttr[name="running_var"](%_1.28)
+  %weight.58 : Tensor = prim::GetAttr[name="weight"](%_1.28)
+  %bias.58 : Tensor = prim::GetAttr[name="bias"](%_1.28)
+   = prim::If(%training.57) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %527 : int[] = aten::size(%input0.29) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.29 : int = aten::__getitem__(%527, %502) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %529 : int = aten::len(%527) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %530 : int = aten::sub(%529, %504) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.59 : int = prim::Loop(%530, %503, %size_prods.29) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.29 : int, %size_prods0.61 : int):
+          %534 : int = aten::add(%i.29, %504) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %535 : int = aten::__getitem__(%527, %534) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.29 : int = aten::mul(%size_prods0.61, %535) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%503, %size_prods1.29)
+      %537 : bool = aten::eq(%size_prods0.59, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%537) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %538 : str = aten::format(%505, %527) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%538, %506) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.29 : Tensor = aten::batch_norm(%input0.29, %weight.58, %bias.58, %running_mean.29, %running_var.29, %training.57, %508, %507, %503) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.12 : Tensor = aten::relu_(%input1.29) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.10 : __torch__.torch.nn.modules.container.___torch_mangle_28.Sequential = prim::GetAttr[name="expand_1x1"](%fire6.1)
+  %_0.30 : __torch__.torch.nn.modules.conv.___torch_mangle_26.Conv2d = prim::GetAttr[name="0"](%expand_1x1.10)
+  %_1.30 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_27.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.10)
+  %weight.60 : Tensor = prim::GetAttr[name="weight"](%_0.30)
+  %bias.60 : Tensor? = prim::GetAttr[name="bias"](%_0.30)
+  %546 : int[] = prim::ListConstruct(%509, %509)
+  %547 : int[] = prim::ListConstruct(%502, %502)
+  %548 : int[] = prim::ListConstruct(%509, %509)
+  %input0.31 : Tensor = aten::conv2d(%x0.12, %weight.60, %bias.60, %546, %547, %548, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.59 : bool = prim::GetAttr[name="training"](%_1.30)
+   = prim::If(%training.59) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.31 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.30)
+      %552 : Tensor = aten::add_(%num_batches_tracked.31, %509, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.61 : bool = prim::GetAttr[name="training"](%_1.30)
+  %running_mean.31 : Tensor = prim::GetAttr[name="running_mean"](%_1.30)
+  %running_var.31 : Tensor = prim::GetAttr[name="running_var"](%_1.30)
+  %weight.62 : Tensor = prim::GetAttr[name="weight"](%_1.30)
+  %bias.62 : Tensor = prim::GetAttr[name="bias"](%_1.30)
+   = prim::If(%training.61) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %558 : int[] = aten::size(%input0.31) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.31 : int = aten::__getitem__(%558, %502) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %560 : int = aten::len(%558) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %561 : int = aten::sub(%560, %504) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.63 : int = prim::Loop(%561, %503, %size_prods.31) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.31 : int, %size_prods0.65 : int):
+          %565 : int = aten::add(%i.31, %504) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %566 : int = aten::__getitem__(%558, %565) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.31 : int = aten::mul(%size_prods0.65, %566) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%503, %size_prods1.31)
+      %568 : bool = aten::eq(%size_prods0.63, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%568) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %569 : str = aten::format(%505, %558) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%569, %506) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.31 : Tensor = aten::batch_norm(%input0.31, %weight.62, %bias.62, %running_mean.31, %running_var.31, %training.61, %508, %507, %503) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.19 : Tensor = aten::relu_(%input1.31) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.10 : __torch__.torch.nn.modules.container.___torch_mangle_30.Sequential = prim::GetAttr[name="expand_3x3"](%fire6.1)
+  %_0.32 : __torch__.torch.nn.modules.conv.___torch_mangle_29.Conv2d = prim::GetAttr[name="0"](%expand_3x3.10)
+  %_1.32 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_27.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.10)
+  %weight.64 : Tensor = prim::GetAttr[name="weight"](%_0.32)
+  %bias.64 : Tensor? = prim::GetAttr[name="bias"](%_0.32)
+  %577 : int[] = prim::ListConstruct(%509, %509)
+  %578 : int[] = prim::ListConstruct(%509, %509)
+  %579 : int[] = prim::ListConstruct(%509, %509)
+  %input0.33 : Tensor = aten::conv2d(%x0.12, %weight.64, %bias.64, %577, %578, %579, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.63 : bool = prim::GetAttr[name="training"](%_1.32)
+   = prim::If(%training.63) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.33 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.32)
+      %583 : Tensor = aten::add_(%num_batches_tracked.33, %509, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.65 : bool = prim::GetAttr[name="training"](%_1.32)
+  %running_mean.33 : Tensor = prim::GetAttr[name="running_mean"](%_1.32)
+  %running_var.33 : Tensor = prim::GetAttr[name="running_var"](%_1.32)
+  %weight.66 : Tensor = prim::GetAttr[name="weight"](%_1.32)
+  %bias.66 : Tensor = prim::GetAttr[name="bias"](%_1.32)
+   = prim::If(%training.65) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %589 : int[] = aten::size(%input0.33) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.33 : int = aten::__getitem__(%589, %502) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %591 : int = aten::len(%589) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %592 : int = aten::sub(%591, %504) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.67 : int = prim::Loop(%592, %503, %size_prods.33) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.33 : int, %size_prods0.69 : int):
+          %596 : int = aten::add(%i.33, %504) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %597 : int = aten::__getitem__(%589, %596) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.33 : int = aten::mul(%size_prods0.69, %597) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%503, %size_prods1.33)
+      %599 : bool = aten::eq(%size_prods0.67, %509) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%599) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %600 : str = aten::format(%505, %589) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%600, %506) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.33 : Tensor = aten::batch_norm(%input0.33, %weight.66, %bias.66, %running_mean.33, %running_var.33, %training.65, %508, %507, %503) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.21 : Tensor = aten::relu_(%input1.33) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %603 : Tensor[] = prim::ListConstruct(%result.19, %result.21)
+  %f6.1 : Tensor = aten::cat(%603, %509) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %fire7.1 : __torch__.selfic.squeezenet.___torch_mangle_34.Fire = prim::GetAttr[name="fire7"](%self.1)
+  %605 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %606 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %607 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %608 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %609 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %610 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %611 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %612 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.12 : __torch__.torch.nn.modules.container.___torch_mangle_33.Sequential = prim::GetAttr[name="squeeze"](%fire7.1)
+  %_0.34 : __torch__.torch.nn.modules.conv.___torch_mangle_32.Conv2d = prim::GetAttr[name="0"](%squeeze.12)
+  %_1.34 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_24.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.12)
+  %weight.68 : Tensor = prim::GetAttr[name="weight"](%_0.34)
+  %bias.68 : Tensor? = prim::GetAttr[name="bias"](%_0.34)
+  %618 : int[] = prim::ListConstruct(%612, %612)
+  %619 : int[] = prim::ListConstruct(%605, %605)
+  %620 : int[] = prim::ListConstruct(%612, %612)
+  %input0.35 : Tensor = aten::conv2d(%f6.1, %weight.68, %bias.68, %618, %619, %620, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.67 : bool = prim::GetAttr[name="training"](%_1.34)
+   = prim::If(%training.67) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.35 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.34)
+      %624 : Tensor = aten::add_(%num_batches_tracked.35, %612, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.69 : bool = prim::GetAttr[name="training"](%_1.34)
+  %running_mean.35 : Tensor = prim::GetAttr[name="running_mean"](%_1.34)
+  %running_var.35 : Tensor = prim::GetAttr[name="running_var"](%_1.34)
+  %weight.70 : Tensor = prim::GetAttr[name="weight"](%_1.34)
+  %bias.70 : Tensor = prim::GetAttr[name="bias"](%_1.34)
+   = prim::If(%training.69) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %630 : int[] = aten::size(%input0.35) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.35 : int = aten::__getitem__(%630, %605) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %632 : int = aten::len(%630) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %633 : int = aten::sub(%632, %607) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.71 : int = prim::Loop(%633, %606, %size_prods.35) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.35 : int, %size_prods0.73 : int):
+          %637 : int = aten::add(%i.35, %607) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %638 : int = aten::__getitem__(%630, %637) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.35 : int = aten::mul(%size_prods0.73, %638) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%606, %size_prods1.35)
+      %640 : bool = aten::eq(%size_prods0.71, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%640) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %641 : str = aten::format(%608, %630) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%641, %609) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.35 : Tensor = aten::batch_norm(%input0.35, %weight.70, %bias.70, %running_mean.35, %running_var.35, %training.69, %611, %610, %606) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.14 : Tensor = aten::relu_(%input1.35) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.12 : __torch__.torch.nn.modules.container.___torch_mangle_28.Sequential = prim::GetAttr[name="expand_1x1"](%fire7.1)
+  %_0.36 : __torch__.torch.nn.modules.conv.___torch_mangle_26.Conv2d = prim::GetAttr[name="0"](%expand_1x1.12)
+  %_1.36 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_27.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.12)
+  %weight.72 : Tensor = prim::GetAttr[name="weight"](%_0.36)
+  %bias.72 : Tensor? = prim::GetAttr[name="bias"](%_0.36)
+  %649 : int[] = prim::ListConstruct(%612, %612)
+  %650 : int[] = prim::ListConstruct(%605, %605)
+  %651 : int[] = prim::ListConstruct(%612, %612)
+  %input0.37 : Tensor = aten::conv2d(%x0.14, %weight.72, %bias.72, %649, %650, %651, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.71 : bool = prim::GetAttr[name="training"](%_1.36)
+   = prim::If(%training.71) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.37 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.36)
+      %655 : Tensor = aten::add_(%num_batches_tracked.37, %612, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.73 : bool = prim::GetAttr[name="training"](%_1.36)
+  %running_mean.37 : Tensor = prim::GetAttr[name="running_mean"](%_1.36)
+  %running_var.37 : Tensor = prim::GetAttr[name="running_var"](%_1.36)
+  %weight.74 : Tensor = prim::GetAttr[name="weight"](%_1.36)
+  %bias.74 : Tensor = prim::GetAttr[name="bias"](%_1.36)
+   = prim::If(%training.73) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %661 : int[] = aten::size(%input0.37) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.37 : int = aten::__getitem__(%661, %605) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %663 : int = aten::len(%661) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %664 : int = aten::sub(%663, %607) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.75 : int = prim::Loop(%664, %606, %size_prods.37) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.37 : int, %size_prods0.77 : int):
+          %668 : int = aten::add(%i.37, %607) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %669 : int = aten::__getitem__(%661, %668) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.37 : int = aten::mul(%size_prods0.77, %669) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%606, %size_prods1.37)
+      %671 : bool = aten::eq(%size_prods0.75, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%671) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %672 : str = aten::format(%608, %661) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%672, %609) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.37 : Tensor = aten::batch_norm(%input0.37, %weight.74, %bias.74, %running_mean.37, %running_var.37, %training.73, %611, %610, %606) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.23 : Tensor = aten::relu_(%input1.37) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.12 : __torch__.torch.nn.modules.container.___torch_mangle_30.Sequential = prim::GetAttr[name="expand_3x3"](%fire7.1)
+  %_0.38 : __torch__.torch.nn.modules.conv.___torch_mangle_29.Conv2d = prim::GetAttr[name="0"](%expand_3x3.12)
+  %_1.38 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_27.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.12)
+  %weight.76 : Tensor = prim::GetAttr[name="weight"](%_0.38)
+  %bias.76 : Tensor? = prim::GetAttr[name="bias"](%_0.38)
+  %680 : int[] = prim::ListConstruct(%612, %612)
+  %681 : int[] = prim::ListConstruct(%612, %612)
+  %682 : int[] = prim::ListConstruct(%612, %612)
+  %input0.39 : Tensor = aten::conv2d(%x0.14, %weight.76, %bias.76, %680, %681, %682, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.75 : bool = prim::GetAttr[name="training"](%_1.38)
+   = prim::If(%training.75) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.39 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.38)
+      %686 : Tensor = aten::add_(%num_batches_tracked.39, %612, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.77 : bool = prim::GetAttr[name="training"](%_1.38)
+  %running_mean.39 : Tensor = prim::GetAttr[name="running_mean"](%_1.38)
+  %running_var.39 : Tensor = prim::GetAttr[name="running_var"](%_1.38)
+  %weight.78 : Tensor = prim::GetAttr[name="weight"](%_1.38)
+  %bias.78 : Tensor = prim::GetAttr[name="bias"](%_1.38)
+   = prim::If(%training.77) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %692 : int[] = aten::size(%input0.39) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.39 : int = aten::__getitem__(%692, %605) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %694 : int = aten::len(%692) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %695 : int = aten::sub(%694, %607) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.79 : int = prim::Loop(%695, %606, %size_prods.39) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.39 : int, %size_prods0.81 : int):
+          %699 : int = aten::add(%i.39, %607) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %700 : int = aten::__getitem__(%692, %699) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.39 : int = aten::mul(%size_prods0.81, %700) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%606, %size_prods1.39)
+      %702 : bool = aten::eq(%size_prods0.79, %612) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%702) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %703 : str = aten::format(%608, %692) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%703, %609) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.39 : Tensor = aten::batch_norm(%input0.39, %weight.78, %bias.78, %running_mean.39, %running_var.39, %training.77, %611, %610, %606) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.25 : Tensor = aten::relu_(%input1.39) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %706 : Tensor[] = prim::ListConstruct(%result.23, %result.25)
+  %x1.8 : Tensor = aten::cat(%706, %612) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %f7.1 : Tensor = aten::add(%x1.8, %f6.1, %2) # /workspace/ImageGenetic/selfic/squeezenet.py:84:13
+  %fire8.1 : __torch__.selfic.squeezenet.___torch_mangle_42.Fire = prim::GetAttr[name="fire8"](%self.1)
+  %708 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %709 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %710 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %711 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %712 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %713 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %714 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %715 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.14 : __torch__.torch.nn.modules.container.___torch_mangle_36.Sequential = prim::GetAttr[name="squeeze"](%fire8.1)
+  %_0.40 : __torch__.torch.nn.modules.conv.___torch_mangle_35.Conv2d = prim::GetAttr[name="0"](%squeeze.14)
+  %_1.40 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_4.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.14)
+  %weight.80 : Tensor = prim::GetAttr[name="weight"](%_0.40)
+  %bias.80 : Tensor? = prim::GetAttr[name="bias"](%_0.40)
+  %721 : int[] = prim::ListConstruct(%715, %715)
+  %722 : int[] = prim::ListConstruct(%708, %708)
+  %723 : int[] = prim::ListConstruct(%715, %715)
+  %input0.41 : Tensor = aten::conv2d(%f7.1, %weight.80, %bias.80, %721, %722, %723, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.79 : bool = prim::GetAttr[name="training"](%_1.40)
+   = prim::If(%training.79) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.41 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.40)
+      %727 : Tensor = aten::add_(%num_batches_tracked.41, %715, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.81 : bool = prim::GetAttr[name="training"](%_1.40)
+  %running_mean.41 : Tensor = prim::GetAttr[name="running_mean"](%_1.40)
+  %running_var.41 : Tensor = prim::GetAttr[name="running_var"](%_1.40)
+  %weight.82 : Tensor = prim::GetAttr[name="weight"](%_1.40)
+  %bias.82 : Tensor = prim::GetAttr[name="bias"](%_1.40)
+   = prim::If(%training.81) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %733 : int[] = aten::size(%input0.41) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.41 : int = aten::__getitem__(%733, %708) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %735 : int = aten::len(%733) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %736 : int = aten::sub(%735, %710) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.83 : int = prim::Loop(%736, %709, %size_prods.41) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.41 : int, %size_prods0.85 : int):
+          %740 : int = aten::add(%i.41, %710) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %741 : int = aten::__getitem__(%733, %740) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.41 : int = aten::mul(%size_prods0.85, %741) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%709, %size_prods1.41)
+      %743 : bool = aten::eq(%size_prods0.83, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%743) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %744 : str = aten::format(%711, %733) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%744, %712) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.41 : Tensor = aten::batch_norm(%input0.41, %weight.82, %bias.82, %running_mean.41, %running_var.41, %training.81, %714, %713, %709) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.16 : Tensor = aten::relu_(%input1.41) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.14 : __torch__.torch.nn.modules.container.___torch_mangle_39.Sequential = prim::GetAttr[name="expand_1x1"](%fire8.1)
+  %_0.42 : __torch__.torch.nn.modules.conv.___torch_mangle_37.Conv2d = prim::GetAttr[name="0"](%expand_1x1.14)
+  %_1.42 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_38.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.14)
+  %weight.84 : Tensor = prim::GetAttr[name="weight"](%_0.42)
+  %bias.84 : Tensor? = prim::GetAttr[name="bias"](%_0.42)
+  %752 : int[] = prim::ListConstruct(%715, %715)
+  %753 : int[] = prim::ListConstruct(%708, %708)
+  %754 : int[] = prim::ListConstruct(%715, %715)
+  %input0.43 : Tensor = aten::conv2d(%x0.16, %weight.84, %bias.84, %752, %753, %754, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.83 : bool = prim::GetAttr[name="training"](%_1.42)
+   = prim::If(%training.83) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.43 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.42)
+      %758 : Tensor = aten::add_(%num_batches_tracked.43, %715, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.85 : bool = prim::GetAttr[name="training"](%_1.42)
+  %running_mean.43 : Tensor = prim::GetAttr[name="running_mean"](%_1.42)
+  %running_var.43 : Tensor = prim::GetAttr[name="running_var"](%_1.42)
+  %weight.86 : Tensor = prim::GetAttr[name="weight"](%_1.42)
+  %bias.86 : Tensor = prim::GetAttr[name="bias"](%_1.42)
+   = prim::If(%training.85) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %764 : int[] = aten::size(%input0.43) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.43 : int = aten::__getitem__(%764, %708) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %766 : int = aten::len(%764) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %767 : int = aten::sub(%766, %710) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.87 : int = prim::Loop(%767, %709, %size_prods.43) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.43 : int, %size_prods0.89 : int):
+          %771 : int = aten::add(%i.43, %710) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %772 : int = aten::__getitem__(%764, %771) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.43 : int = aten::mul(%size_prods0.89, %772) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%709, %size_prods1.43)
+      %774 : bool = aten::eq(%size_prods0.87, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%774) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %775 : str = aten::format(%711, %764) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%775, %712) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.43 : Tensor = aten::batch_norm(%input0.43, %weight.86, %bias.86, %running_mean.43, %running_var.43, %training.85, %714, %713, %709) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.27 : Tensor = aten::relu_(%input1.43) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.14 : __torch__.torch.nn.modules.container.___torch_mangle_41.Sequential = prim::GetAttr[name="expand_3x3"](%fire8.1)
+  %_0.44 : __torch__.torch.nn.modules.conv.___torch_mangle_40.Conv2d = prim::GetAttr[name="0"](%expand_3x3.14)
+  %_1.44 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_38.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.14)
+  %weight.88 : Tensor = prim::GetAttr[name="weight"](%_0.44)
+  %bias.88 : Tensor? = prim::GetAttr[name="bias"](%_0.44)
+  %783 : int[] = prim::ListConstruct(%715, %715)
+  %784 : int[] = prim::ListConstruct(%715, %715)
+  %785 : int[] = prim::ListConstruct(%715, %715)
+  %input0.45 : Tensor = aten::conv2d(%x0.16, %weight.88, %bias.88, %783, %784, %785, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.87 : bool = prim::GetAttr[name="training"](%_1.44)
+   = prim::If(%training.87) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.45 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.44)
+      %789 : Tensor = aten::add_(%num_batches_tracked.45, %715, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.89 : bool = prim::GetAttr[name="training"](%_1.44)
+  %running_mean.45 : Tensor = prim::GetAttr[name="running_mean"](%_1.44)
+  %running_var.45 : Tensor = prim::GetAttr[name="running_var"](%_1.44)
+  %weight.90 : Tensor = prim::GetAttr[name="weight"](%_1.44)
+  %bias.90 : Tensor = prim::GetAttr[name="bias"](%_1.44)
+   = prim::If(%training.89) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %795 : int[] = aten::size(%input0.45) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.45 : int = aten::__getitem__(%795, %708) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %797 : int = aten::len(%795) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %798 : int = aten::sub(%797, %710) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.91 : int = prim::Loop(%798, %709, %size_prods.45) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.45 : int, %size_prods0.93 : int):
+          %802 : int = aten::add(%i.45, %710) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %803 : int = aten::__getitem__(%795, %802) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.45 : int = aten::mul(%size_prods0.93, %803) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%709, %size_prods1.45)
+      %805 : bool = aten::eq(%size_prods0.91, %715) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%805) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %806 : str = aten::format(%711, %795) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%806, %712) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.45 : Tensor = aten::batch_norm(%input0.45, %weight.90, %bias.90, %running_mean.45, %running_var.45, %training.89, %714, %713, %709) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.29 : Tensor = aten::relu_(%input1.45) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %809 : Tensor[] = prim::ListConstruct(%result.27, %result.29)
+  %f8.1 : Tensor = aten::cat(%809, %715) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %maxpool : __torch__.torch.nn.modules.pooling.MaxPool2d = prim::GetAttr[name="maxpool"](%self.1)
+  %811 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:218:12
+  %812 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:217:12
+  %813 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:215:12
+  %814 : bool = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:219:22
+  %815 : int[] = prim::ListConstruct(%813, %813)
+  %816 : int[] = prim::ListConstruct(%813, %813)
+  %817 : int[] = prim::ListConstruct(%812, %812)
+  %818 : int[] = prim::ListConstruct(%811, %811)
+  %f80.1 : Tensor = aten::max_pool2d(%f8.1, %815, %816, %817, %818, %814) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:830:11
+  %fire9.1 : __torch__.selfic.squeezenet.___torch_mangle_45.Fire = prim::GetAttr[name="fire9"](%self.1)
+  %820 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %821 : bool = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %822 : int = prim::Constant[value=2]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %823 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %824 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %825 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %826 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %827 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/selfic/squeezenet.py:44:11
+  %squeeze.1 : __torch__.torch.nn.modules.container.___torch_mangle_44.Sequential = prim::GetAttr[name="squeeze"](%fire9.1)
+  %_0.1 : __torch__.torch.nn.modules.conv.___torch_mangle_43.Conv2d = prim::GetAttr[name="0"](%squeeze.1)
+  %_1.1 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_4.BatchNorm2d = prim::GetAttr[name="1"](%squeeze.1)
+  %weight.3 : Tensor = prim::GetAttr[name="weight"](%_0.1)
+  %bias.3 : Tensor? = prim::GetAttr[name="bias"](%_0.1)
+  %833 : int[] = prim::ListConstruct(%827, %827)
+  %834 : int[] = prim::ListConstruct(%820, %820)
+  %835 : int[] = prim::ListConstruct(%827, %827)
+  %input0.2 : Tensor = aten::conv2d(%f80.1, %weight.3, %bias.3, %833, %834, %835, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.2 : bool = prim::GetAttr[name="training"](%_1.1)
+   = prim::If(%training.2) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.2 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.1)
+      %839 : Tensor = aten::add_(%num_batches_tracked.2, %827, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.4 : bool = prim::GetAttr[name="training"](%_1.1)
+  %running_mean.2 : Tensor = prim::GetAttr[name="running_mean"](%_1.1)
+  %running_var.2 : Tensor = prim::GetAttr[name="running_var"](%_1.1)
+  %weight.5 : Tensor = prim::GetAttr[name="weight"](%_1.1)
+  %bias.5 : Tensor = prim::GetAttr[name="bias"](%_1.1)
+   = prim::If(%training.4) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %845 : int[] = aten::size(%input0.2) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.2 : int = aten::__getitem__(%845, %820) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %847 : int = aten::len(%845) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %848 : int = aten::sub(%847, %822) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.1 : int = prim::Loop(%848, %821, %size_prods.2) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.2 : int, %size_prods0.8 : int):
+          %852 : int = aten::add(%i.2, %822) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %853 : int = aten::__getitem__(%845, %852) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.2 : int = aten::mul(%size_prods0.8, %853) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%821, %size_prods1.2)
+      %855 : bool = aten::eq(%size_prods0.1, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%855) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %856 : str = aten::format(%823, %845) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%856, %824) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.2 : Tensor = aten::batch_norm(%input0.2, %weight.5, %bias.5, %running_mean.2, %running_var.2, %training.4, %826, %825, %821) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.1 : Tensor = aten::relu_(%input1.2) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_1x1.1 : __torch__.torch.nn.modules.container.___torch_mangle_39.Sequential = prim::GetAttr[name="expand_1x1"](%fire9.1)
+  %_0.3 : __torch__.torch.nn.modules.conv.___torch_mangle_37.Conv2d = prim::GetAttr[name="0"](%expand_1x1.1)
+  %_1.3 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_38.BatchNorm2d = prim::GetAttr[name="1"](%expand_1x1.1)
+  %weight.7 : Tensor = prim::GetAttr[name="weight"](%_0.3)
+  %bias.7 : Tensor? = prim::GetAttr[name="bias"](%_0.3)
+  %864 : int[] = prim::ListConstruct(%827, %827)
+  %865 : int[] = prim::ListConstruct(%820, %820)
+  %866 : int[] = prim::ListConstruct(%827, %827)
+  %input0.4 : Tensor = aten::conv2d(%x0.1, %weight.7, %bias.7, %864, %865, %866, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.6 : bool = prim::GetAttr[name="training"](%_1.3)
+   = prim::If(%training.6) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.4 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.3)
+      %870 : Tensor = aten::add_(%num_batches_tracked.4, %827, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.8 : bool = prim::GetAttr[name="training"](%_1.3)
+  %running_mean.4 : Tensor = prim::GetAttr[name="running_mean"](%_1.3)
+  %running_var.4 : Tensor = prim::GetAttr[name="running_var"](%_1.3)
+  %weight.9 : Tensor = prim::GetAttr[name="weight"](%_1.3)
+  %bias.9 : Tensor = prim::GetAttr[name="bias"](%_1.3)
+   = prim::If(%training.8) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %876 : int[] = aten::size(%input0.4) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.4 : int = aten::__getitem__(%876, %820) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %878 : int = aten::len(%876) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %879 : int = aten::sub(%878, %822) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.10 : int = prim::Loop(%879, %821, %size_prods.4) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.4 : int, %size_prods0.12 : int):
+          %883 : int = aten::add(%i.4, %822) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %884 : int = aten::__getitem__(%876, %883) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.4 : int = aten::mul(%size_prods0.12, %884) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%821, %size_prods1.4)
+      %886 : bool = aten::eq(%size_prods0.10, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%886) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %887 : str = aten::format(%823, %876) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%887, %824) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.4 : Tensor = aten::batch_norm(%input0.4, %weight.9, %bias.9, %running_mean.4, %running_var.4, %training.8, %826, %825, %821) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.2 : Tensor = aten::relu_(%input1.4) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %expand_3x3.1 : __torch__.torch.nn.modules.container.___torch_mangle_41.Sequential = prim::GetAttr[name="expand_3x3"](%fire9.1)
+  %_0 : __torch__.torch.nn.modules.conv.___torch_mangle_40.Conv2d = prim::GetAttr[name="0"](%expand_3x3.1)
+  %_1 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_38.BatchNorm2d = prim::GetAttr[name="1"](%expand_3x3.1)
+  %weight.2 : Tensor = prim::GetAttr[name="weight"](%_0)
+  %bias.2 : Tensor? = prim::GetAttr[name="bias"](%_0)
+  %895 : int[] = prim::ListConstruct(%827, %827)
+  %896 : int[] = prim::ListConstruct(%827, %827)
+  %897 : int[] = prim::ListConstruct(%827, %827)
+  %input0.1 : Tensor = aten::conv2d(%x0.1, %weight.2, %bias.2, %895, %896, %897, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.1 : bool = prim::GetAttr[name="training"](%_1)
+   = prim::If(%training.1) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.1 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1)
+      %901 : Tensor = aten::add_(%num_batches_tracked.1, %827, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training : bool = prim::GetAttr[name="training"](%_1)
+  %running_mean.1 : Tensor = prim::GetAttr[name="running_mean"](%_1)
+  %running_var.1 : Tensor = prim::GetAttr[name="running_var"](%_1)
+  %weight.92 : Tensor = prim::GetAttr[name="weight"](%_1)
+  %bias.92 : Tensor = prim::GetAttr[name="bias"](%_1)
+   = prim::If(%training) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %907 : int[] = aten::size(%input0.1) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.1 : int = aten::__getitem__(%907, %820) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %909 : int = aten::len(%907) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %910 : int = aten::sub(%909, %822) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0 : int = prim::Loop(%910, %821, %size_prods.1) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.1 : int, %size_prods0.7 : int):
+          %914 : int = aten::add(%i.1, %822) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %915 : int = aten::__getitem__(%907, %914) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.1 : int = aten::mul(%size_prods0.7, %915) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%821, %size_prods1.1)
+      %917 : bool = aten::eq(%size_prods0, %827) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%917) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %918 : str = aten::format(%823, %907) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%918, %824) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.1 : Tensor = aten::batch_norm(%input0.1, %weight.92, %bias.92, %running_mean.1, %running_var.1, %training, %826, %825, %821) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %result.1 : Tensor = aten::relu_(%input1.1) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1702:17
+  %921 : Tensor[] = prim::ListConstruct(%result.2, %result.1)
+  %f9.1 : Tensor = aten::cat(%921, %827) # /workspace/ImageGenetic/selfic/squeezenet.py:41:12
+  %conv10.1 : __torch__.torch.nn.modules.conv.___torch_mangle_46.Conv2d = prim::GetAttr[name="conv10"](%self.1)
+  %923 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:33
+  %924 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %weight.1 : Tensor = prim::GetAttr[name="weight"](%conv10.1)
+  %bias.1 : Tensor? = prim::GetAttr[name="bias"](%conv10.1)
+  %927 : int[] = prim::ListConstruct(%923, %923)
+  %928 : int[] = prim::ListConstruct(%924, %924)
+  %929 : int[] = prim::ListConstruct(%923, %923)
+  %c10.1 : Tensor = aten::conv2d(%f9.1, %weight.1, %bias.1, %927, %928, %929, %923) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %avg.1 : __torch__.torch.nn.modules.pooling.AdaptiveAvgPool2d = prim::GetAttr[name="avg"](%self.1)
+  %931 : int = prim::Constant[value=2]()
+  %932 : NoneType = prim::Constant()
+  %933 : str = prim::Constant[value="AssertionError: "]() # :0:0
+  %934 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/modules/pooling.py:1455:44
+  %935 : int[] = prim::ListConstruct(%934, %934)
+  %936 : int[] = aten::size(%c10.1) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1381:51
+  %937 : int = aten::len(%936) # <string>:5:9
+  %938 : bool = aten::gt(%937, %931) # <string>:5:9
+   = prim::If(%938) # <string>:5:2
+    block0():
+      -> ()
+    block1():
+       = prim::RaiseException(%933, %932) # <string>:5:2
+      -> ()
+  %x1.2 : Tensor = aten::adaptive_avg_pool2d(%c10.1, %935) # /workspace/ImageGenetic/venv/lib/python3.11/site-packages/torch/nn/functional.py:1382:11
+  %34 : int = aten::size(%x1.2, %3) # /workspace/ImageGenetic/selfic/squeezenet.py:92:19
+  %35 : int[] = prim::ListConstruct(%34, %4)
+  %x2.1 : Tensor = aten::view(%x1.2, %35) # /workspace/ImageGenetic/selfic/squeezenet.py:92:12
+  return (%x2.1)

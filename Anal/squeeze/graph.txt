@@ -1,0 +1,38 @@
+graph(%self.1 : __torch__.selfic.squeezenet.SqueezeNet,
+      %x.1 : Tensor):
+  %18 : int = prim::Constant[value=1]()
+  %78 : int = prim::Constant[value=0]() # /workspace/ImageGenetic/selfic/squeezenet.py:92:26
+  %80 : int = prim::Constant[value=-1]() # /workspace/ImageGenetic/selfic/squeezenet.py:92:30
+  %stem.1 : __torch__.torch.nn.modules.container.Sequential = prim::GetAttr[name="stem"](%self.1)
+  %x0.1 : Tensor = prim::CallMethod[name="forward"](%stem.1, %x.1) # /workspace/ImageGenetic/selfic/squeezenet.py:75:12
+  %fire2.1 : __torch__.selfic.squeezenet.Fire = prim::GetAttr[name="fire2"](%self.1)
+  %f2.1 : Tensor = prim::CallMethod[name="forward"](%fire2.1, %x0.1) # /workspace/ImageGenetic/selfic/squeezenet.py:77:13
+  %fire3.1 : __torch__.selfic.squeezenet.___torch_mangle_10.Fire = prim::GetAttr[name="fire3"](%self.1)
+  %16 : Tensor = prim::CallMethod[name="forward"](%fire3.1, %f2.1) # /workspace/ImageGenetic/selfic/squeezenet.py:78:13
+  %f3.1 : Tensor = aten::add(%16, %f2.1, %18) # /workspace/ImageGenetic/selfic/squeezenet.py:78:13
+  %fire4.1 : __torch__.selfic.squeezenet.___torch_mangle_19.Fire = prim::GetAttr[name="fire4"](%self.1)
+  %f4.1 : Tensor = prim::CallMethod[name="forward"](%fire4.1, %f3.1) # /workspace/ImageGenetic/selfic/squeezenet.py:79:13
+  %maxpool.1 : __torch__.torch.nn.modules.pooling.MaxPool2d = prim::GetAttr[name="maxpool"](%self.1)
+  %f40.1 : Tensor = prim::CallMethod[name="forward"](%maxpool.1, %f4.1) # /workspace/ImageGenetic/selfic/squeezenet.py:80:13
+  %fire5.1 : __torch__.selfic.squeezenet.___torch_mangle_22.Fire = prim::GetAttr[name="fire5"](%self.1)
+  %34 : Tensor = prim::CallMethod[name="forward"](%fire5.1, %f40.1) # /workspace/ImageGenetic/selfic/squeezenet.py:82:13
+  %f5.1 : Tensor = aten::add(%34, %f40.1, %18) # /workspace/ImageGenetic/selfic/squeezenet.py:82:13
+  %fire6.1 : __torch__.selfic.squeezenet.___torch_mangle_31.Fire = prim::GetAttr[name="fire6"](%self.1)
+  %f6.1 : Tensor = prim::CallMethod[name="forward"](%fire6.1, %f5.1) # /workspace/ImageGenetic/selfic/squeezenet.py:83:13
+  %fire7.1 : __torch__.selfic.squeezenet.___torch_mangle_34.Fire = prim::GetAttr[name="fire7"](%self.1)
+  %47 : Tensor = prim::CallMethod[name="forward"](%fire7.1, %f6.1) # /workspace/ImageGenetic/selfic/squeezenet.py:84:13
+  %f7.1 : Tensor = aten::add(%47, %f6.1, %18) # /workspace/ImageGenetic/selfic/squeezenet.py:84:13
+  %fire8.1 : __torch__.selfic.squeezenet.___torch_mangle_42.Fire = prim::GetAttr[name="fire8"](%self.1)
+  %f8.1 : Tensor = prim::CallMethod[name="forward"](%fire8.1, %f7.1) # /workspace/ImageGenetic/selfic/squeezenet.py:85:13
+  %maxpool : __torch__.torch.nn.modules.pooling.MaxPool2d = prim::GetAttr[name="maxpool"](%self.1)
+  %f80.1 : Tensor = prim::CallMethod[name="forward"](%maxpool, %f8.1) # /workspace/ImageGenetic/selfic/squeezenet.py:86:13
+  %fire9.1 : __torch__.selfic.squeezenet.___torch_mangle_45.Fire = prim::GetAttr[name="fire9"](%self.1)
+  %f9.1 : Tensor = prim::CallMethod[name="forward"](%fire9.1, %f80.1) # /workspace/ImageGenetic/selfic/squeezenet.py:88:13
+  %conv10.1 : __torch__.torch.nn.modules.conv.___torch_mangle_46.Conv2d = prim::GetAttr[name="conv10"](%self.1)
+  %c10.1 : Tensor = prim::CallMethod[name="forward"](%conv10.1, %f9.1) # /workspace/ImageGenetic/selfic/squeezenet.py:89:14
+  %avg.1 : __torch__.torch.nn.modules.pooling.AdaptiveAvgPool2d = prim::GetAttr[name="avg"](%self.1)
+  %x1.1 : Tensor = prim::CallMethod[name="forward"](%avg.1, %c10.1) # /workspace/ImageGenetic/selfic/squeezenet.py:91:12
+  %79 : int = aten::size(%x1.1, %78) # /workspace/ImageGenetic/selfic/squeezenet.py:92:19
+  %81 : int[] = prim::ListConstruct(%79, %80)
+  %x2.1 : Tensor = aten::view(%x1.1, %81) # /workspace/ImageGenetic/selfic/squeezenet.py:92:12
+  return (%x2.1)

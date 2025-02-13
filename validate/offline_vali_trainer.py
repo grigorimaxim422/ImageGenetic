@@ -19,6 +19,7 @@ parser.add_argument('--epochs', type=int, default=600, help='num of training epo
 parser.add_argument('--validate_epochs', type=int, default=50, help='num of training epochs to test weight model and NAS algorithm')
 parser.add_argument('--learning_rate', type=float, default=0.025, help="learning rate")
 parser.add_argument('--model_path', type=str, default="saved_model/model.pt", help="path of saved torchscript model")
+parser.add_argument('--net_name', type=str, default='dummy', help='learning rate')
 args = parser.parse_args()
     
     

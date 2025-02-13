@@ -1,0 +1,181 @@
+<bound method Module.children of RecursiveScriptModule(
+  original_name=SqueezeNet
+  (stem): RecursiveScriptModule(
+    original_name=Sequential
+    (0): RecursiveScriptModule(original_name=Conv2d)
+    (1): RecursiveScriptModule(original_name=BatchNorm2d)
+    (2): RecursiveScriptModule(original_name=ReLU)
+    (3): RecursiveScriptModule(original_name=MaxPool2d)
+  )
+  (fire2): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (fire3): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (fire4): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (fire5): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (fire6): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (fire7): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (fire8): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (fire9): RecursiveScriptModule(
+    original_name=Fire
+    (squeeze): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_1x1): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+    (expand_3x3): RecursiveScriptModule(
+      original_name=Sequential
+      (0): RecursiveScriptModule(original_name=Conv2d)
+      (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (2): RecursiveScriptModule(original_name=ReLU)
+    )
+  )
+  (conv10): RecursiveScriptModule(original_name=Conv2d)
+  (avg): RecursiveScriptModule(original_name=AdaptiveAvgPool2d)
+  (maxpool): RecursiveScriptModule(original_name=MaxPool2d)
+)>

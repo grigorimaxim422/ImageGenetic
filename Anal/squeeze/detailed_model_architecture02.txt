@@ -1,0 +1,560 @@
+### TorchScript Model Architecture ###
+
+Module: stem
+  Type: Sequential
+  Trainable Parameters: 2880
+
+Module: stem.0
+  Type: Conv2d
+  Trainable Parameters: 2688
+  In Channels: 3, Out Channels: 96
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stem.1
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: stem.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: stem.3
+  Type: MaxPool2d
+  Trainable Parameters: 0
+  Kernel Size: 2
+  Stride: 2
+  Padding: 0
+
+Module: fire2
+  Type: Fire
+  Trainable Parameters: 12208
+
+Module: fire2.squeeze
+  Type: Sequential
+  Trainable Parameters: 1584
+
+Module: fire2.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 1552
+  In Channels: 96, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire2.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: fire2.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire2.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 1216
+
+Module: fire2.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 1088
+  In Channels: 16, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire2.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: fire2.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire2.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 9408
+
+Module: fire2.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 9280
+  In Channels: 16, Out Channels: 64
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire2.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: fire2.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire3
+  Type: Fire
+  Trainable Parameters: 12720
+
+Module: fire3.squeeze
+  Type: Sequential
+  Trainable Parameters: 2096
+
+Module: fire3.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 2064
+  In Channels: 128, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire3.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: fire3.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire3.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 1216
+
+Module: fire3.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 1088
+  In Channels: 16, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire3.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: fire3.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire3.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 9408
+
+Module: fire3.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 9280
+  In Channels: 16, Out Channels: 64
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire3.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: fire3.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire4
+  Type: Fire
+  Trainable Parameters: 45920
+
+Module: fire4.squeeze
+  Type: Sequential
+  Trainable Parameters: 4192
+
+Module: fire4.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 4128
+  In Channels: 128, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire4.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: fire4.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire4.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 4480
+
+Module: fire4.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 4224
+  In Channels: 32, Out Channels: 128
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire4.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 256
+
+Module: fire4.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire4.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 37248
+
+Module: fire4.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 36992
+  In Channels: 32, Out Channels: 128
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire4.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 256
+
+Module: fire4.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire5
+  Type: Fire
+  Trainable Parameters: 50016
+
+Module: fire5.squeeze
+  Type: Sequential
+  Trainable Parameters: 8288
+
+Module: fire5.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 8224
+  In Channels: 256, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire5.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: fire5.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire5.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 4480
+
+Module: fire5.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 4224
+  In Channels: 32, Out Channels: 128
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire5.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 256
+
+Module: fire5.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire5.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 37248
+
+Module: fire5.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 36992
+  In Channels: 32, Out Channels: 128
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire5.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 256
+
+Module: fire5.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire6
+  Type: Fire
+  Trainable Parameters: 105744
+
+Module: fire6.squeeze
+  Type: Sequential
+  Trainable Parameters: 12432
+
+Module: fire6.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 12336
+  In Channels: 256, Out Channels: 48
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire6.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 96
+
+Module: fire6.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire6.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 9792
+
+Module: fire6.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 9408
+  In Channels: 48, Out Channels: 192
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire6.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: fire6.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire6.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 83520
+
+Module: fire6.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 83136
+  In Channels: 48, Out Channels: 192
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire6.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: fire6.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire7
+  Type: Fire
+  Trainable Parameters: 111888
+
+Module: fire7.squeeze
+  Type: Sequential
+  Trainable Parameters: 18576
+
+Module: fire7.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 18480
+  In Channels: 384, Out Channels: 48
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire7.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 96
+
+Module: fire7.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire7.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 9792
+
+Module: fire7.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 9408
+  In Channels: 48, Out Channels: 192
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire7.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: fire7.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire7.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 83520
+
+Module: fire7.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 83136
+  In Channels: 48, Out Channels: 192
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire7.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: fire7.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire8
+  Type: Fire
+  Trainable Parameters: 190144
+
+Module: fire8.squeeze
+  Type: Sequential
+  Trainable Parameters: 24768
+
+Module: fire8.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 24640
+  In Channels: 384, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire8.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: fire8.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire8.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 17152
+
+Module: fire8.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 16640
+  In Channels: 64, Out Channels: 256
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire8.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 512
+
+Module: fire8.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire8.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 148224
+
+Module: fire8.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 147712
+  In Channels: 64, Out Channels: 256
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire8.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 512
+
+Module: fire8.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire9
+  Type: Fire
+  Trainable Parameters: 198336
+
+Module: fire9.squeeze
+  Type: Sequential
+  Trainable Parameters: 32960
+
+Module: fire9.squeeze.0
+  Type: Conv2d
+  Trainable Parameters: 32832
+  In Channels: 512, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire9.squeeze.1
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: fire9.squeeze.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire9.expand_1x1
+  Type: Sequential
+  Trainable Parameters: 17152
+
+Module: fire9.expand_1x1.0
+  Type: Conv2d
+  Trainable Parameters: 16640
+  In Channels: 64, Out Channels: 256
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: fire9.expand_1x1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 512
+
+Module: fire9.expand_1x1.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: fire9.expand_3x3
+  Type: Sequential
+  Trainable Parameters: 148224
+
+Module: fire9.expand_3x3.0
+  Type: Conv2d
+  Trainable Parameters: 147712
+  In Channels: 64, Out Channels: 256
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: fire9.expand_3x3.1
+  Type: BatchNorm2d
+  Trainable Parameters: 512
+
+Module: fire9.expand_3x3.2
+  Type: ReLU
+  Trainable Parameters: 0
+
+Module: conv10
+  Type: Conv2d
+  Trainable Parameters: 51300
+  In Channels: 512, Out Channels: 100
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: avg
+  Type: AdaptiveAvgPool2d
+  Trainable Parameters: 0
+
+Module: maxpool
+  Type: MaxPool2d
+  Trainable Parameters: 0
+  Kernel Size: 2
+  Stride: 2
+  Padding: 0
+

@@ -10,7 +10,8 @@ import logging
 
 import requests
 import datetime as dt
-from model.dummy_trainer import DummyTrainer
+from selfic.ersten_trainer import ErstenTrainer
+
 
 from validate.offline_vali_trainer import OfflineValiTrainer
 from validate.forward import  *
@@ -21,7 +22,7 @@ parser = argparse.ArgumentParser(description='PyTorch CIFAR100 Training')
 parser.add_argument('--epochs', type=int, default=600, help='num of training epochs')
 parser.add_argument('--validate_epochs', type=int, default=50, help='num of training epochs')
 parser.add_argument('--learning_rate', type=float, default=0.025, help='learning rate')
-parser.add_argument('--net_name', type=str, default='dummy', help='learning rate')
+parser.add_argument('--net_name', type=str, default='ersten', help='learning rate')
 parser.add_argument('--model_path', type=str, default="saved_model/model.pt", help="path of saved torchscript model")
 
 args = parser.parse_args()
@@ -30,9 +31,13 @@ async def main():
     try:           
         save_dir = os.path.basename(args.model_path)
         if not os.path.exists(save_dir):
-            os.makedirs(save_dir)
-                
-        trainer = DummyTrainer(epochs=args.epochs)
+            os.makedirs(save_dir)            
+            
+        trainer = ErstenTrainer(epochs=args.epochs, net_type=args.net_name)        
+        if trainer==None:
+            logging.warning("no valid net_name")
+            return
+                    
         trainer.train()
         model = trainer.get_model()    
         
