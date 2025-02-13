@@ -72,6 +72,7 @@ class DummyTrainer:
         self.weight_decay = weight_decay
         self.cutout_length = cutout_length
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.network=network
         
         self.model = get_network(network)
         self.model = self.model.to(self.device)
@@ -183,7 +184,7 @@ class DummyTrainer:
                 correct += (predicted == labels).sum().item()
                 
         acc = 100 * correct / total
-        print(f'Accuracy of the network on the 10000 test images: {100 * correct / total:.2f}%')
+        print(f'({self.network}): Accuracy of the network on the 10000 test images: {100 * correct / total:.2f}%')
         return acc
 
     def get_model(self):
