@@ -1,0 +1,606 @@
+### TorchScript Model Architecture ###
+
+Module: pre
+  Type: Sequential
+  Trainable Parameters: 192
+
+Module: pre.0
+  Type: Conv2d
+  Trainable Parameters: 128
+  In Channels: 3, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: pre.1
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: pre.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage1
+  Type: LinearBottleNeck
+  Trainable Parameters: 2064
+  In Channels: 32, Out Channels: 16
+  Stride: 1
+
+Module: stage1.residual
+  Type: Sequential
+  Trainable Parameters: 2064
+
+Module: stage1.residual.0
+  Type: Conv2d
+  Trainable Parameters: 1056
+  In Channels: 32, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage1.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: stage1.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage1.residual.3
+  Type: Conv2d
+  Trainable Parameters: 320
+  In Channels: 32, Out Channels: 32
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stage1.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: stage1.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage1.residual.6
+  Type: Conv2d
+  Trainable Parameters: 528
+  In Channels: 32, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage1.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: stage2
+  Type: Sequential
+  Trainable Parameters: 2712
+
+Module: stage2.0
+  Type: LinearBottleNeck
+  Trainable Parameters: 2712
+  In Channels: 16, Out Channels: 24
+  Stride: 2
+
+Module: stage2.0.residual
+  Type: Sequential
+  Trainable Parameters: 2712
+
+Module: stage2.0.residual.0
+  Type: Conv2d
+  Trainable Parameters: 816
+  In Channels: 16, Out Channels: 48
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage2.0.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 96
+
+Module: stage2.0.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage2.0.residual.3
+  Type: Conv2d
+  Trainable Parameters: 480
+  In Channels: 48, Out Channels: 48
+  Kernel Size: (3, 3)
+  Stride: (2, 2)
+  Padding: (1, 1)
+
+Module: stage2.0.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 96
+
+Module: stage2.0.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage2.0.residual.6
+  Type: Conv2d
+  Trainable Parameters: 1176
+  In Channels: 48, Out Channels: 24
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage2.0.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 48
+
+Module: stage3
+  Type: Sequential
+  Trainable Parameters: 12888
+
+Module: stage3.0
+  Type: LinearBottleNeck
+  Trainable Parameters: 5208
+  In Channels: 24, Out Channels: 32
+  Stride: 2
+
+Module: stage3.0.residual
+  Type: Sequential
+  Trainable Parameters: 5208
+
+Module: stage3.0.residual.0
+  Type: Conv2d
+  Trainable Parameters: 1800
+  In Channels: 24, Out Channels: 72
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage3.0.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 144
+
+Module: stage3.0.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage3.0.residual.3
+  Type: Conv2d
+  Trainable Parameters: 720
+  In Channels: 72, Out Channels: 72
+  Kernel Size: (3, 3)
+  Stride: (2, 2)
+  Padding: (1, 1)
+
+Module: stage3.0.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 144
+
+Module: stage3.0.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage3.0.residual.6
+  Type: Conv2d
+  Trainable Parameters: 2336
+  In Channels: 72, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage3.0.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: stage3.1
+  Type: LinearBottleNeck
+  Trainable Parameters: 7680
+  In Channels: 32, Out Channels: 32
+  Stride: 1
+
+Module: stage3.1.residual
+  Type: Sequential
+  Trainable Parameters: 7680
+
+Module: stage3.1.residual.0
+  Type: Conv2d
+  Trainable Parameters: 3168
+  In Channels: 32, Out Channels: 96
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage3.1.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: stage3.1.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage3.1.residual.3
+  Type: Conv2d
+  Trainable Parameters: 960
+  In Channels: 96, Out Channels: 96
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stage3.1.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: stage3.1.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage3.1.residual.6
+  Type: Conv2d
+  Trainable Parameters: 3104
+  In Channels: 96, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage3.1.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: stage4
+  Type: Sequential
+  Trainable Parameters: 66144
+
+Module: stage4.0
+  Type: LinearBottleNeck
+  Trainable Parameters: 10848
+  In Channels: 32, Out Channels: 64
+  Stride: 2
+
+Module: stage4.0.residual
+  Type: Sequential
+  Trainable Parameters: 10848
+
+Module: stage4.0.residual.0
+  Type: Conv2d
+  Trainable Parameters: 3168
+  In Channels: 32, Out Channels: 96
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage4.0.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: stage4.0.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage4.0.residual.3
+  Type: Conv2d
+  Trainable Parameters: 960
+  In Channels: 96, Out Channels: 96
+  Kernel Size: (3, 3)
+  Stride: (2, 2)
+  Padding: (1, 1)
+
+Module: stage4.0.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: stage4.0.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage4.0.residual.6
+  Type: Conv2d
+  Trainable Parameters: 6208
+  In Channels: 96, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage4.0.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: stage4.1
+  Type: LinearBottleNeck
+  Trainable Parameters: 27648
+  In Channels: 64, Out Channels: 64
+  Stride: 1
+
+Module: stage4.1.residual
+  Type: Sequential
+  Trainable Parameters: 27648
+
+Module: stage4.1.residual.0
+  Type: Conv2d
+  Trainable Parameters: 12480
+  In Channels: 64, Out Channels: 192
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage4.1.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: stage4.1.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage4.1.residual.3
+  Type: Conv2d
+  Trainable Parameters: 1920
+  In Channels: 192, Out Channels: 192
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stage4.1.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: stage4.1.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage4.1.residual.6
+  Type: Conv2d
+  Trainable Parameters: 12352
+  In Channels: 192, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage4.1.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: stage4.2
+  Type: LinearBottleNeck
+  Trainable Parameters: 27648
+  In Channels: 64, Out Channels: 64
+  Stride: 1
+
+Module: stage4.2.residual
+  Type: Sequential
+  Trainable Parameters: 27648
+
+Module: stage4.2.residual.0
+  Type: Conv2d
+  Trainable Parameters: 12480
+  In Channels: 64, Out Channels: 192
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage4.2.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: stage4.2.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage4.2.residual.3
+  Type: Conv2d
+  Trainable Parameters: 1920
+  In Channels: 192, Out Channels: 192
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stage4.2.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: stage4.2.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage4.2.residual.6
+  Type: Conv2d
+  Trainable Parameters: 12352
+  In Channels: 192, Out Channels: 64
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage4.2.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: stage5
+  Type: Sequential
+  Trainable Parameters: 93792
+
+Module: stage5.0
+  Type: LinearBottleNeck
+  Trainable Parameters: 33888
+  In Channels: 64, Out Channels: 96
+  Stride: 1
+
+Module: stage5.0.residual
+  Type: Sequential
+  Trainable Parameters: 33888
+
+Module: stage5.0.residual.0
+  Type: Conv2d
+  Trainable Parameters: 12480
+  In Channels: 64, Out Channels: 192
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage5.0.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: stage5.0.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage5.0.residual.3
+  Type: Conv2d
+  Trainable Parameters: 1920
+  In Channels: 192, Out Channels: 192
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stage5.0.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: stage5.0.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage5.0.residual.6
+  Type: Conv2d
+  Trainable Parameters: 18528
+  In Channels: 192, Out Channels: 96
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage5.0.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: stage5.1
+  Type: LinearBottleNeck
+  Trainable Parameters: 59904
+  In Channels: 96, Out Channels: 96
+  Stride: 1
+
+Module: stage5.1.residual
+  Type: Sequential
+  Trainable Parameters: 59904
+
+Module: stage5.1.residual.0
+  Type: Conv2d
+  Trainable Parameters: 27936
+  In Channels: 96, Out Channels: 288
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage5.1.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 576
+
+Module: stage5.1.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage5.1.residual.3
+  Type: Conv2d
+  Trainable Parameters: 2880
+  In Channels: 288, Out Channels: 288
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stage5.1.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 576
+
+Module: stage5.1.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage5.1.residual.6
+  Type: Conv2d
+  Trainable Parameters: 27744
+  In Channels: 288, Out Channels: 96
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage5.1.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: stage6
+  Type: LinearBottleNeck
+  Trainable Parameters: 101808
+  In Channels: 96, Out Channels: 240
+  Stride: 1
+
+Module: stage6.residual
+  Type: Sequential
+  Trainable Parameters: 101808
+
+Module: stage6.residual.0
+  Type: Conv2d
+  Trainable Parameters: 27936
+  In Channels: 96, Out Channels: 288
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage6.residual.1
+  Type: BatchNorm2d
+  Trainable Parameters: 576
+
+Module: stage6.residual.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage6.residual.3
+  Type: Conv2d
+  Trainable Parameters: 2880
+  In Channels: 288, Out Channels: 288
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stage6.residual.4
+  Type: BatchNorm2d
+  Trainable Parameters: 576
+
+Module: stage6.residual.5
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: stage6.residual.6
+  Type: Conv2d
+  Trainable Parameters: 69360
+  In Channels: 288, Out Channels: 240
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stage6.residual.7
+  Type: BatchNorm2d
+  Trainable Parameters: 480
+
+Module: conv1
+  Type: Sequential
+  Trainable Parameters: 155520
+
+Module: conv1.0
+  Type: Conv2d
+  Trainable Parameters: 154240
+  In Channels: 240, Out Channels: 640
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: conv1.1
+  Type: BatchNorm2d
+  Trainable Parameters: 1280
+
+Module: conv1.2
+  Type: ReLU6
+  Trainable Parameters: 0
+
+Module: conv2
+  Type: Conv2d
+  Trainable Parameters: 64100
+  In Channels: 640, Out Channels: 100
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+

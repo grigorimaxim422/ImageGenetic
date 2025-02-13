@@ -22,3 +22,6 @@ log.txt
 
 !saved_model/first.pt
 !saved_model/second.pt
+##self branch
+# from 2d_fap
+!saved_model/mobilenetv2.pt 

@@ -1,10 +1,10 @@
 import torch
 
 # Load the TorchScript model
-model = torch.jit.load("../saved_model/first.pt", map_location="cpu")
+model = torch.jit.load("../saved_model/mobilenetv2.pt", map_location="cpu")
 
 # Define output files
-output_dir = "first/"
+output_dir = "mobilenetv2/"
 import os
 os.makedirs(output_dir, exist_ok=True)
 

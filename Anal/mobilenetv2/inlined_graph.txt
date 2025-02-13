@@ -1,0 +1,1776 @@
+graph(%self.1 : __torch__.models.mobilenetv2.___torch_mangle_283.MobileNetV2,
+      %x.1 : Tensor):
+  %2 : Function = prim::Constant[name="adaptive_avg_pool2d"]()
+  %3 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:84:37
+  %4 : int = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:26
+  %5 : int = prim::Constant[value=-1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:30
+  %pre.1 : __torch__.torch.nn.modules.container.___torch_mangle_225.Sequential = prim::GetAttr[name="pre"](%self.1)
+  %29 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %30 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %31 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %32 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %33 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %34 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %35 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:22
+  %36 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %37 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %38 : int = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:33
+  %_0.9 : __torch__.torch.nn.modules.conv.___torch_mangle_222.Conv2d = prim::GetAttr[name="0"](%pre.1)
+  %_1.15 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_223.BatchNorm2d = prim::GetAttr[name="1"](%pre.1)
+  %weight.59 : Tensor = prim::GetAttr[name="weight"](%_0.9)
+  %bias.59 : Tensor? = prim::GetAttr[name="bias"](%_0.9)
+  %43 : int[] = prim::ListConstruct(%38, %38)
+  %44 : int[] = prim::ListConstruct(%38, %38)
+  %45 : int[] = prim::ListConstruct(%38, %38)
+  %input0.7 : Tensor = aten::conv2d(%x.1, %weight.59, %bias.59, %43, %44, %45, %38) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.59 : bool = prim::GetAttr[name="training"](%_1.15)
+   = prim::If(%training.59) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.31 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.15)
+      %49 : Tensor = aten::add_(%num_batches_tracked.31, %38, %38) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.61 : bool = prim::GetAttr[name="training"](%_1.15)
+  %running_mean.31 : Tensor = prim::GetAttr[name="running_mean"](%_1.15)
+  %running_var.31 : Tensor = prim::GetAttr[name="running_var"](%_1.15)
+  %weight.61 : Tensor = prim::GetAttr[name="weight"](%_1.15)
+  %bias.61 : Tensor = prim::GetAttr[name="bias"](%_1.15)
+   = prim::If(%training.61) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %55 : int[] = aten::size(%input0.7) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.31 : int = aten::__getitem__(%55, %35) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %57 : int = aten::len(%55) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %58 : int = aten::sub(%57, %36) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.63 : int = prim::Loop(%58, %37, %size_prods.31) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.31 : int, %size_prods0.65 : int):
+          %62 : int = aten::add(%i.31, %36) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %63 : int = aten::__getitem__(%55, %62) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.31 : int = aten::mul(%size_prods0.65, %63) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%37, %size_prods1.31)
+      %65 : bool = aten::eq(%size_prods0.63, %38) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%65) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %66 : str = aten::format(%34, %55) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%66, %33) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.6 : Tensor = aten::batch_norm(%input0.7, %weight.61, %bias.61, %running_mean.31, %running_var.31, %training.61, %31, %32, %37) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x0.1 : Tensor = aten::hardtanh_(%input1.6, %29, %30) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %stage1.1 : __torch__.models.mobilenetv2.___torch_mangle_231.LinearBottleNeck = prim::GetAttr[name="stage1"](%self.1)
+  %69 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %70 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %71 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %72 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %73 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %74 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %75 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %76 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %77 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %78 : int = prim::Constant[value=32]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %79 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:26
+  %80 : bool = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %residual.10 : __torch__.torch.nn.modules.container.___torch_mangle_230.Sequential = prim::GetAttr[name="residual"](%stage1.1)
+  %_0.17 : __torch__.torch.nn.modules.conv.___torch_mangle_226.Conv2d = prim::GetAttr[name="0"](%residual.10)
+  %_1.7 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_223.BatchNorm2d = prim::GetAttr[name="1"](%residual.10)
+  %_3.9 : __torch__.torch.nn.modules.conv.___torch_mangle_227.Conv2d = prim::GetAttr[name="3"](%residual.10)
+  %_4.9 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_223.BatchNorm2d = prim::GetAttr[name="4"](%residual.10)
+  %_6.9 : __torch__.torch.nn.modules.conv.___torch_mangle_228.Conv2d = prim::GetAttr[name="6"](%residual.10)
+  %_7.9 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_229.BatchNorm2d = prim::GetAttr[name="7"](%residual.10)
+  %weight.63 : Tensor = prim::GetAttr[name="weight"](%_0.17)
+  %bias.63 : Tensor? = prim::GetAttr[name="bias"](%_0.17)
+  %90 : int[] = prim::ListConstruct(%79, %79)
+  %91 : int[] = prim::ListConstruct(%69, %69)
+  %92 : int[] = prim::ListConstruct(%79, %79)
+  %input0.4 : Tensor = aten::conv2d(%x0.1, %weight.63, %bias.63, %90, %91, %92, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.63 : bool = prim::GetAttr[name="training"](%_1.7)
+   = prim::If(%training.63) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.33 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.7)
+      %96 : Tensor = aten::add_(%num_batches_tracked.33, %79, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.65 : bool = prim::GetAttr[name="training"](%_1.7)
+  %running_mean.33 : Tensor = prim::GetAttr[name="running_mean"](%_1.7)
+  %running_var.33 : Tensor = prim::GetAttr[name="running_var"](%_1.7)
+  %weight.65 : Tensor = prim::GetAttr[name="weight"](%_1.7)
+  %bias.65 : Tensor = prim::GetAttr[name="bias"](%_1.7)
+   = prim::If(%training.65) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %102 : int[] = aten::size(%input0.4) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.33 : int = aten::__getitem__(%102, %69) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %104 : int = aten::len(%102) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %105 : int = aten::sub(%104, %71) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.67 : int = prim::Loop(%105, %70, %size_prods.33) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.33 : int, %size_prods0.69 : int):
+          %109 : int = aten::add(%i.33, %71) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %110 : int = aten::__getitem__(%102, %109) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.33 : int = aten::mul(%size_prods0.69, %110) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%70, %size_prods1.33)
+      %112 : bool = aten::eq(%size_prods0.67, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%112) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %113 : str = aten::format(%72, %102) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%113, %73) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.10 : Tensor = aten::batch_norm(%input0.4, %weight.65, %bias.65, %running_mean.33, %running_var.33, %training.65, %75, %74, %70) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.10 : Tensor = aten::hardtanh_(%input1.10, %77, %76) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.27 : Tensor = prim::GetAttr[name="weight"](%_3.9)
+  %bias.27 : Tensor? = prim::GetAttr[name="bias"](%_3.9)
+  %118 : int[] = prim::ListConstruct(%79, %79)
+  %119 : int[] = prim::ListConstruct(%79, %79)
+  %120 : int[] = prim::ListConstruct(%79, %79)
+  %input3.10 : Tensor = aten::conv2d(%input2.10, %weight.27, %bias.27, %118, %119, %120, %78) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.27 : bool = prim::GetAttr[name="training"](%_4.9)
+   = prim::If(%training.27) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.15 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.9)
+      %124 : Tensor = aten::add_(%num_batches_tracked.15, %79, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.29 : bool = prim::GetAttr[name="training"](%_4.9)
+  %running_mean.15 : Tensor = prim::GetAttr[name="running_mean"](%_4.9)
+  %running_var.15 : Tensor = prim::GetAttr[name="running_var"](%_4.9)
+  %weight.29 : Tensor = prim::GetAttr[name="weight"](%_4.9)
+  %bias.29 : Tensor = prim::GetAttr[name="bias"](%_4.9)
+   = prim::If(%training.29) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %130 : int[] = aten::size(%input3.10) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.15 : int = aten::__getitem__(%130, %69) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %132 : int = aten::len(%130) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %133 : int = aten::sub(%132, %71) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.31 : int = prim::Loop(%133, %70, %size_prods.15) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.15 : int, %size_prods0.33 : int):
+          %137 : int = aten::add(%i.15, %71) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %138 : int = aten::__getitem__(%130, %137) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.15 : int = aten::mul(%size_prods0.33, %138) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%70, %size_prods1.15)
+      %140 : bool = aten::eq(%size_prods0.31, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%140) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %141 : str = aten::format(%72, %130) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%141, %73) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.10 : Tensor = aten::batch_norm(%input3.10, %weight.29, %bias.29, %running_mean.15, %running_var.15, %training.29, %75, %74, %70) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.10 : Tensor = aten::hardtanh_(%input4.10, %77, %76) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.55 : Tensor = prim::GetAttr[name="weight"](%_6.9)
+  %bias.55 : Tensor? = prim::GetAttr[name="bias"](%_6.9)
+  %146 : int[] = prim::ListConstruct(%79, %79)
+  %147 : int[] = prim::ListConstruct(%69, %69)
+  %148 : int[] = prim::ListConstruct(%79, %79)
+  %input6.10 : Tensor = aten::conv2d(%input5.10, %weight.55, %bias.55, %146, %147, %148, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.55 : bool = prim::GetAttr[name="training"](%_7.9)
+   = prim::If(%training.55) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.29 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.9)
+      %152 : Tensor = aten::add_(%num_batches_tracked.29, %79, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.57 : bool = prim::GetAttr[name="training"](%_7.9)
+  %running_mean.29 : Tensor = prim::GetAttr[name="running_mean"](%_7.9)
+  %running_var.29 : Tensor = prim::GetAttr[name="running_var"](%_7.9)
+  %weight.57 : Tensor = prim::GetAttr[name="weight"](%_7.9)
+  %bias.57 : Tensor = prim::GetAttr[name="bias"](%_7.9)
+   = prim::If(%training.57) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %158 : int[] = aten::size(%input6.10) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.29 : int = aten::__getitem__(%158, %69) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %160 : int = aten::len(%158) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %161 : int = aten::sub(%160, %71) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.59 : int = prim::Loop(%161, %70, %size_prods.29) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.29 : int, %size_prods0.61 : int):
+          %165 : int = aten::add(%i.29, %71) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %166 : int = aten::__getitem__(%158, %165) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.29 : int = aten::mul(%size_prods0.61, %166) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%70, %size_prods1.29)
+      %168 : bool = aten::eq(%size_prods0.59, %79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%168) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %169 : str = aten::format(%72, %158) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%169, %73) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.10 : Tensor = aten::batch_norm(%input6.10, %weight.57, %bias.57, %running_mean.29, %running_var.29, %training.57, %75, %74, %70) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.10 : int = prim::GetAttr[name="stride"](%stage1.1)
+  %172 : bool = aten::eq(%stride.10, %79) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %173 : bool = prim::If(%172) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.10 : int = prim::GetAttr[name="in_channels"](%stage1.1)
+      %out_channels.10 : int = prim::GetAttr[name="out_channels"](%stage1.1)
+      %176 : bool = aten::eq(%in_channels.10, %out_channels.10) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%176)
+    block1():
+      -> (%80)
+  %x1.1 : Tensor = prim::If(%173) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.10 : Tensor = aten::add_(%residual0.10, %x0.1, %79) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.10)
+    block1():
+      -> (%residual0.10)
+  %stage2.1 : __torch__.torch.nn.modules.container.___torch_mangle_239.Sequential = prim::GetAttr[name="stage2"](%self.1)
+  %179 : bool = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %180 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:26
+  %181 : int = prim::Constant[value=48]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %182 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %183 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %184 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %185 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %186 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %187 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %188 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %189 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %190 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %_0.7 : __torch__.models.mobilenetv2.___torch_mangle_238.LinearBottleNeck = prim::GetAttr[name="0"](%stage2.1)
+  %residual.6 : __torch__.torch.nn.modules.container.___torch_mangle_237.Sequential = prim::GetAttr[name="residual"](%_0.7)
+  %_0.11 : __torch__.torch.nn.modules.conv.___torch_mangle_232.Conv2d = prim::GetAttr[name="0"](%residual.6)
+  %_1.9 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_233.BatchNorm2d = prim::GetAttr[name="1"](%residual.6)
+  %_3.5 : __torch__.torch.nn.modules.conv.___torch_mangle_234.Conv2d = prim::GetAttr[name="3"](%residual.6)
+  %_4.5 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_233.BatchNorm2d = prim::GetAttr[name="4"](%residual.6)
+  %_6.5 : __torch__.torch.nn.modules.conv.___torch_mangle_235.Conv2d = prim::GetAttr[name="6"](%residual.6)
+  %_7.5 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_236.BatchNorm2d = prim::GetAttr[name="7"](%residual.6)
+  %weight.31 : Tensor = prim::GetAttr[name="weight"](%_0.11)
+  %bias.31 : Tensor? = prim::GetAttr[name="bias"](%_0.11)
+  %201 : int[] = prim::ListConstruct(%180, %180)
+  %202 : int[] = prim::ListConstruct(%190, %190)
+  %203 : int[] = prim::ListConstruct(%180, %180)
+  %input0.9 : Tensor = aten::conv2d(%x1.1, %weight.31, %bias.31, %201, %202, %203, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.31 : bool = prim::GetAttr[name="training"](%_1.9)
+   = prim::If(%training.31) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.17 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.9)
+      %207 : Tensor = aten::add_(%num_batches_tracked.17, %180, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.33 : bool = prim::GetAttr[name="training"](%_1.9)
+  %running_mean.17 : Tensor = prim::GetAttr[name="running_mean"](%_1.9)
+  %running_var.17 : Tensor = prim::GetAttr[name="running_var"](%_1.9)
+  %weight.33 : Tensor = prim::GetAttr[name="weight"](%_1.9)
+  %bias.33 : Tensor = prim::GetAttr[name="bias"](%_1.9)
+   = prim::If(%training.33) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %213 : int[] = aten::size(%input0.9) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.17 : int = aten::__getitem__(%213, %190) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %215 : int = aten::len(%213) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %216 : int = aten::sub(%215, %188) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.35 : int = prim::Loop(%216, %189, %size_prods.17) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.17 : int, %size_prods0.37 : int):
+          %220 : int = aten::add(%i.17, %188) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %221 : int = aten::__getitem__(%213, %220) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.17 : int = aten::mul(%size_prods0.37, %221) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%189, %size_prods1.17)
+      %223 : bool = aten::eq(%size_prods0.35, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%223) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %224 : str = aten::format(%187, %213) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%224, %186) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.12 : Tensor = aten::batch_norm(%input0.9, %weight.33, %bias.33, %running_mean.17, %running_var.17, %training.33, %184, %185, %189) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.6 : Tensor = aten::hardtanh_(%input1.12, %182, %183) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.35 : Tensor = prim::GetAttr[name="weight"](%_3.5)
+  %bias.35 : Tensor? = prim::GetAttr[name="bias"](%_3.5)
+  %229 : int[] = prim::ListConstruct(%188, %188)
+  %230 : int[] = prim::ListConstruct(%180, %180)
+  %231 : int[] = prim::ListConstruct(%180, %180)
+  %input3.6 : Tensor = aten::conv2d(%input2.6, %weight.35, %bias.35, %229, %230, %231, %181) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.35 : bool = prim::GetAttr[name="training"](%_4.5)
+   = prim::If(%training.35) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.19 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.5)
+      %235 : Tensor = aten::add_(%num_batches_tracked.19, %180, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.37 : bool = prim::GetAttr[name="training"](%_4.5)
+  %running_mean.19 : Tensor = prim::GetAttr[name="running_mean"](%_4.5)
+  %running_var.19 : Tensor = prim::GetAttr[name="running_var"](%_4.5)
+  %weight.37 : Tensor = prim::GetAttr[name="weight"](%_4.5)
+  %bias.37 : Tensor = prim::GetAttr[name="bias"](%_4.5)
+   = prim::If(%training.37) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %241 : int[] = aten::size(%input3.6) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.19 : int = aten::__getitem__(%241, %190) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %243 : int = aten::len(%241) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %244 : int = aten::sub(%243, %188) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.39 : int = prim::Loop(%244, %189, %size_prods.19) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.19 : int, %size_prods0.41 : int):
+          %248 : int = aten::add(%i.19, %188) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %249 : int = aten::__getitem__(%241, %248) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.19 : int = aten::mul(%size_prods0.41, %249) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%189, %size_prods1.19)
+      %251 : bool = aten::eq(%size_prods0.39, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%251) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %252 : str = aten::format(%187, %241) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%252, %186) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.6 : Tensor = aten::batch_norm(%input3.6, %weight.37, %bias.37, %running_mean.19, %running_var.19, %training.37, %184, %185, %189) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.6 : Tensor = aten::hardtanh_(%input4.6, %182, %183) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.39 : Tensor = prim::GetAttr[name="weight"](%_6.5)
+  %bias.39 : Tensor? = prim::GetAttr[name="bias"](%_6.5)
+  %257 : int[] = prim::ListConstruct(%180, %180)
+  %258 : int[] = prim::ListConstruct(%190, %190)
+  %259 : int[] = prim::ListConstruct(%180, %180)
+  %input6.6 : Tensor = aten::conv2d(%input5.6, %weight.39, %bias.39, %257, %258, %259, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.39 : bool = prim::GetAttr[name="training"](%_7.5)
+   = prim::If(%training.39) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.21 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.5)
+      %263 : Tensor = aten::add_(%num_batches_tracked.21, %180, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.41 : bool = prim::GetAttr[name="training"](%_7.5)
+  %running_mean.21 : Tensor = prim::GetAttr[name="running_mean"](%_7.5)
+  %running_var.21 : Tensor = prim::GetAttr[name="running_var"](%_7.5)
+  %weight.41 : Tensor = prim::GetAttr[name="weight"](%_7.5)
+  %bias.41 : Tensor = prim::GetAttr[name="bias"](%_7.5)
+   = prim::If(%training.41) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %269 : int[] = aten::size(%input6.6) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.21 : int = aten::__getitem__(%269, %190) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %271 : int = aten::len(%269) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %272 : int = aten::sub(%271, %188) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.43 : int = prim::Loop(%272, %189, %size_prods.21) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.21 : int, %size_prods0.45 : int):
+          %276 : int = aten::add(%i.21, %188) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %277 : int = aten::__getitem__(%269, %276) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.21 : int = aten::mul(%size_prods0.45, %277) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%189, %size_prods1.21)
+      %279 : bool = aten::eq(%size_prods0.43, %180) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%279) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %280 : str = aten::format(%187, %269) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%280, %186) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.6 : Tensor = aten::batch_norm(%input6.6, %weight.41, %bias.41, %running_mean.21, %running_var.21, %training.41, %184, %185, %189) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.6 : int = prim::GetAttr[name="stride"](%_0.7)
+  %283 : bool = aten::eq(%stride.6, %180) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %284 : bool = prim::If(%283) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.6 : int = prim::GetAttr[name="in_channels"](%_0.7)
+      %out_channels.6 : int = prim::GetAttr[name="out_channels"](%_0.7)
+      %287 : bool = aten::eq(%in_channels.6, %out_channels.6) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%287)
+    block1():
+      -> (%179)
+  %x2.1 : Tensor = prim::If(%284) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.6 : Tensor = aten::add_(%residual0.6, %x1.1, %180) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.6)
+    block1():
+      -> (%residual0.6)
+  %stage3.1 : __torch__.torch.nn.modules.container.___torch_mangle_252.Sequential = prim::GetAttr[name="stage3"](%self.1)
+  %290 : int = prim::Constant[value=96]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %291 : bool = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %292 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:26
+  %293 : int = prim::Constant[value=72]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %294 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %295 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %296 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %297 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %298 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %299 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %300 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %301 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %302 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %_0.13 : __torch__.models.mobilenetv2.___torch_mangle_245.LinearBottleNeck = prim::GetAttr[name="0"](%stage3.1)
+  %_1.11 : __torch__.models.mobilenetv2.___torch_mangle_251.LinearBottleNeck = prim::GetAttr[name="1"](%stage3.1)
+  %residual.8 : __torch__.torch.nn.modules.container.___torch_mangle_244.Sequential = prim::GetAttr[name="residual"](%_0.13)
+  %_0.15 : __torch__.torch.nn.modules.conv.___torch_mangle_240.Conv2d = prim::GetAttr[name="0"](%residual.8)
+  %_1.13 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_241.BatchNorm2d = prim::GetAttr[name="1"](%residual.8)
+  %_3.7 : __torch__.torch.nn.modules.conv.___torch_mangle_242.Conv2d = prim::GetAttr[name="3"](%residual.8)
+  %_4.7 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_241.BatchNorm2d = prim::GetAttr[name="4"](%residual.8)
+  %_6.7 : __torch__.torch.nn.modules.conv.___torch_mangle_243.Conv2d = prim::GetAttr[name="6"](%residual.8)
+  %_7.7 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_223.BatchNorm2d = prim::GetAttr[name="7"](%residual.8)
+  %weight.43 : Tensor = prim::GetAttr[name="weight"](%_0.15)
+  %bias.43 : Tensor? = prim::GetAttr[name="bias"](%_0.15)
+  %314 : int[] = prim::ListConstruct(%292, %292)
+  %315 : int[] = prim::ListConstruct(%302, %302)
+  %316 : int[] = prim::ListConstruct(%292, %292)
+  %input0.11 : Tensor = aten::conv2d(%x2.1, %weight.43, %bias.43, %314, %315, %316, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.43 : bool = prim::GetAttr[name="training"](%_1.13)
+   = prim::If(%training.43) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.23 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.13)
+      %320 : Tensor = aten::add_(%num_batches_tracked.23, %292, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.45 : bool = prim::GetAttr[name="training"](%_1.13)
+  %running_mean.23 : Tensor = prim::GetAttr[name="running_mean"](%_1.13)
+  %running_var.23 : Tensor = prim::GetAttr[name="running_var"](%_1.13)
+  %weight.45 : Tensor = prim::GetAttr[name="weight"](%_1.13)
+  %bias.45 : Tensor = prim::GetAttr[name="bias"](%_1.13)
+   = prim::If(%training.45) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %326 : int[] = aten::size(%input0.11) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.23 : int = aten::__getitem__(%326, %302) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %328 : int = aten::len(%326) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %329 : int = aten::sub(%328, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.47 : int = prim::Loop(%329, %301, %size_prods.23) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.23 : int, %size_prods0.49 : int):
+          %333 : int = aten::add(%i.23, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %334 : int = aten::__getitem__(%326, %333) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.23 : int = aten::mul(%size_prods0.49, %334) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%301, %size_prods1.23)
+      %336 : bool = aten::eq(%size_prods0.47, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%336) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %337 : str = aten::format(%299, %326) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%337, %298) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.14 : Tensor = aten::batch_norm(%input0.11, %weight.45, %bias.45, %running_mean.23, %running_var.23, %training.45, %296, %297, %301) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.8 : Tensor = aten::hardtanh_(%input1.14, %294, %295) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.47 : Tensor = prim::GetAttr[name="weight"](%_3.7)
+  %bias.47 : Tensor? = prim::GetAttr[name="bias"](%_3.7)
+  %342 : int[] = prim::ListConstruct(%300, %300)
+  %343 : int[] = prim::ListConstruct(%292, %292)
+  %344 : int[] = prim::ListConstruct(%292, %292)
+  %input3.8 : Tensor = aten::conv2d(%input2.8, %weight.47, %bias.47, %342, %343, %344, %293) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.47 : bool = prim::GetAttr[name="training"](%_4.7)
+   = prim::If(%training.47) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.25 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.7)
+      %348 : Tensor = aten::add_(%num_batches_tracked.25, %292, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.49 : bool = prim::GetAttr[name="training"](%_4.7)
+  %running_mean.25 : Tensor = prim::GetAttr[name="running_mean"](%_4.7)
+  %running_var.25 : Tensor = prim::GetAttr[name="running_var"](%_4.7)
+  %weight.49 : Tensor = prim::GetAttr[name="weight"](%_4.7)
+  %bias.49 : Tensor = prim::GetAttr[name="bias"](%_4.7)
+   = prim::If(%training.49) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %354 : int[] = aten::size(%input3.8) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.25 : int = aten::__getitem__(%354, %302) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %356 : int = aten::len(%354) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %357 : int = aten::sub(%356, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.51 : int = prim::Loop(%357, %301, %size_prods.25) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.25 : int, %size_prods0.53 : int):
+          %361 : int = aten::add(%i.25, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %362 : int = aten::__getitem__(%354, %361) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.25 : int = aten::mul(%size_prods0.53, %362) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%301, %size_prods1.25)
+      %364 : bool = aten::eq(%size_prods0.51, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%364) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %365 : str = aten::format(%299, %354) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%365, %298) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.8 : Tensor = aten::batch_norm(%input3.8, %weight.49, %bias.49, %running_mean.25, %running_var.25, %training.49, %296, %297, %301) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.8 : Tensor = aten::hardtanh_(%input4.8, %294, %295) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.51 : Tensor = prim::GetAttr[name="weight"](%_6.7)
+  %bias.51 : Tensor? = prim::GetAttr[name="bias"](%_6.7)
+  %370 : int[] = prim::ListConstruct(%292, %292)
+  %371 : int[] = prim::ListConstruct(%302, %302)
+  %372 : int[] = prim::ListConstruct(%292, %292)
+  %input6.8 : Tensor = aten::conv2d(%input5.8, %weight.51, %bias.51, %370, %371, %372, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.51 : bool = prim::GetAttr[name="training"](%_7.7)
+   = prim::If(%training.51) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.27 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.7)
+      %376 : Tensor = aten::add_(%num_batches_tracked.27, %292, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.53 : bool = prim::GetAttr[name="training"](%_7.7)
+  %running_mean.27 : Tensor = prim::GetAttr[name="running_mean"](%_7.7)
+  %running_var.27 : Tensor = prim::GetAttr[name="running_var"](%_7.7)
+  %weight.53 : Tensor = prim::GetAttr[name="weight"](%_7.7)
+  %bias.53 : Tensor = prim::GetAttr[name="bias"](%_7.7)
+   = prim::If(%training.53) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %382 : int[] = aten::size(%input6.8) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.27 : int = aten::__getitem__(%382, %302) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %384 : int = aten::len(%382) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %385 : int = aten::sub(%384, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.55 : int = prim::Loop(%385, %301, %size_prods.27) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.27 : int, %size_prods0.57 : int):
+          %389 : int = aten::add(%i.27, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %390 : int = aten::__getitem__(%382, %389) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.27 : int = aten::mul(%size_prods0.57, %390) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%301, %size_prods1.27)
+      %392 : bool = aten::eq(%size_prods0.55, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%392) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %393 : str = aten::format(%299, %382) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%393, %298) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.8 : Tensor = aten::batch_norm(%input6.8, %weight.53, %bias.53, %running_mean.27, %running_var.27, %training.53, %296, %297, %301) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.8 : int = prim::GetAttr[name="stride"](%_0.13)
+  %396 : bool = aten::eq(%stride.8, %292) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %397 : bool = prim::If(%396) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.8 : int = prim::GetAttr[name="in_channels"](%_0.13)
+      %out_channels.8 : int = prim::GetAttr[name="out_channels"](%_0.13)
+      %400 : bool = aten::eq(%in_channels.8, %out_channels.8) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%400)
+    block1():
+      -> (%291)
+  %input0.13 : Tensor = prim::If(%397) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.8 : Tensor = aten::add_(%residual0.8, %x2.1, %292) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.8)
+    block1():
+      -> (%residual0.8)
+  %residual.12 : __torch__.torch.nn.modules.container.___torch_mangle_250.Sequential = prim::GetAttr[name="residual"](%_1.11)
+  %_0.19 : __torch__.torch.nn.modules.conv.___torch_mangle_246.Conv2d = prim::GetAttr[name="0"](%residual.12)
+  %_1.17 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_247.BatchNorm2d = prim::GetAttr[name="1"](%residual.12)
+  %_3.11 : __torch__.torch.nn.modules.conv.___torch_mangle_248.Conv2d = prim::GetAttr[name="3"](%residual.12)
+  %_4.11 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_247.BatchNorm2d = prim::GetAttr[name="4"](%residual.12)
+  %_6.11 : __torch__.torch.nn.modules.conv.___torch_mangle_249.Conv2d = prim::GetAttr[name="6"](%residual.12)
+  %_7.11 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_223.BatchNorm2d = prim::GetAttr[name="7"](%residual.12)
+  %weight.67 : Tensor = prim::GetAttr[name="weight"](%_0.19)
+  %bias.67 : Tensor? = prim::GetAttr[name="bias"](%_0.19)
+  %412 : int[] = prim::ListConstruct(%292, %292)
+  %413 : int[] = prim::ListConstruct(%302, %302)
+  %414 : int[] = prim::ListConstruct(%292, %292)
+  %input0.15 : Tensor = aten::conv2d(%input0.13, %weight.67, %bias.67, %412, %413, %414, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.67 : bool = prim::GetAttr[name="training"](%_1.17)
+   = prim::If(%training.67) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.35 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.17)
+      %418 : Tensor = aten::add_(%num_batches_tracked.35, %292, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.69 : bool = prim::GetAttr[name="training"](%_1.17)
+  %running_mean.35 : Tensor = prim::GetAttr[name="running_mean"](%_1.17)
+  %running_var.35 : Tensor = prim::GetAttr[name="running_var"](%_1.17)
+  %weight.69 : Tensor = prim::GetAttr[name="weight"](%_1.17)
+  %bias.69 : Tensor = prim::GetAttr[name="bias"](%_1.17)
+   = prim::If(%training.69) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %424 : int[] = aten::size(%input0.15) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.35 : int = aten::__getitem__(%424, %302) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %426 : int = aten::len(%424) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %427 : int = aten::sub(%426, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.71 : int = prim::Loop(%427, %301, %size_prods.35) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.35 : int, %size_prods0.73 : int):
+          %431 : int = aten::add(%i.35, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %432 : int = aten::__getitem__(%424, %431) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.35 : int = aten::mul(%size_prods0.73, %432) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%301, %size_prods1.35)
+      %434 : bool = aten::eq(%size_prods0.71, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%434) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %435 : str = aten::format(%299, %424) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%435, %298) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.16 : Tensor = aten::batch_norm(%input0.15, %weight.69, %bias.69, %running_mean.35, %running_var.35, %training.69, %296, %297, %301) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.12 : Tensor = aten::hardtanh_(%input1.16, %294, %295) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.71 : Tensor = prim::GetAttr[name="weight"](%_3.11)
+  %bias.71 : Tensor? = prim::GetAttr[name="bias"](%_3.11)
+  %440 : int[] = prim::ListConstruct(%292, %292)
+  %441 : int[] = prim::ListConstruct(%292, %292)
+  %442 : int[] = prim::ListConstruct(%292, %292)
+  %input3.12 : Tensor = aten::conv2d(%input2.12, %weight.71, %bias.71, %440, %441, %442, %290) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.71 : bool = prim::GetAttr[name="training"](%_4.11)
+   = prim::If(%training.71) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.37 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.11)
+      %446 : Tensor = aten::add_(%num_batches_tracked.37, %292, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.73 : bool = prim::GetAttr[name="training"](%_4.11)
+  %running_mean.37 : Tensor = prim::GetAttr[name="running_mean"](%_4.11)
+  %running_var.37 : Tensor = prim::GetAttr[name="running_var"](%_4.11)
+  %weight.73 : Tensor = prim::GetAttr[name="weight"](%_4.11)
+  %bias.73 : Tensor = prim::GetAttr[name="bias"](%_4.11)
+   = prim::If(%training.73) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %452 : int[] = aten::size(%input3.12) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.37 : int = aten::__getitem__(%452, %302) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %454 : int = aten::len(%452) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %455 : int = aten::sub(%454, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.75 : int = prim::Loop(%455, %301, %size_prods.37) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.37 : int, %size_prods0.77 : int):
+          %459 : int = aten::add(%i.37, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %460 : int = aten::__getitem__(%452, %459) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.37 : int = aten::mul(%size_prods0.77, %460) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%301, %size_prods1.37)
+      %462 : bool = aten::eq(%size_prods0.75, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%462) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %463 : str = aten::format(%299, %452) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%463, %298) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.12 : Tensor = aten::batch_norm(%input3.12, %weight.73, %bias.73, %running_mean.37, %running_var.37, %training.73, %296, %297, %301) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.12 : Tensor = aten::hardtanh_(%input4.12, %294, %295) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.75 : Tensor = prim::GetAttr[name="weight"](%_6.11)
+  %bias.75 : Tensor? = prim::GetAttr[name="bias"](%_6.11)
+  %468 : int[] = prim::ListConstruct(%292, %292)
+  %469 : int[] = prim::ListConstruct(%302, %302)
+  %470 : int[] = prim::ListConstruct(%292, %292)
+  %input6.12 : Tensor = aten::conv2d(%input5.12, %weight.75, %bias.75, %468, %469, %470, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.75 : bool = prim::GetAttr[name="training"](%_7.11)
+   = prim::If(%training.75) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.39 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.11)
+      %474 : Tensor = aten::add_(%num_batches_tracked.39, %292, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.77 : bool = prim::GetAttr[name="training"](%_7.11)
+  %running_mean.39 : Tensor = prim::GetAttr[name="running_mean"](%_7.11)
+  %running_var.39 : Tensor = prim::GetAttr[name="running_var"](%_7.11)
+  %weight.77 : Tensor = prim::GetAttr[name="weight"](%_7.11)
+  %bias.77 : Tensor = prim::GetAttr[name="bias"](%_7.11)
+   = prim::If(%training.77) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %480 : int[] = aten::size(%input6.12) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.39 : int = aten::__getitem__(%480, %302) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %482 : int = aten::len(%480) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %483 : int = aten::sub(%482, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.79 : int = prim::Loop(%483, %301, %size_prods.39) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.39 : int, %size_prods0.81 : int):
+          %487 : int = aten::add(%i.39, %300) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %488 : int = aten::__getitem__(%480, %487) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.39 : int = aten::mul(%size_prods0.81, %488) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%301, %size_prods1.39)
+      %490 : bool = aten::eq(%size_prods0.79, %292) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%490) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %491 : str = aten::format(%299, %480) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%491, %298) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.12 : Tensor = aten::batch_norm(%input6.12, %weight.77, %bias.77, %running_mean.39, %running_var.39, %training.77, %296, %297, %301) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.12 : int = prim::GetAttr[name="stride"](%_1.11)
+  %494 : bool = aten::eq(%stride.12, %292) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %495 : bool = prim::If(%494) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.12 : int = prim::GetAttr[name="in_channels"](%_1.11)
+      %out_channels.12 : int = prim::GetAttr[name="out_channels"](%_1.11)
+      %498 : bool = aten::eq(%in_channels.12, %out_channels.12) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%498)
+    block1():
+      -> (%291)
+  %x3.1 : Tensor = prim::If(%495) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.12 : Tensor = aten::add_(%residual0.12, %input0.13, %292) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.12)
+    block1():
+      -> (%residual0.12)
+  %stage4.1 : __torch__.torch.nn.modules.container.___torch_mangle_264.Sequential = prim::GetAttr[name="stage4"](%self.1)
+  %501 : int = prim::Constant[value=192]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %502 : bool = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %503 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:26
+  %504 : int = prim::Constant[value=96]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %505 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %506 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %507 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %508 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %509 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %510 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %511 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %512 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %513 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %_0.21 : __torch__.models.mobilenetv2.___torch_mangle_257.LinearBottleNeck = prim::GetAttr[name="0"](%stage4.1)
+  %_1.19 : __torch__.models.mobilenetv2.___torch_mangle_263.LinearBottleNeck = prim::GetAttr[name="1"](%stage4.1)
+  %_2 : __torch__.models.mobilenetv2.___torch_mangle_263.LinearBottleNeck = prim::GetAttr[name="2"](%stage4.1)
+  %residual.14 : __torch__.torch.nn.modules.container.___torch_mangle_256.Sequential = prim::GetAttr[name="residual"](%_0.21)
+  %_0.23 : __torch__.torch.nn.modules.conv.___torch_mangle_246.Conv2d = prim::GetAttr[name="0"](%residual.14)
+  %_1.21 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_247.BatchNorm2d = prim::GetAttr[name="1"](%residual.14)
+  %_3.13 : __torch__.torch.nn.modules.conv.___torch_mangle_253.Conv2d = prim::GetAttr[name="3"](%residual.14)
+  %_4.13 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_247.BatchNorm2d = prim::GetAttr[name="4"](%residual.14)
+  %_6.13 : __torch__.torch.nn.modules.conv.___torch_mangle_254.Conv2d = prim::GetAttr[name="6"](%residual.14)
+  %_7.13 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_255.BatchNorm2d = prim::GetAttr[name="7"](%residual.14)
+  %weight.79 : Tensor = prim::GetAttr[name="weight"](%_0.23)
+  %bias.79 : Tensor? = prim::GetAttr[name="bias"](%_0.23)
+  %526 : int[] = prim::ListConstruct(%503, %503)
+  %527 : int[] = prim::ListConstruct(%513, %513)
+  %528 : int[] = prim::ListConstruct(%503, %503)
+  %input0.17 : Tensor = aten::conv2d(%x3.1, %weight.79, %bias.79, %526, %527, %528, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.79 : bool = prim::GetAttr[name="training"](%_1.21)
+   = prim::If(%training.79) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.41 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.21)
+      %532 : Tensor = aten::add_(%num_batches_tracked.41, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.81 : bool = prim::GetAttr[name="training"](%_1.21)
+  %running_mean.41 : Tensor = prim::GetAttr[name="running_mean"](%_1.21)
+  %running_var.41 : Tensor = prim::GetAttr[name="running_var"](%_1.21)
+  %weight.81 : Tensor = prim::GetAttr[name="weight"](%_1.21)
+  %bias.81 : Tensor = prim::GetAttr[name="bias"](%_1.21)
+   = prim::If(%training.81) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %538 : int[] = aten::size(%input0.17) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.41 : int = aten::__getitem__(%538, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %540 : int = aten::len(%538) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %541 : int = aten::sub(%540, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.83 : int = prim::Loop(%541, %512, %size_prods.41) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.41 : int, %size_prods0.85 : int):
+          %545 : int = aten::add(%i.41, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %546 : int = aten::__getitem__(%538, %545) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.41 : int = aten::mul(%size_prods0.85, %546) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.41)
+      %548 : bool = aten::eq(%size_prods0.83, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%548) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %549 : str = aten::format(%510, %538) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%549, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.4 : Tensor = aten::batch_norm(%input0.17, %weight.81, %bias.81, %running_mean.41, %running_var.41, %training.81, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.14 : Tensor = aten::hardtanh_(%input1.4, %505, %506) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.83 : Tensor = prim::GetAttr[name="weight"](%_3.13)
+  %bias.83 : Tensor? = prim::GetAttr[name="bias"](%_3.13)
+  %554 : int[] = prim::ListConstruct(%511, %511)
+  %555 : int[] = prim::ListConstruct(%503, %503)
+  %556 : int[] = prim::ListConstruct(%503, %503)
+  %input3.14 : Tensor = aten::conv2d(%input2.14, %weight.83, %bias.83, %554, %555, %556, %504) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.83 : bool = prim::GetAttr[name="training"](%_4.13)
+   = prim::If(%training.83) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.43 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.13)
+      %560 : Tensor = aten::add_(%num_batches_tracked.43, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.85 : bool = prim::GetAttr[name="training"](%_4.13)
+  %running_mean.43 : Tensor = prim::GetAttr[name="running_mean"](%_4.13)
+  %running_var.43 : Tensor = prim::GetAttr[name="running_var"](%_4.13)
+  %weight.85 : Tensor = prim::GetAttr[name="weight"](%_4.13)
+  %bias.85 : Tensor = prim::GetAttr[name="bias"](%_4.13)
+   = prim::If(%training.85) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %566 : int[] = aten::size(%input3.14) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.43 : int = aten::__getitem__(%566, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %568 : int = aten::len(%566) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %569 : int = aten::sub(%568, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.87 : int = prim::Loop(%569, %512, %size_prods.43) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.43 : int, %size_prods0.89 : int):
+          %573 : int = aten::add(%i.43, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %574 : int = aten::__getitem__(%566, %573) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.43 : int = aten::mul(%size_prods0.89, %574) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.43)
+      %576 : bool = aten::eq(%size_prods0.87, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%576) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %577 : str = aten::format(%510, %566) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%577, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.14 : Tensor = aten::batch_norm(%input3.14, %weight.85, %bias.85, %running_mean.43, %running_var.43, %training.85, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.14 : Tensor = aten::hardtanh_(%input4.14, %505, %506) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.87 : Tensor = prim::GetAttr[name="weight"](%_6.13)
+  %bias.87 : Tensor? = prim::GetAttr[name="bias"](%_6.13)
+  %582 : int[] = prim::ListConstruct(%503, %503)
+  %583 : int[] = prim::ListConstruct(%513, %513)
+  %584 : int[] = prim::ListConstruct(%503, %503)
+  %input6.14 : Tensor = aten::conv2d(%input5.14, %weight.87, %bias.87, %582, %583, %584, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.87 : bool = prim::GetAttr[name="training"](%_7.13)
+   = prim::If(%training.87) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.45 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.13)
+      %588 : Tensor = aten::add_(%num_batches_tracked.45, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.89 : bool = prim::GetAttr[name="training"](%_7.13)
+  %running_mean.45 : Tensor = prim::GetAttr[name="running_mean"](%_7.13)
+  %running_var.45 : Tensor = prim::GetAttr[name="running_var"](%_7.13)
+  %weight.89 : Tensor = prim::GetAttr[name="weight"](%_7.13)
+  %bias.89 : Tensor = prim::GetAttr[name="bias"](%_7.13)
+   = prim::If(%training.89) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %594 : int[] = aten::size(%input6.14) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.45 : int = aten::__getitem__(%594, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %596 : int = aten::len(%594) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %597 : int = aten::sub(%596, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.91 : int = prim::Loop(%597, %512, %size_prods.45) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.45 : int, %size_prods0.93 : int):
+          %601 : int = aten::add(%i.45, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %602 : int = aten::__getitem__(%594, %601) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.45 : int = aten::mul(%size_prods0.93, %602) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.45)
+      %604 : bool = aten::eq(%size_prods0.91, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%604) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %605 : str = aten::format(%510, %594) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%605, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.14 : Tensor = aten::batch_norm(%input6.14, %weight.89, %bias.89, %running_mean.45, %running_var.45, %training.89, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.14 : int = prim::GetAttr[name="stride"](%_0.21)
+  %608 : bool = aten::eq(%stride.14, %503) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %609 : bool = prim::If(%608) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.14 : int = prim::GetAttr[name="in_channels"](%_0.21)
+      %out_channels.14 : int = prim::GetAttr[name="out_channels"](%_0.21)
+      %612 : bool = aten::eq(%in_channels.14, %out_channels.14) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%612)
+    block1():
+      -> (%502)
+  %input0.19 : Tensor = prim::If(%609) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.14 : Tensor = aten::add_(%residual0.14, %x3.1, %503) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.14)
+    block1():
+      -> (%residual0.14)
+  %residual.4 : __torch__.torch.nn.modules.container.___torch_mangle_262.Sequential = prim::GetAttr[name="residual"](%_1.19)
+  %_0.5 : __torch__.torch.nn.modules.conv.___torch_mangle_258.Conv2d = prim::GetAttr[name="0"](%residual.4)
+  %_1.5 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_259.BatchNorm2d = prim::GetAttr[name="1"](%residual.4)
+  %_3.3 : __torch__.torch.nn.modules.conv.___torch_mangle_260.Conv2d = prim::GetAttr[name="3"](%residual.4)
+  %_4.3 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_259.BatchNorm2d = prim::GetAttr[name="4"](%residual.4)
+  %_6.3 : __torch__.torch.nn.modules.conv.___torch_mangle_261.Conv2d = prim::GetAttr[name="6"](%residual.4)
+  %_7.3 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_255.BatchNorm2d = prim::GetAttr[name="7"](%residual.4)
+  %weight.15 : Tensor = prim::GetAttr[name="weight"](%_0.5)
+  %bias.15 : Tensor? = prim::GetAttr[name="bias"](%_0.5)
+  %624 : int[] = prim::ListConstruct(%503, %503)
+  %625 : int[] = prim::ListConstruct(%513, %513)
+  %626 : int[] = prim::ListConstruct(%503, %503)
+  %input0.8 : Tensor = aten::conv2d(%input0.19, %weight.15, %bias.15, %624, %625, %626, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.15 : bool = prim::GetAttr[name="training"](%_1.5)
+   = prim::If(%training.15) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.9 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.5)
+      %630 : Tensor = aten::add_(%num_batches_tracked.9, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.17 : bool = prim::GetAttr[name="training"](%_1.5)
+  %running_mean.9 : Tensor = prim::GetAttr[name="running_mean"](%_1.5)
+  %running_var.9 : Tensor = prim::GetAttr[name="running_var"](%_1.5)
+  %weight.17 : Tensor = prim::GetAttr[name="weight"](%_1.5)
+  %bias.17 : Tensor = prim::GetAttr[name="bias"](%_1.5)
+   = prim::If(%training.17) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %636 : int[] = aten::size(%input0.8) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.9 : int = aten::__getitem__(%636, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %638 : int = aten::len(%636) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %639 : int = aten::sub(%638, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.19 : int = prim::Loop(%639, %512, %size_prods.9) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.9 : int, %size_prods0.21 : int):
+          %643 : int = aten::add(%i.9, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %644 : int = aten::__getitem__(%636, %643) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.9 : int = aten::mul(%size_prods0.21, %644) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.9)
+      %646 : bool = aten::eq(%size_prods0.19, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%646) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %647 : str = aten::format(%510, %636) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%647, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.8 : Tensor = aten::batch_norm(%input0.8, %weight.17, %bias.17, %running_mean.9, %running_var.9, %training.17, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.4 : Tensor = aten::hardtanh_(%input1.8, %505, %506) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.19 : Tensor = prim::GetAttr[name="weight"](%_3.3)
+  %bias.19 : Tensor? = prim::GetAttr[name="bias"](%_3.3)
+  %652 : int[] = prim::ListConstruct(%503, %503)
+  %653 : int[] = prim::ListConstruct(%503, %503)
+  %654 : int[] = prim::ListConstruct(%503, %503)
+  %input3.4 : Tensor = aten::conv2d(%input2.4, %weight.19, %bias.19, %652, %653, %654, %501) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.19 : bool = prim::GetAttr[name="training"](%_4.3)
+   = prim::If(%training.19) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.11 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.3)
+      %658 : Tensor = aten::add_(%num_batches_tracked.11, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.21 : bool = prim::GetAttr[name="training"](%_4.3)
+  %running_mean.11 : Tensor = prim::GetAttr[name="running_mean"](%_4.3)
+  %running_var.11 : Tensor = prim::GetAttr[name="running_var"](%_4.3)
+  %weight.21 : Tensor = prim::GetAttr[name="weight"](%_4.3)
+  %bias.21 : Tensor = prim::GetAttr[name="bias"](%_4.3)
+   = prim::If(%training.21) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %664 : int[] = aten::size(%input3.4) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.11 : int = aten::__getitem__(%664, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %666 : int = aten::len(%664) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %667 : int = aten::sub(%666, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.23 : int = prim::Loop(%667, %512, %size_prods.11) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.11 : int, %size_prods0.25 : int):
+          %671 : int = aten::add(%i.11, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %672 : int = aten::__getitem__(%664, %671) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.11 : int = aten::mul(%size_prods0.25, %672) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.11)
+      %674 : bool = aten::eq(%size_prods0.23, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%674) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %675 : str = aten::format(%510, %664) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%675, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.4 : Tensor = aten::batch_norm(%input3.4, %weight.21, %bias.21, %running_mean.11, %running_var.11, %training.21, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.4 : Tensor = aten::hardtanh_(%input4.4, %505, %506) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.23 : Tensor = prim::GetAttr[name="weight"](%_6.3)
+  %bias.23 : Tensor? = prim::GetAttr[name="bias"](%_6.3)
+  %680 : int[] = prim::ListConstruct(%503, %503)
+  %681 : int[] = prim::ListConstruct(%513, %513)
+  %682 : int[] = prim::ListConstruct(%503, %503)
+  %input6.4 : Tensor = aten::conv2d(%input5.4, %weight.23, %bias.23, %680, %681, %682, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.23 : bool = prim::GetAttr[name="training"](%_7.3)
+   = prim::If(%training.23) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.13 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.3)
+      %686 : Tensor = aten::add_(%num_batches_tracked.13, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.25 : bool = prim::GetAttr[name="training"](%_7.3)
+  %running_mean.13 : Tensor = prim::GetAttr[name="running_mean"](%_7.3)
+  %running_var.13 : Tensor = prim::GetAttr[name="running_var"](%_7.3)
+  %weight.25 : Tensor = prim::GetAttr[name="weight"](%_7.3)
+  %bias.25 : Tensor = prim::GetAttr[name="bias"](%_7.3)
+   = prim::If(%training.25) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %692 : int[] = aten::size(%input6.4) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.13 : int = aten::__getitem__(%692, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %694 : int = aten::len(%692) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %695 : int = aten::sub(%694, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.27 : int = prim::Loop(%695, %512, %size_prods.13) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.13 : int, %size_prods0.29 : int):
+          %699 : int = aten::add(%i.13, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %700 : int = aten::__getitem__(%692, %699) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.13 : int = aten::mul(%size_prods0.29, %700) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.13)
+      %702 : bool = aten::eq(%size_prods0.27, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%702) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %703 : str = aten::format(%510, %692) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%703, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.4 : Tensor = aten::batch_norm(%input6.4, %weight.25, %bias.25, %running_mean.13, %running_var.13, %training.25, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.4 : int = prim::GetAttr[name="stride"](%_1.19)
+  %706 : bool = aten::eq(%stride.4, %503) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %707 : bool = prim::If(%706) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.4 : int = prim::GetAttr[name="in_channels"](%_1.19)
+      %out_channels.4 : int = prim::GetAttr[name="out_channels"](%_1.19)
+      %710 : bool = aten::eq(%in_channels.4, %out_channels.4) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%710)
+    block1():
+      -> (%502)
+  %input1.18 : Tensor = prim::If(%707) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.4 : Tensor = aten::add_(%residual0.4, %input0.19, %503) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.4)
+    block1():
+      -> (%residual0.4)
+  %residual.16 : __torch__.torch.nn.modules.container.___torch_mangle_262.Sequential = prim::GetAttr[name="residual"](%_2)
+  %_0.25 : __torch__.torch.nn.modules.conv.___torch_mangle_258.Conv2d = prim::GetAttr[name="0"](%residual.16)
+  %_1.23 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_259.BatchNorm2d = prim::GetAttr[name="1"](%residual.16)
+  %_3.15 : __torch__.torch.nn.modules.conv.___torch_mangle_260.Conv2d = prim::GetAttr[name="3"](%residual.16)
+  %_4.15 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_259.BatchNorm2d = prim::GetAttr[name="4"](%residual.16)
+  %_6.15 : __torch__.torch.nn.modules.conv.___torch_mangle_261.Conv2d = prim::GetAttr[name="6"](%residual.16)
+  %_7.15 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_255.BatchNorm2d = prim::GetAttr[name="7"](%residual.16)
+  %weight.91 : Tensor = prim::GetAttr[name="weight"](%_0.25)
+  %bias.91 : Tensor? = prim::GetAttr[name="bias"](%_0.25)
+  %722 : int[] = prim::ListConstruct(%503, %503)
+  %723 : int[] = prim::ListConstruct(%513, %513)
+  %724 : int[] = prim::ListConstruct(%503, %503)
+  %input0.21 : Tensor = aten::conv2d(%input1.18, %weight.91, %bias.91, %722, %723, %724, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.91 : bool = prim::GetAttr[name="training"](%_1.23)
+   = prim::If(%training.91) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.47 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.23)
+      %728 : Tensor = aten::add_(%num_batches_tracked.47, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.93 : bool = prim::GetAttr[name="training"](%_1.23)
+  %running_mean.47 : Tensor = prim::GetAttr[name="running_mean"](%_1.23)
+  %running_var.47 : Tensor = prim::GetAttr[name="running_var"](%_1.23)
+  %weight.93 : Tensor = prim::GetAttr[name="weight"](%_1.23)
+  %bias.93 : Tensor = prim::GetAttr[name="bias"](%_1.23)
+   = prim::If(%training.93) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %734 : int[] = aten::size(%input0.21) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.47 : int = aten::__getitem__(%734, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %736 : int = aten::len(%734) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %737 : int = aten::sub(%736, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.95 : int = prim::Loop(%737, %512, %size_prods.47) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.47 : int, %size_prods0.97 : int):
+          %741 : int = aten::add(%i.47, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %742 : int = aten::__getitem__(%734, %741) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.47 : int = aten::mul(%size_prods0.97, %742) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.47)
+      %744 : bool = aten::eq(%size_prods0.95, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%744) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %745 : str = aten::format(%510, %734) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%745, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.20 : Tensor = aten::batch_norm(%input0.21, %weight.93, %bias.93, %running_mean.47, %running_var.47, %training.93, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.16 : Tensor = aten::hardtanh_(%input1.20, %505, %506) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.95 : Tensor = prim::GetAttr[name="weight"](%_3.15)
+  %bias.95 : Tensor? = prim::GetAttr[name="bias"](%_3.15)
+  %750 : int[] = prim::ListConstruct(%503, %503)
+  %751 : int[] = prim::ListConstruct(%503, %503)
+  %752 : int[] = prim::ListConstruct(%503, %503)
+  %input3.16 : Tensor = aten::conv2d(%input2.16, %weight.95, %bias.95, %750, %751, %752, %501) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.95 : bool = prim::GetAttr[name="training"](%_4.15)
+   = prim::If(%training.95) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.49 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.15)
+      %756 : Tensor = aten::add_(%num_batches_tracked.49, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.97 : bool = prim::GetAttr[name="training"](%_4.15)
+  %running_mean.49 : Tensor = prim::GetAttr[name="running_mean"](%_4.15)
+  %running_var.49 : Tensor = prim::GetAttr[name="running_var"](%_4.15)
+  %weight.97 : Tensor = prim::GetAttr[name="weight"](%_4.15)
+  %bias.97 : Tensor = prim::GetAttr[name="bias"](%_4.15)
+   = prim::If(%training.97) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %762 : int[] = aten::size(%input3.16) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.49 : int = aten::__getitem__(%762, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %764 : int = aten::len(%762) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %765 : int = aten::sub(%764, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.99 : int = prim::Loop(%765, %512, %size_prods.49) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.49 : int, %size_prods0.101 : int):
+          %769 : int = aten::add(%i.49, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %770 : int = aten::__getitem__(%762, %769) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.49 : int = aten::mul(%size_prods0.101, %770) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.49)
+      %772 : bool = aten::eq(%size_prods0.99, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%772) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %773 : str = aten::format(%510, %762) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%773, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.16 : Tensor = aten::batch_norm(%input3.16, %weight.97, %bias.97, %running_mean.49, %running_var.49, %training.97, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.16 : Tensor = aten::hardtanh_(%input4.16, %505, %506) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.99 : Tensor = prim::GetAttr[name="weight"](%_6.15)
+  %bias.99 : Tensor? = prim::GetAttr[name="bias"](%_6.15)
+  %778 : int[] = prim::ListConstruct(%503, %503)
+  %779 : int[] = prim::ListConstruct(%513, %513)
+  %780 : int[] = prim::ListConstruct(%503, %503)
+  %input6.16 : Tensor = aten::conv2d(%input5.16, %weight.99, %bias.99, %778, %779, %780, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.99 : bool = prim::GetAttr[name="training"](%_7.15)
+   = prim::If(%training.99) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.51 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.15)
+      %784 : Tensor = aten::add_(%num_batches_tracked.51, %503, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.101 : bool = prim::GetAttr[name="training"](%_7.15)
+  %running_mean.51 : Tensor = prim::GetAttr[name="running_mean"](%_7.15)
+  %running_var.51 : Tensor = prim::GetAttr[name="running_var"](%_7.15)
+  %weight.101 : Tensor = prim::GetAttr[name="weight"](%_7.15)
+  %bias.101 : Tensor = prim::GetAttr[name="bias"](%_7.15)
+   = prim::If(%training.101) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %790 : int[] = aten::size(%input6.16) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.51 : int = aten::__getitem__(%790, %513) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %792 : int = aten::len(%790) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %793 : int = aten::sub(%792, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.103 : int = prim::Loop(%793, %512, %size_prods.51) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.51 : int, %size_prods0.105 : int):
+          %797 : int = aten::add(%i.51, %511) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %798 : int = aten::__getitem__(%790, %797) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.51 : int = aten::mul(%size_prods0.105, %798) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%512, %size_prods1.51)
+      %800 : bool = aten::eq(%size_prods0.103, %503) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%800) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %801 : str = aten::format(%510, %790) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%801, %509) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.16 : Tensor = aten::batch_norm(%input6.16, %weight.101, %bias.101, %running_mean.51, %running_var.51, %training.101, %507, %508, %512) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.16 : int = prim::GetAttr[name="stride"](%_2)
+  %804 : bool = aten::eq(%stride.16, %503) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %805 : bool = prim::If(%804) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.16 : int = prim::GetAttr[name="in_channels"](%_2)
+      %out_channels.16 : int = prim::GetAttr[name="out_channels"](%_2)
+      %808 : bool = aten::eq(%in_channels.16, %out_channels.16) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%808)
+    block1():
+      -> (%502)
+  %x4.1 : Tensor = prim::If(%805) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.16 : Tensor = aten::add_(%residual0.16, %input1.18, %503) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.16)
+    block1():
+      -> (%residual0.16)
+  %stage5.1 : __torch__.torch.nn.modules.container.___torch_mangle_274.Sequential = prim::GetAttr[name="stage5"](%self.1)
+  %811 : int = prim::Constant[value=288]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %812 : bool = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %813 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:26
+  %814 : int = prim::Constant[value=192]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %815 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %816 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %817 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %818 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %819 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %820 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %821 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %822 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %823 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %_0.1 : __torch__.models.mobilenetv2.___torch_mangle_267.LinearBottleNeck = prim::GetAttr[name="0"](%stage5.1)
+  %_1.1 : __torch__.models.mobilenetv2.___torch_mangle_273.LinearBottleNeck = prim::GetAttr[name="1"](%stage5.1)
+  %residual.2 : __torch__.torch.nn.modules.container.___torch_mangle_266.Sequential = prim::GetAttr[name="residual"](%_0.1)
+  %_0.3 : __torch__.torch.nn.modules.conv.___torch_mangle_258.Conv2d = prim::GetAttr[name="0"](%residual.2)
+  %_1.3 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_259.BatchNorm2d = prim::GetAttr[name="1"](%residual.2)
+  %_3.1 : __torch__.torch.nn.modules.conv.___torch_mangle_260.Conv2d = prim::GetAttr[name="3"](%residual.2)
+  %_4.1 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_259.BatchNorm2d = prim::GetAttr[name="4"](%residual.2)
+  %_6.1 : __torch__.torch.nn.modules.conv.___torch_mangle_265.Conv2d = prim::GetAttr[name="6"](%residual.2)
+  %_7.1 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_247.BatchNorm2d = prim::GetAttr[name="7"](%residual.2)
+  %weight.3 : Tensor = prim::GetAttr[name="weight"](%_0.3)
+  %bias.3 : Tensor? = prim::GetAttr[name="bias"](%_0.3)
+  %835 : int[] = prim::ListConstruct(%813, %813)
+  %836 : int[] = prim::ListConstruct(%823, %823)
+  %837 : int[] = prim::ListConstruct(%813, %813)
+  %input0.6 : Tensor = aten::conv2d(%x4.1, %weight.3, %bias.3, %835, %836, %837, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.3 : bool = prim::GetAttr[name="training"](%_1.3)
+   = prim::If(%training.3) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.3 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.3)
+      %841 : Tensor = aten::add_(%num_batches_tracked.3, %813, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.5 : bool = prim::GetAttr[name="training"](%_1.3)
+  %running_mean.3 : Tensor = prim::GetAttr[name="running_mean"](%_1.3)
+  %running_var.3 : Tensor = prim::GetAttr[name="running_var"](%_1.3)
+  %weight.5 : Tensor = prim::GetAttr[name="weight"](%_1.3)
+  %bias.5 : Tensor = prim::GetAttr[name="bias"](%_1.3)
+   = prim::If(%training.5) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %847 : int[] = aten::size(%input0.6) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.3 : int = aten::__getitem__(%847, %823) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %849 : int = aten::len(%847) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %850 : int = aten::sub(%849, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.2 : int = prim::Loop(%850, %822, %size_prods.3) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.3 : int, %size_prods0.9 : int):
+          %854 : int = aten::add(%i.3, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %855 : int = aten::__getitem__(%847, %854) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.3 : int = aten::mul(%size_prods0.9, %855) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%822, %size_prods1.3)
+      %857 : bool = aten::eq(%size_prods0.2, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%857) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %858 : str = aten::format(%820, %847) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%858, %819) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.2 : Tensor = aten::batch_norm(%input0.6, %weight.5, %bias.5, %running_mean.3, %running_var.3, %training.5, %817, %818, %822) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.2 : Tensor = aten::hardtanh_(%input1.2, %815, %816) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.7 : Tensor = prim::GetAttr[name="weight"](%_3.1)
+  %bias.7 : Tensor? = prim::GetAttr[name="bias"](%_3.1)
+  %863 : int[] = prim::ListConstruct(%813, %813)
+  %864 : int[] = prim::ListConstruct(%813, %813)
+  %865 : int[] = prim::ListConstruct(%813, %813)
+  %input3.2 : Tensor = aten::conv2d(%input2.2, %weight.7, %bias.7, %863, %864, %865, %814) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.7 : bool = prim::GetAttr[name="training"](%_4.1)
+   = prim::If(%training.7) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.5 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.1)
+      %869 : Tensor = aten::add_(%num_batches_tracked.5, %813, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.9 : bool = prim::GetAttr[name="training"](%_4.1)
+  %running_mean.5 : Tensor = prim::GetAttr[name="running_mean"](%_4.1)
+  %running_var.5 : Tensor = prim::GetAttr[name="running_var"](%_4.1)
+  %weight.9 : Tensor = prim::GetAttr[name="weight"](%_4.1)
+  %bias.9 : Tensor = prim::GetAttr[name="bias"](%_4.1)
+   = prim::If(%training.9) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %875 : int[] = aten::size(%input3.2) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.5 : int = aten::__getitem__(%875, %823) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %877 : int = aten::len(%875) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %878 : int = aten::sub(%877, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.11 : int = prim::Loop(%878, %822, %size_prods.5) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.5 : int, %size_prods0.13 : int):
+          %882 : int = aten::add(%i.5, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %883 : int = aten::__getitem__(%875, %882) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.5 : int = aten::mul(%size_prods0.13, %883) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%822, %size_prods1.5)
+      %885 : bool = aten::eq(%size_prods0.11, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%885) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %886 : str = aten::format(%820, %875) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%886, %819) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.2 : Tensor = aten::batch_norm(%input3.2, %weight.9, %bias.9, %running_mean.5, %running_var.5, %training.9, %817, %818, %822) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.2 : Tensor = aten::hardtanh_(%input4.2, %815, %816) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.11 : Tensor = prim::GetAttr[name="weight"](%_6.1)
+  %bias.11 : Tensor? = prim::GetAttr[name="bias"](%_6.1)
+  %891 : int[] = prim::ListConstruct(%813, %813)
+  %892 : int[] = prim::ListConstruct(%823, %823)
+  %893 : int[] = prim::ListConstruct(%813, %813)
+  %input6.2 : Tensor = aten::conv2d(%input5.2, %weight.11, %bias.11, %891, %892, %893, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.11 : bool = prim::GetAttr[name="training"](%_7.1)
+   = prim::If(%training.11) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.7 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.1)
+      %897 : Tensor = aten::add_(%num_batches_tracked.7, %813, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.13 : bool = prim::GetAttr[name="training"](%_7.1)
+  %running_mean.7 : Tensor = prim::GetAttr[name="running_mean"](%_7.1)
+  %running_var.7 : Tensor = prim::GetAttr[name="running_var"](%_7.1)
+  %weight.13 : Tensor = prim::GetAttr[name="weight"](%_7.1)
+  %bias.13 : Tensor = prim::GetAttr[name="bias"](%_7.1)
+   = prim::If(%training.13) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %903 : int[] = aten::size(%input6.2) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.7 : int = aten::__getitem__(%903, %823) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %905 : int = aten::len(%903) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %906 : int = aten::sub(%905, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.15 : int = prim::Loop(%906, %822, %size_prods.7) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.7 : int, %size_prods0.17 : int):
+          %910 : int = aten::add(%i.7, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %911 : int = aten::__getitem__(%903, %910) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.7 : int = aten::mul(%size_prods0.17, %911) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%822, %size_prods1.7)
+      %913 : bool = aten::eq(%size_prods0.15, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%913) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %914 : str = aten::format(%820, %903) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%914, %819) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.2 : Tensor = aten::batch_norm(%input6.2, %weight.13, %bias.13, %running_mean.7, %running_var.7, %training.13, %817, %818, %822) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.2 : int = prim::GetAttr[name="stride"](%_0.1)
+  %917 : bool = aten::eq(%stride.2, %813) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %918 : bool = prim::If(%917) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.2 : int = prim::GetAttr[name="in_channels"](%_0.1)
+      %out_channels.2 : int = prim::GetAttr[name="out_channels"](%_0.1)
+      %921 : bool = aten::eq(%in_channels.2, %out_channels.2) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%921)
+    block1():
+      -> (%812)
+  %input0.2 : Tensor = prim::If(%918) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.2 : Tensor = aten::add_(%residual0.2, %x4.1, %813) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.2)
+    block1():
+      -> (%residual0.2)
+  %residual.18 : __torch__.torch.nn.modules.container.___torch_mangle_272.Sequential = prim::GetAttr[name="residual"](%_1.1)
+  %_0.27 : __torch__.torch.nn.modules.conv.___torch_mangle_268.Conv2d = prim::GetAttr[name="0"](%residual.18)
+  %_1.25 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_269.BatchNorm2d = prim::GetAttr[name="1"](%residual.18)
+  %_3.17 : __torch__.torch.nn.modules.conv.___torch_mangle_270.Conv2d = prim::GetAttr[name="3"](%residual.18)
+  %_4.17 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_269.BatchNorm2d = prim::GetAttr[name="4"](%residual.18)
+  %_6.17 : __torch__.torch.nn.modules.conv.___torch_mangle_271.Conv2d = prim::GetAttr[name="6"](%residual.18)
+  %_7.17 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_247.BatchNorm2d = prim::GetAttr[name="7"](%residual.18)
+  %weight.103 : Tensor = prim::GetAttr[name="weight"](%_0.27)
+  %bias.103 : Tensor? = prim::GetAttr[name="bias"](%_0.27)
+  %933 : int[] = prim::ListConstruct(%813, %813)
+  %934 : int[] = prim::ListConstruct(%823, %823)
+  %935 : int[] = prim::ListConstruct(%813, %813)
+  %input0.23 : Tensor = aten::conv2d(%input0.2, %weight.103, %bias.103, %933, %934, %935, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.103 : bool = prim::GetAttr[name="training"](%_1.25)
+   = prim::If(%training.103) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.53 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.25)
+      %939 : Tensor = aten::add_(%num_batches_tracked.53, %813, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.105 : bool = prim::GetAttr[name="training"](%_1.25)
+  %running_mean.53 : Tensor = prim::GetAttr[name="running_mean"](%_1.25)
+  %running_var.53 : Tensor = prim::GetAttr[name="running_var"](%_1.25)
+  %weight.105 : Tensor = prim::GetAttr[name="weight"](%_1.25)
+  %bias.105 : Tensor = prim::GetAttr[name="bias"](%_1.25)
+   = prim::If(%training.105) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %945 : int[] = aten::size(%input0.23) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.53 : int = aten::__getitem__(%945, %823) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %947 : int = aten::len(%945) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %948 : int = aten::sub(%947, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.107 : int = prim::Loop(%948, %822, %size_prods.53) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.53 : int, %size_prods0.109 : int):
+          %952 : int = aten::add(%i.53, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %953 : int = aten::__getitem__(%945, %952) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.53 : int = aten::mul(%size_prods0.109, %953) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%822, %size_prods1.53)
+      %955 : bool = aten::eq(%size_prods0.107, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%955) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %956 : str = aten::format(%820, %945) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%956, %819) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.22 : Tensor = aten::batch_norm(%input0.23, %weight.105, %bias.105, %running_mean.53, %running_var.53, %training.105, %817, %818, %822) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.18 : Tensor = aten::hardtanh_(%input1.22, %815, %816) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.107 : Tensor = prim::GetAttr[name="weight"](%_3.17)
+  %bias.107 : Tensor? = prim::GetAttr[name="bias"](%_3.17)
+  %961 : int[] = prim::ListConstruct(%813, %813)
+  %962 : int[] = prim::ListConstruct(%813, %813)
+  %963 : int[] = prim::ListConstruct(%813, %813)
+  %input3.18 : Tensor = aten::conv2d(%input2.18, %weight.107, %bias.107, %961, %962, %963, %811) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.107 : bool = prim::GetAttr[name="training"](%_4.17)
+   = prim::If(%training.107) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.55 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4.17)
+      %967 : Tensor = aten::add_(%num_batches_tracked.55, %813, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.109 : bool = prim::GetAttr[name="training"](%_4.17)
+  %running_mean.55 : Tensor = prim::GetAttr[name="running_mean"](%_4.17)
+  %running_var.55 : Tensor = prim::GetAttr[name="running_var"](%_4.17)
+  %weight.109 : Tensor = prim::GetAttr[name="weight"](%_4.17)
+  %bias.109 : Tensor = prim::GetAttr[name="bias"](%_4.17)
+   = prim::If(%training.109) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %973 : int[] = aten::size(%input3.18) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.55 : int = aten::__getitem__(%973, %823) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %975 : int = aten::len(%973) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %976 : int = aten::sub(%975, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.111 : int = prim::Loop(%976, %822, %size_prods.55) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.55 : int, %size_prods0.113 : int):
+          %980 : int = aten::add(%i.55, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %981 : int = aten::__getitem__(%973, %980) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.55 : int = aten::mul(%size_prods0.113, %981) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%822, %size_prods1.55)
+      %983 : bool = aten::eq(%size_prods0.111, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%983) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %984 : str = aten::format(%820, %973) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%984, %819) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.18 : Tensor = aten::batch_norm(%input3.18, %weight.109, %bias.109, %running_mean.55, %running_var.55, %training.109, %817, %818, %822) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.18 : Tensor = aten::hardtanh_(%input4.18, %815, %816) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.111 : Tensor = prim::GetAttr[name="weight"](%_6.17)
+  %bias.111 : Tensor? = prim::GetAttr[name="bias"](%_6.17)
+  %989 : int[] = prim::ListConstruct(%813, %813)
+  %990 : int[] = prim::ListConstruct(%823, %823)
+  %991 : int[] = prim::ListConstruct(%813, %813)
+  %input6.18 : Tensor = aten::conv2d(%input5.18, %weight.111, %bias.111, %989, %990, %991, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.111 : bool = prim::GetAttr[name="training"](%_7.17)
+   = prim::If(%training.111) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.57 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7.17)
+      %995 : Tensor = aten::add_(%num_batches_tracked.57, %813, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.113 : bool = prim::GetAttr[name="training"](%_7.17)
+  %running_mean.57 : Tensor = prim::GetAttr[name="running_mean"](%_7.17)
+  %running_var.57 : Tensor = prim::GetAttr[name="running_var"](%_7.17)
+  %weight.113 : Tensor = prim::GetAttr[name="weight"](%_7.17)
+  %bias.113 : Tensor = prim::GetAttr[name="bias"](%_7.17)
+   = prim::If(%training.113) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %1001 : int[] = aten::size(%input6.18) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.57 : int = aten::__getitem__(%1001, %823) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %1003 : int = aten::len(%1001) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %1004 : int = aten::sub(%1003, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.115 : int = prim::Loop(%1004, %822, %size_prods.57) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.57 : int, %size_prods0.117 : int):
+          %1008 : int = aten::add(%i.57, %821) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %1009 : int = aten::__getitem__(%1001, %1008) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.57 : int = aten::mul(%size_prods0.117, %1009) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%822, %size_prods1.57)
+      %1011 : bool = aten::eq(%size_prods0.115, %813) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%1011) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %1012 : str = aten::format(%820, %1001) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%1012, %819) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.18 : Tensor = aten::batch_norm(%input6.18, %weight.113, %bias.113, %running_mean.57, %running_var.57, %training.113, %817, %818, %822) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.18 : int = prim::GetAttr[name="stride"](%_1.1)
+  %1015 : bool = aten::eq(%stride.18, %813) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %1016 : bool = prim::If(%1015) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.18 : int = prim::GetAttr[name="in_channels"](%_1.1)
+      %out_channels.18 : int = prim::GetAttr[name="out_channels"](%_1.1)
+      %1019 : bool = aten::eq(%in_channels.18, %out_channels.18) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%1019)
+    block1():
+      -> (%812)
+  %x5.1 : Tensor = prim::If(%1016) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.18 : Tensor = aten::add_(%residual0.18, %input0.2, %813) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.18)
+    block1():
+      -> (%residual0.18)
+  %stage6.1 : __torch__.models.mobilenetv2.___torch_mangle_278.LinearBottleNeck = prim::GetAttr[name="stage6"](%self.1)
+  %1022 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %1023 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %1024 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %1025 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %1026 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %1027 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %1028 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %1029 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %1030 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %1031 : int = prim::Constant[value=288]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:75
+  %1032 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:26
+  %1033 : bool = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %residual.1 : __torch__.torch.nn.modules.container.___torch_mangle_277.Sequential = prim::GetAttr[name="residual"](%stage6.1)
+  %_0.29 : __torch__.torch.nn.modules.conv.___torch_mangle_268.Conv2d = prim::GetAttr[name="0"](%residual.1)
+  %_1.27 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_269.BatchNorm2d = prim::GetAttr[name="1"](%residual.1)
+  %_3 : __torch__.torch.nn.modules.conv.___torch_mangle_270.Conv2d = prim::GetAttr[name="3"](%residual.1)
+  %_4 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_269.BatchNorm2d = prim::GetAttr[name="4"](%residual.1)
+  %_6 : __torch__.torch.nn.modules.conv.___torch_mangle_275.Conv2d = prim::GetAttr[name="6"](%residual.1)
+  %_7 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_276.BatchNorm2d = prim::GetAttr[name="7"](%residual.1)
+  %weight.115 : Tensor = prim::GetAttr[name="weight"](%_0.29)
+  %bias.115 : Tensor? = prim::GetAttr[name="bias"](%_0.29)
+  %1043 : int[] = prim::ListConstruct(%1032, %1032)
+  %1044 : int[] = prim::ListConstruct(%1022, %1022)
+  %1045 : int[] = prim::ListConstruct(%1032, %1032)
+  %input0.25 : Tensor = aten::conv2d(%x5.1, %weight.115, %bias.115, %1043, %1044, %1045, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.2 : bool = prim::GetAttr[name="training"](%_1.27)
+   = prim::If(%training.2) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.2 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1.27)
+      %1049 : Tensor = aten::add_(%num_batches_tracked.2, %1032, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.4 : bool = prim::GetAttr[name="training"](%_1.27)
+  %running_mean.2 : Tensor = prim::GetAttr[name="running_mean"](%_1.27)
+  %running_var.2 : Tensor = prim::GetAttr[name="running_var"](%_1.27)
+  %weight.4 : Tensor = prim::GetAttr[name="weight"](%_1.27)
+  %bias.4 : Tensor = prim::GetAttr[name="bias"](%_1.27)
+   = prim::If(%training.4) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %1055 : int[] = aten::size(%input0.25) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.2 : int = aten::__getitem__(%1055, %1022) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %1057 : int = aten::len(%1055) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %1058 : int = aten::sub(%1057, %1024) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.1 : int = prim::Loop(%1058, %1023, %size_prods.2) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.2 : int, %size_prods0.8 : int):
+          %1062 : int = aten::add(%i.2, %1024) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %1063 : int = aten::__getitem__(%1055, %1062) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.2 : int = aten::mul(%size_prods0.8, %1063) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%1023, %size_prods1.2)
+      %1065 : bool = aten::eq(%size_prods0.1, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%1065) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %1066 : str = aten::format(%1025, %1055) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%1066, %1026) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.24 : Tensor = aten::batch_norm(%input0.25, %weight.4, %bias.4, %running_mean.2, %running_var.2, %training.4, %1028, %1027, %1023) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input2.1 : Tensor = aten::hardtanh_(%input1.24, %1030, %1029) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.6 : Tensor = prim::GetAttr[name="weight"](%_3)
+  %bias.6 : Tensor? = prim::GetAttr[name="bias"](%_3)
+  %1071 : int[] = prim::ListConstruct(%1032, %1032)
+  %1072 : int[] = prim::ListConstruct(%1032, %1032)
+  %1073 : int[] = prim::ListConstruct(%1032, %1032)
+  %input3.1 : Tensor = aten::conv2d(%input2.1, %weight.6, %bias.6, %1071, %1072, %1073, %1031) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.6 : bool = prim::GetAttr[name="training"](%_4)
+   = prim::If(%training.6) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.4 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_4)
+      %1077 : Tensor = aten::add_(%num_batches_tracked.4, %1032, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.8 : bool = prim::GetAttr[name="training"](%_4)
+  %running_mean.4 : Tensor = prim::GetAttr[name="running_mean"](%_4)
+  %running_var.4 : Tensor = prim::GetAttr[name="running_var"](%_4)
+  %weight.8 : Tensor = prim::GetAttr[name="weight"](%_4)
+  %bias.8 : Tensor = prim::GetAttr[name="bias"](%_4)
+   = prim::If(%training.8) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %1083 : int[] = aten::size(%input3.1) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.4 : int = aten::__getitem__(%1083, %1022) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %1085 : int = aten::len(%1083) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %1086 : int = aten::sub(%1085, %1024) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.10 : int = prim::Loop(%1086, %1023, %size_prods.4) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.4 : int, %size_prods0.12 : int):
+          %1090 : int = aten::add(%i.4, %1024) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %1091 : int = aten::__getitem__(%1083, %1090) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.4 : int = aten::mul(%size_prods0.12, %1091) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%1023, %size_prods1.4)
+      %1093 : bool = aten::eq(%size_prods0.10, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%1093) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %1094 : str = aten::format(%1025, %1083) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%1094, %1026) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input4.1 : Tensor = aten::batch_norm(%input3.1, %weight.8, %bias.8, %running_mean.4, %running_var.4, %training.8, %1028, %1027, %1023) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %input5.1 : Tensor = aten::hardtanh_(%input4.1, %1030, %1029) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %weight.10 : Tensor = prim::GetAttr[name="weight"](%_6)
+  %bias.10 : Tensor? = prim::GetAttr[name="bias"](%_6)
+  %1099 : int[] = prim::ListConstruct(%1032, %1032)
+  %1100 : int[] = prim::ListConstruct(%1022, %1022)
+  %1101 : int[] = prim::ListConstruct(%1032, %1032)
+  %input6.1 : Tensor = aten::conv2d(%input5.1, %weight.10, %bias.10, %1099, %1100, %1101, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.115 : bool = prim::GetAttr[name="training"](%_7)
+   = prim::If(%training.115) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.59 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_7)
+      %1105 : Tensor = aten::add_(%num_batches_tracked.59, %1032, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training.117 : bool = prim::GetAttr[name="training"](%_7)
+  %running_mean.59 : Tensor = prim::GetAttr[name="running_mean"](%_7)
+  %running_var.59 : Tensor = prim::GetAttr[name="running_var"](%_7)
+  %weight.117 : Tensor = prim::GetAttr[name="weight"](%_7)
+  %bias.117 : Tensor = prim::GetAttr[name="bias"](%_7)
+   = prim::If(%training.117) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %1111 : int[] = aten::size(%input6.1) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.59 : int = aten::__getitem__(%1111, %1022) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %1113 : int = aten::len(%1111) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %1114 : int = aten::sub(%1113, %1024) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0.119 : int = prim::Loop(%1114, %1023, %size_prods.59) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.59 : int, %size_prods0.121 : int):
+          %1118 : int = aten::add(%i.59, %1024) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %1119 : int = aten::__getitem__(%1111, %1118) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.59 : int = aten::mul(%size_prods0.121, %1119) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%1023, %size_prods1.59)
+      %1121 : bool = aten::eq(%size_prods0.119, %1032) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%1121) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %1122 : str = aten::format(%1025, %1111) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%1122, %1026) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %residual0.1 : Tensor = aten::batch_norm(%input6.1, %weight.117, %bias.117, %running_mean.59, %running_var.59, %training.117, %1028, %1027, %1023) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %stride.1 : int = prim::GetAttr[name="stride"](%stage6.1)
+  %1125 : bool = aten::eq(%stride.1, %1032) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+  %1126 : bool = prim::If(%1125) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:11
+    block0():
+      %in_channels.1 : int = prim::GetAttr[name="in_channels"](%stage6.1)
+      %out_channels.1 : int = prim::GetAttr[name="out_channels"](%stage6.1)
+      %1129 : bool = aten::eq(%in_channels.1, %out_channels.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:32
+      -> (%1129)
+    block1():
+      -> (%1033)
+  %x6.1 : Tensor = prim::If(%1126) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:42:8
+    block0():
+      %residual1.1 : Tensor = aten::add_(%residual0.1, %x5.1, %1032) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:43:12
+      -> (%residual1.1)
+    block1():
+      -> (%residual0.1)
+  %conv1.1 : __torch__.torch.nn.modules.container.___torch_mangle_281.Sequential = prim::GetAttr[name="conv1"](%self.1)
+  %1132 : float = prim::Constant[value=0.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:33
+  %1133 : float = prim::Constant[value=6.]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:269:47
+  %1134 : float = prim::Constant[value=0.10000000000000001]() # :0:0
+  %1135 : float = prim::Constant[value=1.0000000000000001e-05]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:204:12
+  %1136 : str = prim::Constant[value="builtins.ValueError"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:452:18
+  %1137 : str = prim::Constant[value="Expected more than 1 value per channel when training, got input size {}"]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+  %1138 : int = prim::Constant[value=2]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:31
+  %1139 : bool = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2821:8
+  %1140 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %1141 : int = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:33
+  %_0 : __torch__.torch.nn.modules.conv.___torch_mangle_279.Conv2d = prim::GetAttr[name="0"](%conv1.1)
+  %_1 : __torch__.torch.nn.modules.batchnorm.___torch_mangle_280.BatchNorm2d = prim::GetAttr[name="1"](%conv1.1)
+  %weight.2 : Tensor = prim::GetAttr[name="weight"](%_0)
+  %bias.2 : Tensor? = prim::GetAttr[name="bias"](%_0)
+  %1146 : int[] = prim::ListConstruct(%1141, %1141)
+  %1147 : int[] = prim::ListConstruct(%1140, %1140)
+  %1148 : int[] = prim::ListConstruct(%1141, %1141)
+  %input0.1 : Tensor = aten::conv2d(%x6.1, %weight.2, %bias.2, %1146, %1147, %1148, %1141) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %training.1 : bool = prim::GetAttr[name="training"](%_1)
+   = prim::If(%training.1) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:170:11
+    block0():
+      %num_batches_tracked.1 : Tensor = prim::GetAttr[name="num_batches_tracked"](%_1)
+      %1152 : Tensor = aten::add_(%num_batches_tracked.1, %1141, %1141) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py:173:16
+      -> ()
+    block1():
+      -> ()
+  %training : bool = prim::GetAttr[name="training"](%_1)
+  %running_mean.1 : Tensor = prim::GetAttr[name="running_mean"](%_1)
+  %running_var.1 : Tensor = prim::GetAttr[name="running_var"](%_1)
+  %weight.119 : Tensor = prim::GetAttr[name="weight"](%_1)
+  %bias.119 : Tensor = prim::GetAttr[name="bias"](%_1)
+   = prim::If(%training) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2809:4
+    block0():
+      %1158 : int[] = aten::size(%input0.1) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2810:27
+      %size_prods.1 : int = aten::__getitem__(%1158, %1140) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2772:17
+      %1160 : int = aten::len(%1158) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %1161 : int = aten::sub(%1160, %1138) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:19
+      %size_prods0 : int = prim::Loop(%1161, %1139, %size_prods.1) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2773:4
+        block0(%i.1 : int, %size_prods0.7 : int):
+          %1165 : int = aten::add(%i.1, %1138) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:27
+          %1166 : int = aten::__getitem__(%1158, %1165) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:22
+          %size_prods1.1 : int = aten::mul(%size_prods0.7, %1166) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2774:8
+          -> (%1139, %size_prods1.1)
+      %1168 : bool = aten::eq(%size_prods0, %1141) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:7
+       = prim::If(%1168) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2775:4
+        block0():
+          %1169 : str = aten::format(%1137, %1158) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2777:12
+           = prim::RaiseException(%1169, %1136) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2776:8
+          -> ()
+        block1():
+          -> ()
+      -> ()
+    block1():
+      -> ()
+  %input1.1 : Tensor = aten::batch_norm(%input0.1, %weight.119, %bias.119, %running_mean.1, %running_var.1, %training, %1134, %1135, %1139) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:2812:11
+  %x7.1 : Tensor = aten::hardtanh_(%input1.1, %1132, %1133) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1764:17
+  %22 : int[] = prim::ListConstruct(%3, %3)
+  %1172 : str = prim::Constant[value="AssertionError: "]() # :0:0
+  %1173 : NoneType = prim::Constant()
+  %1174 : int[] = aten::size(%x7.1) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1381:51
+  %1175 : int = aten::len(%1174) # <string>:5:9
+  %1176 : int = aten::len(%22) # <string>:5:25
+  %1177 : bool = aten::gt(%1175, %1176) # <string>:5:9
+   = prim::If(%1177) # <string>:5:2
+    block0():
+      -> ()
+    block1():
+       = prim::RaiseException(%1172, %1173) # <string>:5:2
+      -> ()
+  %x8.1 : Tensor = aten::adaptive_avg_pool2d(%x7.1, %22) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/functional.py:1382:11
+  %conv2.1 : __torch__.torch.nn.modules.conv.___torch_mangle_282.Conv2d = prim::GetAttr[name="conv2"](%self.1)
+  %1179 : int = prim::Constant[value=1]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:33
+  %1180 : int = prim::Constant[value=0]() # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:550:46
+  %weight.1 : Tensor = prim::GetAttr[name="weight"](%conv2.1)
+  %bias.1 : Tensor? = prim::GetAttr[name="bias"](%conv2.1)
+  %1183 : int[] = prim::ListConstruct(%1179, %1179)
+  %1184 : int[] = prim::ListConstruct(%1180, %1180)
+  %1185 : int[] = prim::ListConstruct(%1179, %1179)
+  %x9.1 : Tensor = aten::conv2d(%x8.1, %weight.1, %bias.1, %1183, %1184, %1185, %1179) # /workspace/mein_naschain/venv/lib/python3.11/site-packages/torch/nn/modules/conv.py:549:15
+  %26 : int = aten::size(%x9.1, %4) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:19
+  %27 : int[] = prim::ListConstruct(%26, %5)
+  %x10.1 : Tensor = aten::view(%x9.1, %27) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:12
+  return (%x10.1)

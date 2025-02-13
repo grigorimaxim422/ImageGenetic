@@ -1,0 +1,30 @@
+graph(%self.1 : __torch__.models.mobilenetv2.___torch_mangle_283.MobileNetV2,
+      %x.1 : Tensor):
+  %45 : Function = prim::Constant[name="adaptive_avg_pool2d"]()
+  %43 : int = prim::Constant[value=1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:84:37
+  %54 : int = prim::Constant[value=0]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:26
+  %56 : int = prim::Constant[value=-1]() # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:30
+  %pre.1 : __torch__.torch.nn.modules.container.___torch_mangle_225.Sequential = prim::GetAttr[name="pre"](%self.1)
+  %x0.1 : Tensor = prim::CallMethod[name="forward"](%pre.1, %x.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:75:12
+  %stage1.1 : __torch__.models.mobilenetv2.___torch_mangle_231.LinearBottleNeck = prim::GetAttr[name="stage1"](%self.1)
+  %x1.1 : Tensor = prim::CallMethod[name="forward"](%stage1.1, %x0.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:76:12
+  %stage2.1 : __torch__.torch.nn.modules.container.___torch_mangle_239.Sequential = prim::GetAttr[name="stage2"](%self.1)
+  %x2.1 : Tensor = prim::CallMethod[name="forward"](%stage2.1, %x1.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:77:12
+  %stage3.1 : __torch__.torch.nn.modules.container.___torch_mangle_252.Sequential = prim::GetAttr[name="stage3"](%self.1)
+  %x3.1 : Tensor = prim::CallMethod[name="forward"](%stage3.1, %x2.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:78:12
+  %stage4.1 : __torch__.torch.nn.modules.container.___torch_mangle_264.Sequential = prim::GetAttr[name="stage4"](%self.1)
+  %x4.1 : Tensor = prim::CallMethod[name="forward"](%stage4.1, %x3.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:79:12
+  %stage5.1 : __torch__.torch.nn.modules.container.___torch_mangle_274.Sequential = prim::GetAttr[name="stage5"](%self.1)
+  %x5.1 : Tensor = prim::CallMethod[name="forward"](%stage5.1, %x4.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:80:12
+  %stage6.1 : __torch__.models.mobilenetv2.___torch_mangle_278.LinearBottleNeck = prim::GetAttr[name="stage6"](%self.1)
+  %x6.1 : Tensor = prim::CallMethod[name="forward"](%stage6.1, %x5.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:81:12
+  %conv1.1 : __torch__.torch.nn.modules.container.___torch_mangle_281.Sequential = prim::GetAttr[name="conv1"](%self.1)
+  %x7.1 : Tensor = prim::CallMethod[name="forward"](%conv1.1, %x6.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:83:12
+  %44 : int[] = prim::ListConstruct(%43, %43)
+  %x8.1 : Tensor = prim::CallFunction(%45, %x7.1, %44) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:84:12
+  %conv2.1 : __torch__.torch.nn.modules.conv.___torch_mangle_282.Conv2d = prim::GetAttr[name="conv2"](%self.1)
+  %x9.1 : Tensor = prim::CallMethod[name="forward"](%conv2.1, %x8.1) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:85:12
+  %55 : int = aten::size(%x9.1, %54) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:19
+  %57 : int[] = prim::ListConstruct(%55, %56)
+  %x10.1 : Tensor = aten::view(%x9.1, %57) # /workspace/mein_naschain/weiaicunzai/models/mobilenetv2.py:86:12
+  return (%x10.1)
