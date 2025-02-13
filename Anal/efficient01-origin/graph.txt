@@ -1,0 +1,18 @@
+graph(%self.1 : __torch__.model.efficient01A.EfficientNet01A,
+      %x.1 : Tensor):
+  %26 : int = prim::Constant[value=-1]()
+  %12 : str = prim::Constant[value="none"]()
+  %25 : int = prim::Constant[value=1]() # /workspace/ImageGenetic/model/efficient01A.py:113:29
+  %stem_bn.1 : __torch__.torch.nn.modules.batchnorm.BatchNorm2d = prim::GetAttr[name="stem_bn"](%self.1)
+  %stem_conv.1 : __torch__.torch.nn.modules.conv.Conv2d = prim::GetAttr[name="stem_conv"](%self.1)
+  %9 : Tensor = prim::CallMethod[name="forward"](%stem_conv.1, %x.1) # /workspace/ImageGenetic/model/efficient01A.py:110:32
+  %10 : Tensor = prim::CallMethod[name="forward"](%stem_bn.1, %9) # /workspace/ImageGenetic/model/efficient01A.py:110:19
+  %x0.1 : Tensor = aten::gelu(%10, %12) # /workspace/ImageGenetic/model/efficient01A.py:110:12
+  %blocks.1 : __torch__.torch.nn.modules.container.Sequential = prim::GetAttr[name="blocks"](%self.1)
+  %x1.1 : Tensor = prim::CallMethod[name="forward"](%blocks.1, %x0.1) # /workspace/ImageGenetic/model/efficient01A.py:111:12
+  %global_pool.1 : __torch__.torch.nn.modules.pooling.AdaptiveAvgPool2d = prim::GetAttr[name="global_pool"](%self.1)
+  %x2.1 : Tensor = prim::CallMethod[name="forward"](%global_pool.1, %x1.1) # /workspace/ImageGenetic/model/efficient01A.py:112:12
+  %x3.1 : Tensor = aten::flatten(%x2.1, %25, %26) # /workspace/ImageGenetic/model/efficient01A.py:113:12
+  %fc.1 : __torch__.torch.nn.modules.linear.Linear = prim::GetAttr[name="fc"](%self.1)
+  %32 : Tensor = prim::CallMethod[name="forward"](%fc.1, %x3.1) # /workspace/ImageGenetic/model/efficient01A.py:114:12
+  return (%32)

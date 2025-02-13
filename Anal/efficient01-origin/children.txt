@@ -1,0 +1,59 @@
+<bound method Module.children of RecursiveScriptModule(
+  original_name=EfficientNet01A
+  (stem_conv): RecursiveScriptModule(original_name=Conv2d)
+  (stem_bn): RecursiveScriptModule(original_name=BatchNorm2d)
+  (blocks): RecursiveScriptModule(
+    original_name=Sequential
+    (0): RecursiveScriptModule(
+      original_name=EfficientBlock
+      (conv1): RecursiveScriptModule(original_name=Conv2d)
+      (bn1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (conv2): RecursiveScriptModule(original_name=Conv2d)
+      (bn2): RecursiveScriptModule(original_name=BatchNorm2d)
+    )
+    (1): RecursiveScriptModule(
+      original_name=EfficientBlock
+      (conv1): RecursiveScriptModule(original_name=Conv2d)
+      (bn1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (conv2): RecursiveScriptModule(original_name=Conv2d)
+      (bn2): RecursiveScriptModule(original_name=BatchNorm2d)
+    )
+    (2): RecursiveScriptModule(
+      original_name=EfficientBlock
+      (conv1): RecursiveScriptModule(original_name=Conv2d)
+      (bn1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (conv2): RecursiveScriptModule(original_name=Conv2d)
+      (bn2): RecursiveScriptModule(original_name=BatchNorm2d)
+    )
+    (3): RecursiveScriptModule(
+      original_name=EfficientBlock
+      (conv1): RecursiveScriptModule(original_name=Conv2d)
+      (bn1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (conv2): RecursiveScriptModule(original_name=Conv2d)
+      (bn2): RecursiveScriptModule(original_name=BatchNorm2d)
+    )
+    (4): RecursiveScriptModule(
+      original_name=EfficientBlock
+      (conv1): RecursiveScriptModule(original_name=Conv2d)
+      (bn1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (conv2): RecursiveScriptModule(original_name=Conv2d)
+      (bn2): RecursiveScriptModule(original_name=BatchNorm2d)
+    )
+    (5): RecursiveScriptModule(
+      original_name=EfficientBlock
+      (conv1): RecursiveScriptModule(original_name=Conv2d)
+      (bn1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (conv2): RecursiveScriptModule(original_name=Conv2d)
+      (bn2): RecursiveScriptModule(original_name=BatchNorm2d)
+    )
+    (6): RecursiveScriptModule(
+      original_name=EfficientBlock
+      (conv1): RecursiveScriptModule(original_name=Conv2d)
+      (bn1): RecursiveScriptModule(original_name=BatchNorm2d)
+      (conv2): RecursiveScriptModule(original_name=Conv2d)
+      (bn2): RecursiveScriptModule(original_name=BatchNorm2d)
+    )
+  )
+  (global_pool): RecursiveScriptModule(original_name=AdaptiveAvgPool2d)
+  (fc): RecursiveScriptModule(original_name=Linear)
+)>

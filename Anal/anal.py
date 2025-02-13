@@ -1,10 +1,20 @@
 import torch
+import time
+import logging
+from torchinfo import summary
 
+def check(net):
+    logging.info("----------------------------------------------")
+    summary(net, input_size=(1, 3, 32, 32), col_names=("input_size", "output_size", "num_params", "mult_adds"))
+    logging.info("----------------------------------------------")
+    
+    
 # Load the TorchScript model
-model = torch.jit.load("../saved_model/mobilenetv2.pt", map_location="cpu")
-
+model = torch.jit.load("../saved_model/efficient01-origin.pt.best", map_location="cpu")
+check(model)
+time.sleep(5)
 # Define output files
-output_dir = "mobilenetv2/"
+output_dir = "efficient01-origin/"
 import os
 os.makedirs(output_dir, exist_ok=True)
 

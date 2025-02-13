@@ -1,0 +1,223 @@
+### TorchScript Model Architecture ###
+
+Module: stem_conv
+  Type: Conv2d
+  Trainable Parameters: 840
+  In Channels: 3, Out Channels: 30
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: stem_bn
+  Type: BatchNorm2d
+  Trainable Parameters: 60
+
+Module: blocks
+  Type: Sequential
+  Trainable Parameters: 2517211
+
+Module: blocks.0
+  Type: EfficientBlock
+  Trainable Parameters: 10050
+
+Module: blocks.0.conv1
+  Type: Conv2d
+  Trainable Parameters: 1800
+  In Channels: 30, Out Channels: 60
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.0.bn1
+  Type: BatchNorm2d
+  Trainable Parameters: 120
+
+Module: blocks.0.conv2
+  Type: Conv2d
+  Trainable Parameters: 8100
+  In Channels: 60, Out Channels: 15
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: blocks.0.bn2
+  Type: BatchNorm2d
+  Trainable Parameters: 30
+
+Module: blocks.1
+  Type: EfficientBlock
+  Trainable Parameters: 85849
+
+Module: blocks.1.conv1
+  Type: Conv2d
+  Trainable Parameters: 1575
+  In Channels: 15, Out Channels: 105
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.1.bn1
+  Type: BatchNorm2d
+  Trainable Parameters: 210
+
+Module: blocks.1.conv2
+  Type: Conv2d
+  Trainable Parameters: 84000
+  In Channels: 105, Out Channels: 32
+  Kernel Size: (5, 5)
+  Stride: (2, 2)
+  Padding: (2, 2)
+
+Module: blocks.1.bn2
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: blocks.2
+  Type: EfficientBlock
+  Trainable Parameters: 80128
+
+Module: blocks.2.conv1
+  Type: Conv2d
+  Trainable Parameters: 3072
+  In Channels: 32, Out Channels: 96
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.2.bn1
+  Type: BatchNorm2d
+  Trainable Parameters: 192
+
+Module: blocks.2.conv2
+  Type: Conv2d
+  Trainable Parameters: 76800
+  In Channels: 96, Out Channels: 32
+  Kernel Size: (5, 5)
+  Stride: (1, 1)
+  Padding: (2, 2)
+
+Module: blocks.2.bn2
+  Type: BatchNorm2d
+  Trainable Parameters: 64
+
+Module: blocks.3
+  Type: EfficientBlock
+  Trainable Parameters: 366144
+
+Module: blocks.3.conv1
+  Type: Conv2d
+  Trainable Parameters: 7168
+  In Channels: 32, Out Channels: 224
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.3.bn1
+  Type: BatchNorm2d
+  Trainable Parameters: 448
+
+Module: blocks.3.conv2
+  Type: Conv2d
+  Trainable Parameters: 358400
+  In Channels: 224, Out Channels: 64
+  Kernel Size: (5, 5)
+  Stride: (2, 2)
+  Padding: (2, 2)
+
+Module: blocks.3.bn2
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: blocks.4
+  Type: EfficientBlock
+  Trainable Parameters: 533248
+
+Module: blocks.4.conv1
+  Type: Conv2d
+  Trainable Parameters: 20480
+  In Channels: 64, Out Channels: 320
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.4.bn1
+  Type: BatchNorm2d
+  Trainable Parameters: 640
+
+Module: blocks.4.conv2
+  Type: Conv2d
+  Trainable Parameters: 512000
+  In Channels: 320, Out Channels: 64
+  Kernel Size: (5, 5)
+  Stride: (1, 1)
+  Padding: (2, 2)
+
+Module: blocks.4.bn2
+  Type: BatchNorm2d
+  Trainable Parameters: 128
+
+Module: blocks.5
+  Type: EfficientBlock
+  Trainable Parameters: 687584
+
+Module: blocks.5.conv1
+  Type: Conv2d
+  Trainable Parameters: 40960
+  In Channels: 64, Out Channels: 640
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.5.bn1
+  Type: BatchNorm2d
+  Trainable Parameters: 1280
+
+Module: blocks.5.conv2
+  Type: Conv2d
+  Trainable Parameters: 645120
+  In Channels: 640, Out Channels: 112
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: blocks.5.bn2
+  Type: BatchNorm2d
+  Trainable Parameters: 224
+
+Module: blocks.6
+  Type: EfficientBlock
+  Trainable Parameters: 754208
+
+Module: blocks.6.conv1
+  Type: Conv2d
+  Trainable Parameters: 75264
+  In Channels: 112, Out Channels: 672
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.6.bn1
+  Type: BatchNorm2d
+  Trainable Parameters: 1344
+
+Module: blocks.6.conv2
+  Type: Conv2d
+  Trainable Parameters: 677376
+  In Channels: 672, Out Channels: 112
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: blocks.6.bn2
+  Type: BatchNorm2d
+  Trainable Parameters: 224
+
+Module: global_pool
+  Type: AdaptiveAvgPool2d
+  Trainable Parameters: 0
+
+Module: fc
+  Type: Linear
+  Trainable Parameters: 11300
+  Input Features: 112, Output Features: 100
+

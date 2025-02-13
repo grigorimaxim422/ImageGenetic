@@ -88,7 +88,7 @@ class MBConv6(nn.Module):
 class EfficientNet01A(nn.Module):
     def __init__(self, num_classes=100):
         super(EfficientNet01A, self).__init__()
-        self.stem_conv = nn.Conv2d(3, 30, kernel_size=3, stride=1, padding=1)
+        self.stem_conv = nn.Conv2d(3, 30, kernel_size=3, stride=1, padding=0)
         self.stem_bn = nn.BatchNorm2d(30)
         self.blocks = nn.Sequential(        
             
