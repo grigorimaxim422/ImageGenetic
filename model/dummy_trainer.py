@@ -75,7 +75,7 @@ class DummyTrainer:
         
         self.criterion = nn.CrossEntropyLoss()
         self.optimizer = optim.SGD(self.model.parameters(), lr=self.learning_rate, momentum=self.momentum, weight_decay=self.weight_decay)
-        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, self.epochs)
+        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, self.epochs,eta_min=0.0001)
 
         # Data loading and normalization
         transform_train = transforms.Compose([
