@@ -98,6 +98,7 @@ class EfficientNet01(nn.Module):
             EfficientBlock(64, 64, expand_ratio=3, stride=1, padding=2),
             EfficientBlock(64, 112, expand_ratio=5, stride=1, padding=1),
             # EfficientBlock(112, 112, expand_ratio=3, stride=1, padding=1)                            
+            
             #First Simulate
             # EfficientBlock(32, 16, expand_ratio=2, stride=1,padding=1, kernel_size=3),
             # EfficientBlock(16, 32, expand_ratio=7, stride=2, padding=2, kernel_size=5),

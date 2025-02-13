@@ -88,34 +88,19 @@ class MBConv6(nn.Module):
 class EfficientNet01A(nn.Module):
     def __init__(self, num_classes=100):
         super(EfficientNet01A, self).__init__()
-        self.stem_conv = nn.Conv2d(3, 16, kernel_size=3, stride=2, padding=1, bias=False)
-        self.stem_bn = nn.BatchNorm2d(16)
+        self.stem_conv = nn.Conv2d(3, 30, kernel_size=3, stride=1, padding=1)
+        self.stem_bn = nn.BatchNorm2d(30)
         self.blocks = nn.Sequential(        
-             #A02            
-            EfficientBlock(16, 32, expand_ratio=4, stride=2, padding=2),
-            EfficientBlock(32, 32, expand_ratio=2, stride=1, padding=2),
-            EfficientBlock(32, 64, expand_ratio=4, stride=2, padding=2),
-            EfficientBlock(64, 64, expand_ratio=3, stride=1, padding=2),
-            EfficientBlock(64, 112, expand_ratio=5, stride=1, padding=1),
-            # EfficientBlock(112, 112, expand_ratio=3, stride=1, padding=1)                            
-            #First Simulate
-            # EfficientBlock(32, 16, expand_ratio=2, stride=1,padding=1, kernel_size=3),
-            # EfficientBlock(16, 32, expand_ratio=7, stride=2, padding=2, kernel_size=5),
-            # EfficientBlock(32, 32, expand_ratio=3, stride=1, padding=2, kernel_size=5),
-            # EfficientBlock(32, 64, expand_ratio=7, stride=2, padding=2, kernel_size=5),
-            # EfficientBlock(64, 64, expand_ratio=5, stride=1, padding=2, kernel_size=5),
-            # EfficientBlock(64, 112, expand_ratio=10, stride=1, padding=1, kernel_size=3),
-            # EfficientBlock(112, 112, expand_ratio=6, stride=1, padding=1, kernel_size=3)
             
-            #A01
-            # EfficientBlock(32, 16, expand_ratio=2, stride=1,padding=1),
-            # EfficientBlock(16, 32, expand_ratio=5, stride=2, padding=1),
-            # EfficientBlock(32, 32, expand_ratio=2, stride=1, padding=1),
-            # EfficientBlock(32, 64, expand_ratio=5, stride=2, padding=1),
-            # EfficientBlock(64, 64, expand_ratio=3, stride=1, padding=1),
-            # EfficientBlock(64, 112, expand_ratio=5, stride=1, padding=1),
-            # EfficientBlock(112, 112, expand_ratio=3, stride=1, padding=1)
-           
+            #First Simulate
+            EfficientBlock(30, 15, expand_ratio=2, stride=1,padding=1, kernel_size=3),
+            EfficientBlock(15, 32, expand_ratio=7, stride=2, padding=2, kernel_size=5),
+            EfficientBlock(32, 32, expand_ratio=3, stride=1, padding=2, kernel_size=5),
+            EfficientBlock(32, 64, expand_ratio=7, stride=2, padding=2, kernel_size=5),
+            EfficientBlock(64, 64, expand_ratio=5, stride=1, padding=2, kernel_size=5),
+            EfficientBlock(64, 112, expand_ratio=10, stride=1, padding=1, kernel_size=3),
+            EfficientBlock(112, 112, expand_ratio=6, stride=1, padding=1, kernel_size=3)
+                                   
             
         )
         self.global_pool = nn.AdaptiveAvgPool2d(1)
