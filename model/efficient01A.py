@@ -85,9 +85,9 @@ class MBConv6(nn.Module):
     def forward(self, x):
         return self.layers(x)
     
-class EfficientNet01(nn.Module):
+class EfficientNet01A(nn.Module):
     def __init__(self, num_classes=100):
-        super(EfficientNet01, self).__init__()
+        super(EfficientNet01A, self).__init__()
         self.stem_conv = nn.Conv2d(3, 16, kernel_size=3, stride=2, padding=1, bias=False)
         self.stem_bn = nn.BatchNorm2d(16)
         self.blocks = nn.Sequential(        

@@ -14,6 +14,7 @@ from torchinfo import summary
 
 from model.simplecnn import SimpleCNN
 from model.efficient01 import EfficientNet01
+from model.efficient01A import EfficientNet01A
 from model.efficient02 import EfficientNet02
 from model.efficient03 import EfficientNet03
 from model.efficientnet import EfficientNet
@@ -45,6 +46,8 @@ def get_network(network):
         net = SimpleCNN()
     elif network == 'efficient01':
         net = EfficientNet01()
+    elif network == 'efficient01A':
+        net = EfficientNet01A()
     elif network == 'efficient02':
         net = EfficientNet02()
     elif network == 'efficient03':
