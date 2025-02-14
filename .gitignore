@@ -19,6 +19,6 @@ cifar100/cifar-*/
 *.png
 *.config
 log.txt
-
+!saved_model/*.best
 !saved_model/first.pt
 !saved_model/second.pt

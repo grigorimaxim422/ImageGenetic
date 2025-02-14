@@ -14,6 +14,8 @@ from torchinfo import summary
 
 from model.simplecnn import SimpleCNN
 from model.efficient01A import EfficientNet01A
+from model.squeezenet import SqueezeNet
+from model.mobilenetv2 import MobileNetV2
 
 class Cutout(object):
     def __init__(self, length):
@@ -42,7 +44,11 @@ def get_network(network):
     if network=='simplecnn':
         net = SimpleCNN()    
     elif network == 'efficient01A':
-        net = EfficientNet01A()    
+        net = EfficientNet01A()   
+    elif network=='squeezenet':
+        net = SqueezeNet()   
+    elif network=='mobilenetv2':
+        net = MobileNetV2()   
     else:
         net = SimpleCNN()
     
