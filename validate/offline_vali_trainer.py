@@ -142,7 +142,11 @@ class OfflineValiTrainer:
                         running_loss = 0.0
                         correct = 0
                         total = 0
-
+                        
+                    # if (i+1) % 10 ==0:
+                    #     scripted_model = torch.jit.script(model)
+                    #     scripted_model.save(save_path)
+                    #     print(f"model saved into {save_path}")
                 # Test the model after each epoch
                 test_accuracy = self.test(model)
          
