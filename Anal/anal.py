@@ -10,11 +10,11 @@ def check(net):
     
     
 # Load the TorchScript model
-model = torch.jit.load("../saved_model/efficient01-origin.pt.best", map_location="cpu")
+model = torch.jit.load("../saved_model/03-40.pt", map_location="cpu")
 check(model)
 time.sleep(5)
 # Define output files
-output_dir = "efficient01-origin/"
+output_dir = "03-40/"
 import os
 os.makedirs(output_dir, exist_ok=True)
 

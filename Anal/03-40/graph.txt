@@ -1,0 +1,17 @@
+graph(%self.1 : __torch__.___torch_mangle_334.SimpleCNN,
+      %x.1 : Tensor):
+  %18 : NoneType = prim::Constant()
+  %17 : bool = prim::Constant[value=0]()
+  %13 : int = prim::Constant[value=2]() # /home/auto_update_valid_train.py:300:24
+  %14 : int = prim::Constant[value=3]() # /home/auto_update_valid_train.py:300:27
+  %stem.1 : __torch__.torch.nn.modules.container.Sequential = prim::GetAttr[name="stem"](%self.1)
+  %x0.1 : Tensor = prim::CallMethod[name="forward"](%stem.1, %x.1) # /home/auto_update_valid_train.py:298:12
+  %blocks.1 : __torch__.torch.nn.modules.container.___torch_mangle_333.Sequential = prim::GetAttr[name="blocks"](%self.1)
+  %x1.1 : Tensor = prim::CallMethod[name="forward"](%blocks.1, %x0.1) # /home/auto_update_valid_train.py:299:12
+  %15 : int[] = prim::ListConstruct(%13, %14)
+  %x2.1 : Tensor = aten::mean(%x1.1, %15, %17, %18) # /home/auto_update_valid_train.py:300:12
+  %dropout.1 : __torch__.torch.nn.modules.dropout.Dropout = prim::GetAttr[name="dropout"](%self.1)
+  %x3.1 : Tensor = prim::CallMethod[name="forward"](%dropout.1, %x2.1) # /home/auto_update_valid_train.py:301:12
+  %classifier.1 : __torch__.torch.nn.modules.linear.Linear = prim::GetAttr[name="classifier"](%self.1)
+  %29 : Tensor = prim::CallMethod[name="forward"](%classifier.1, %x3.1) # /home/auto_update_valid_train.py:302:12
+  return (%29)
