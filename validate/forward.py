@@ -52,10 +52,10 @@ def calc_flops(model):
     total_mflops = round(prof.key_averages().total_average().flops / 1e6)
     return total_mflops
 
-def calc_flops_onnx(model):
+def calc_flops_onnx(model,prefix="cache/", index=0):
     fixed_dummy_input = torch.randn(1, 3, 32, 32).cuda()
-    onnx_path = "cache/tmp.onnx"
-    profile_path = "cache/profile.txt"
+    onnx_path = f"{prefix}-profile{str(index).zfill(3)}.onnx"
+    profile_path = f"{prefix}-profile{str(index).zfill(3)}.txt"
     torch.onnx.export(model,
                   fixed_dummy_input,
                   onnx_path,
@@ -76,5 +76,8 @@ def calc_flops_onnx(model):
         total_macs = match.group(1)
         total_macs = int(total_macs.replace(',', ''))
         total_macs = round_flops_to_nearest_significant(total_macs)
+    
+    os.remove(onnx_path)
+    os.remove(profile_path)
     return total_macs
 

@@ -1,0 +1,1 @@
+python3 -m validate.validator --model_path ../models
