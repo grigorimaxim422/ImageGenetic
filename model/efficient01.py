@@ -92,12 +92,12 @@ class EfficientNet01(nn.Module):
         self.stem_bn = nn.BatchNorm2d(16)
         self.blocks = nn.Sequential(        
              #A02            
-            EfficientBlock(16, 32, expand_ratio=4, stride=2, padding=2),
-            EfficientBlock(32, 32, expand_ratio=2, stride=1, padding=2),
-            EfficientBlock(32, 64, expand_ratio=4, stride=2, padding=2),
-            EfficientBlock(64, 64, expand_ratio=3, stride=1, padding=2),
-            EfficientBlock(64, 112, expand_ratio=5, stride=1, padding=1),
-            # EfficientBlock(112, 112, expand_ratio=3, stride=1, padding=1)                            
+            # EfficientBlock(16, 32, expand_ratio=4, stride=2, padding=2),
+            # EfficientBlock(32, 32, expand_ratio=2, stride=1, padding=2),
+            # EfficientBlock(32, 64, expand_ratio=4, stride=2, padding=2),
+            # EfficientBlock(64, 64, expand_ratio=3, stride=1, padding=2),
+            # EfficientBlock(64, 112, expand_ratio=5, stride=1, padding=1),
+            # EfficientBlock(112, 112, expand_ratio=1, stride=1, padding=1)                            
             
             #First Simulate
             # EfficientBlock(32, 16, expand_ratio=2, stride=1,padding=1, kernel_size=3),
@@ -109,13 +109,13 @@ class EfficientNet01(nn.Module):
             # EfficientBlock(112, 112, expand_ratio=6, stride=1, padding=1, kernel_size=3)
             
             #A01
-            # EfficientBlock(32, 16, expand_ratio=2, stride=1,padding=1),
-            # EfficientBlock(16, 32, expand_ratio=5, stride=2, padding=1),
-            # EfficientBlock(32, 32, expand_ratio=2, stride=1, padding=1),
-            # EfficientBlock(32, 64, expand_ratio=5, stride=2, padding=1),
-            # EfficientBlock(64, 64, expand_ratio=3, stride=1, padding=1),
-            # EfficientBlock(64, 112, expand_ratio=5, stride=1, padding=1),
-            # EfficientBlock(112, 112, expand_ratio=3, stride=1, padding=1)
+            EfficientBlock(32, 16, expand_ratio=2, stride=1,padding=1),
+            EfficientBlock(16, 32, expand_ratio=5, stride=2, padding=1),
+            EfficientBlock(32, 32, expand_ratio=2, stride=1, padding=1),
+            EfficientBlock(32, 64, expand_ratio=5, stride=2, padding=1),
+            EfficientBlock(64, 64, expand_ratio=3, stride=1, padding=1),
+            EfficientBlock(64, 112, expand_ratio=2, stride=1, padding=1),
+            EfficientBlock(112, 112, expand_ratio=3, stride=1, padding=1)
            
             
         )

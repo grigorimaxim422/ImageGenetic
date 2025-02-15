@@ -267,6 +267,9 @@ def find_model_files(model_dir):
         for file in files:
             if file.endswith(".pt") or file.endswith(".pth"):  
                 model_files.append(os.path.join(root, file))
+                
+    model_files.sort(reverse=True)
+
     return model_files
     
 def main(args):
@@ -275,6 +278,8 @@ def main(args):
         model_files = find_model_files(args.model_path)
         results = []
         print(f"{model_files}")
+        model_files.sort(key=lambda f: os.path.basename(f), reverse=True)
+        
         for model_file in model_files:
             validatoe(model_file)            
         # with mp.Pool(processes=mp.cpu_count()) as pool:
