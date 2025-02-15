@@ -11,6 +11,7 @@ import random
 import argparse
 import os
 import math
+import json
 import asyncio
 from validate.forward import *
 
@@ -225,8 +226,15 @@ async def main(args):
         accuracy = math.floor(trainer.test(retrained_model))            
         retrained_params = sum(param.numel() for param in retrained_model.parameters())     
         retrained_params = round_to_nearest_significant(retrained_params, 1)
-        retrained_macs = calc_flops_onnx(retrained_model)
+        retrained_macs = calc_flops_onnx(retrained_model, args.model_path,args.validate_epochs)
         
+        with open(f"{args.model_path}-profile{str(args.validate_epochs).zfill(3)}.json", "w") as f:
+            json.dump({
+                "params":params,
+                "flops":retrained_macs,
+                "accuracy":accuracy
+                       }, f, indent=4)
+
         print("-------------------------------")
         print(f"B.🖥️ Accuracy: {accuracy}%")    
         print(f"B.🖥️ Params: {retrained_params/1000}K")    

@@ -1,0 +1,871 @@
+### TorchScript Model Architecture ###
+
+Module: stem
+  Type: Sequential
+  Trainable Parameters: 464
+
+Module: stem.0
+  Type: Conv2d
+  Trainable Parameters: 432
+  In Channels: 3, Out Channels: 16
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: stem.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: stem.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks
+  Type: Sequential
+  Trainable Parameters: 233032
+
+Module: blocks.0
+  Type: ConvBlock
+  Trainable Parameters: 1008
+  In Channels: 16, Out Channels: 16
+  Stride: 1
+
+Module: blocks.0.expand_conv
+  Type: Identity
+  Trainable Parameters: 0
+
+Module: blocks.0.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 176
+
+Module: blocks.0.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 144
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: blocks.0.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.0.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.0.se
+  Type: SqueezeExcite
+  Trainable Parameters: 544
+
+Module: blocks.0.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.0.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.0.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.0.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.0.project_conv
+  Type: Sequential
+  Trainable Parameters: 288
+
+Module: blocks.0.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 256
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.0.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.1
+  Type: ConvBlock
+  Trainable Parameters: 1008
+  In Channels: 16, Out Channels: 16
+  Stride: 1
+
+Module: blocks.1.expand_conv
+  Type: Identity
+  Trainable Parameters: 0
+
+Module: blocks.1.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 176
+
+Module: blocks.1.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 144
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: blocks.1.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.1.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.1.se
+  Type: SqueezeExcite
+  Trainable Parameters: 544
+
+Module: blocks.1.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.1.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.1.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.1.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.1.project_conv
+  Type: Sequential
+  Trainable Parameters: 288
+
+Module: blocks.1.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 256
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.1.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.2
+  Type: ConvBlock
+  Trainable Parameters: 1008
+  In Channels: 16, Out Channels: 16
+  Stride: 1
+
+Module: blocks.2.expand_conv
+  Type: Identity
+  Trainable Parameters: 0
+
+Module: blocks.2.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 176
+
+Module: blocks.2.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 144
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: blocks.2.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.2.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.2.se
+  Type: SqueezeExcite
+  Trainable Parameters: 544
+
+Module: blocks.2.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.2.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.2.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.2.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.2.project_conv
+  Type: Sequential
+  Trainable Parameters: 288
+
+Module: blocks.2.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 256
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.2.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.3
+  Type: ConvBlock
+  Trainable Parameters: 1008
+  In Channels: 16, Out Channels: 16
+  Stride: 1
+
+Module: blocks.3.expand_conv
+  Type: Identity
+  Trainable Parameters: 0
+
+Module: blocks.3.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 176
+
+Module: blocks.3.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 144
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (3, 3)
+  Stride: (1, 1)
+  Padding: (1, 1)
+
+Module: blocks.3.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.3.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.3.se
+  Type: SqueezeExcite
+  Trainable Parameters: 544
+
+Module: blocks.3.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.3.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.3.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 272
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.3.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.3.project_conv
+  Type: Sequential
+  Trainable Parameters: 288
+
+Module: blocks.3.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 256
+  In Channels: 16, Out Channels: 16
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.3.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 32
+
+Module: blocks.4
+  Type: ConvBlock
+  Trainable Parameters: 10800
+  In Channels: 16, Out Channels: 24
+  Stride: 2
+
+Module: blocks.4.expand_conv
+  Type: Sequential
+  Trainable Parameters: 1440
+
+Module: blocks.4.expand_conv.0
+  Type: Conv2d
+  Trainable Parameters: 1280
+  In Channels: 16, Out Channels: 80
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.4.expand_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 160
+
+Module: blocks.4.expand_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.4.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 2160
+
+Module: blocks.4.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 2000
+  In Channels: 80, Out Channels: 80
+  Kernel Size: (5, 5)
+  Stride: (2, 2)
+  Padding: (2, 2)
+
+Module: blocks.4.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 160
+
+Module: blocks.4.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.4.se
+  Type: SqueezeExcite
+  Trainable Parameters: 5232
+
+Module: blocks.4.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 2592
+  In Channels: 80, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.4.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.4.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 2640
+  In Channels: 32, Out Channels: 80
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.4.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.4.project_conv
+  Type: Sequential
+  Trainable Parameters: 1968
+
+Module: blocks.4.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 1920
+  In Channels: 80, Out Channels: 24
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.4.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 48
+
+Module: blocks.5
+  Type: ConvBlock
+  Trainable Parameters: 17120
+  In Channels: 24, Out Channels: 24
+  Stride: 1
+
+Module: blocks.5.expand_conv
+  Type: Sequential
+  Trainable Parameters: 3120
+
+Module: blocks.5.expand_conv.0
+  Type: Conv2d
+  Trainable Parameters: 2880
+  In Channels: 24, Out Channels: 120
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.5.expand_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 240
+
+Module: blocks.5.expand_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.5.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 3240
+
+Module: blocks.5.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 3000
+  In Channels: 120, Out Channels: 120
+  Kernel Size: (5, 5)
+  Stride: (1, 1)
+  Padding: (2, 2)
+
+Module: blocks.5.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 240
+
+Module: blocks.5.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.5.se
+  Type: SqueezeExcite
+  Trainable Parameters: 7832
+
+Module: blocks.5.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 3872
+  In Channels: 120, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.5.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.5.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 3960
+  In Channels: 32, Out Channels: 120
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.5.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.5.project_conv
+  Type: Sequential
+  Trainable Parameters: 2928
+
+Module: blocks.5.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 2880
+  In Channels: 120, Out Channels: 24
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.5.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 48
+
+Module: blocks.6
+  Type: ConvBlock
+  Trainable Parameters: 17120
+  In Channels: 24, Out Channels: 24
+  Stride: 1
+
+Module: blocks.6.expand_conv
+  Type: Sequential
+  Trainable Parameters: 3120
+
+Module: blocks.6.expand_conv.0
+  Type: Conv2d
+  Trainable Parameters: 2880
+  In Channels: 24, Out Channels: 120
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.6.expand_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 240
+
+Module: blocks.6.expand_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.6.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 3240
+
+Module: blocks.6.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 3000
+  In Channels: 120, Out Channels: 120
+  Kernel Size: (5, 5)
+  Stride: (1, 1)
+  Padding: (2, 2)
+
+Module: blocks.6.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 240
+
+Module: blocks.6.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.6.se
+  Type: SqueezeExcite
+  Trainable Parameters: 7832
+
+Module: blocks.6.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 3872
+  In Channels: 120, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.6.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.6.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 3960
+  In Channels: 32, Out Channels: 120
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.6.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.6.project_conv
+  Type: Sequential
+  Trainable Parameters: 2928
+
+Module: blocks.6.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 2880
+  In Channels: 120, Out Channels: 24
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.6.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 48
+
+Module: blocks.7
+  Type: ConvBlock
+  Trainable Parameters: 32000
+  In Channels: 24, Out Channels: 48
+  Stride: 2
+
+Module: blocks.7.expand_conv
+  Type: Sequential
+  Trainable Parameters: 4992
+
+Module: blocks.7.expand_conv.0
+  Type: Conv2d
+  Trainable Parameters: 4608
+  In Channels: 24, Out Channels: 192
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.7.expand_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: blocks.7.expand_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.7.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 5184
+
+Module: blocks.7.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 4800
+  In Channels: 192, Out Channels: 192
+  Kernel Size: (5, 5)
+  Stride: (2, 2)
+  Padding: (2, 2)
+
+Module: blocks.7.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 384
+
+Module: blocks.7.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.7.se
+  Type: SqueezeExcite
+  Trainable Parameters: 12512
+
+Module: blocks.7.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 6176
+  In Channels: 192, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.7.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.7.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 6336
+  In Channels: 32, Out Channels: 192
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.7.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.7.project_conv
+  Type: Sequential
+  Trainable Parameters: 9312
+
+Module: blocks.7.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 9216
+  In Channels: 192, Out Channels: 48
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.7.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 96
+
+Module: blocks.8
+  Type: ConvBlock
+  Trainable Parameters: 73088
+  In Channels: 48, Out Channels: 48
+  Stride: 1
+
+Module: blocks.8.expand_conv
+  Type: Sequential
+  Trainable Parameters: 19200
+
+Module: blocks.8.expand_conv.0
+  Type: Conv2d
+  Trainable Parameters: 18432
+  In Channels: 48, Out Channels: 384
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.8.expand_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 768
+
+Module: blocks.8.expand_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.8.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 10368
+
+Module: blocks.8.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 9600
+  In Channels: 384, Out Channels: 384
+  Kernel Size: (5, 5)
+  Stride: (1, 1)
+  Padding: (2, 2)
+
+Module: blocks.8.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 768
+
+Module: blocks.8.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.8.se
+  Type: SqueezeExcite
+  Trainable Parameters: 24992
+
+Module: blocks.8.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 12320
+  In Channels: 384, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.8.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.8.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 12672
+  In Channels: 32, Out Channels: 384
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.8.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.8.project_conv
+  Type: Sequential
+  Trainable Parameters: 18528
+
+Module: blocks.8.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 18432
+  In Channels: 384, Out Channels: 48
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.8.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 96
+
+Module: blocks.9
+  Type: ConvBlock
+  Trainable Parameters: 78872
+  In Channels: 48, Out Channels: 108
+  Stride: 2
+
+Module: blocks.9.expand_conv
+  Type: Sequential
+  Trainable Parameters: 16800
+
+Module: blocks.9.expand_conv.0
+  Type: Conv2d
+  Trainable Parameters: 16128
+  In Channels: 48, Out Channels: 336
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.9.expand_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 672
+
+Module: blocks.9.expand_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.9.depthwise_conv
+  Type: Sequential
+  Trainable Parameters: 3696
+
+Module: blocks.9.depthwise_conv.0
+  Type: Conv2d
+  Trainable Parameters: 3024
+  In Channels: 336, Out Channels: 336
+  Kernel Size: (3, 3)
+  Stride: (2, 2)
+  Padding: (1, 1)
+
+Module: blocks.9.depthwise_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 672
+
+Module: blocks.9.depthwise_conv.2
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.9.se
+  Type: SqueezeExcite
+  Trainable Parameters: 21872
+
+Module: blocks.9.se.fc1
+  Type: Conv2d
+  Trainable Parameters: 10784
+  In Channels: 336, Out Channels: 32
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.9.se.act1
+  Type: GELU
+  Trainable Parameters: 0
+
+Module: blocks.9.se.fc2
+  Type: Conv2d
+  Trainable Parameters: 11088
+  In Channels: 32, Out Channels: 336
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.9.se.act2
+  Type: Sigmoid
+  Trainable Parameters: 0
+
+Module: blocks.9.project_conv
+  Type: Sequential
+  Trainable Parameters: 36504
+
+Module: blocks.9.project_conv.0
+  Type: Conv2d
+  Trainable Parameters: 36288
+  In Channels: 336, Out Channels: 108
+  Kernel Size: (1, 1)
+  Stride: (1, 1)
+  Padding: (0, 0)
+
+Module: blocks.9.project_conv.1
+  Type: BatchNorm2d
+  Trainable Parameters: 216
+
+Module: dropout
+  Type: Dropout
+  Trainable Parameters: 0
+
+Module: classifier
+  Type: Linear
+  Trainable Parameters: 10900
+  Input Features: 108, Output Features: 100
+

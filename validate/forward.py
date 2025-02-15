@@ -77,7 +77,7 @@ def calc_flops_onnx(model,prefix="cache/", index=0):
         total_macs = int(total_macs.replace(',', ''))
         total_macs = round_flops_to_nearest_significant(total_macs)
     
-    os.remove(onnx_path)
-    os.remove(profile_path)
+    # os.remove(onnx_path)
+    # os.remove(profile_path)
     return total_macs
 

@@ -1,0 +1,389 @@
+<bound method Module.children of RecursiveScriptModule(
+  original_name=SimpleCNN
+  (stem): RecursiveScriptModule(
+    original_name=Sequential
+    (0): RecursiveScriptModule(original_name=Conv2d)
+    (1): RecursiveScriptModule(original_name=BatchNorm2d)
+    (2): RecursiveScriptModule(original_name=GELU)
+  )
+  (blocks): RecursiveScriptModule(
+    original_name=Sequential
+    (0): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (1): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (2): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (3): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (4): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (5): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (6): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (7): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (8): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (9): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (10): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (11): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (12): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (13): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+    (14): RecursiveScriptModule(
+      original_name=ConvBlock
+      (expand_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (depthwise_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+        (2): RecursiveScriptModule(original_name=GELU)
+      )
+      (project_conv): RecursiveScriptModule(
+        original_name=Sequential
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=BatchNorm2d)
+      )
+      (srm): RecursiveScriptModule(
+        original_name=SRMLayer
+        (cfc): RecursiveScriptModule(original_name=Conv1d)
+        (bn): RecursiveScriptModule(original_name=BatchNorm1d)
+      )
+    )
+  )
+  (dropout): RecursiveScriptModule(original_name=Dropout)
+  (classifier): RecursiveScriptModule(original_name=Linear)
+)>

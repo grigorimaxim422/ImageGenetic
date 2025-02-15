@@ -1,0 +1,11 @@
+def forward(self,
+    x: Tensor) -> Tensor:
+  stem = self.stem
+  x0 = (stem).forward(x, )
+  blocks = self.blocks
+  x1 = (blocks).forward(x0, )
+  x2 = torch.mean(x1, [2, 3])
+  dropout = self.dropout
+  x3 = (dropout).forward(x2, )
+  classifier = self.classifier
+  return (classifier).forward(x3, )
