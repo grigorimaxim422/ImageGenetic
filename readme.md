@@ -21,8 +21,19 @@ This project aims to train the optimal TorchScript model that not only maximizes
 
 - FLOPs: Ideally 30M–40M
 
+## 2. Installation (offline)
+- Pull down docker image and run it in docker desktop
+```
+    docker push grigorimaxim/image-genetic:tagname
+```
+- Activate conda and run train or validate shell script.
+```
+    conda init
+    exit
+    cd /workspace/ImageGenetic    
+```
 
-## 2. Installation
+## 2. Installation (online)
 
 Follow these steps to set up the environment:
 
