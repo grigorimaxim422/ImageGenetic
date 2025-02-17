@@ -80,7 +80,7 @@ class OfflineValiTrainer:
             transforms.Normalize((0.50707516, 0.48654887, 0.44091785), (0.26733429, 0.25643846, 0.27615047))
         ])
         
-        self.testset = torchvision.datasets.CIFAR100(root='./data/cifar-100-python', train=False, download=True, transform=transform_test)        
+        self.testset = torchvision.datasets.CIFAR100(root='./data/cifar-100-python', train=False, download=False, transform=transform_test)        
         self.testloader = DataLoader(self.testset, batch_size=self.batch_size, num_workers=5,
                                      worker_init_fn=self.worker_init_fn, generator=g, pin_memory=True)
     
