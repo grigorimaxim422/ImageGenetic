@@ -114,7 +114,7 @@
 
 # Use the official PyTorch image with GPU support
 
-# FROM pytorch/pytorch:2.5.0-cuda11.8-cudnn9-runtime
+FROM pytorch/pytorch:2.5.0-cuda11.8-cudnn9-runtime
 
 
 WORKDIR /workspace
@@ -134,6 +134,7 @@ COPY . /workspace/ImageGenetic
 RUN chmod +x /workspace/ImageGenetic/download.sh && cd /workspace/ImageGenetic && ./download.sh
 
 #CMD ["sh", "-c", "cd /workspace/ImageGenetic && ./train_offline.sh"]
+#CMD ["sh", "-c", "bin/sh"]
     
 
 
