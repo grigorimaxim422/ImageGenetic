@@ -85,7 +85,8 @@ class DummyTrainer:
         g = torch.Generator()
         g.manual_seed(0)
 
-        self.trainset = torchvision.datasets.CIFAR100(root='./data', train=True, download=True, transform=transform_train)
+        self.trainset = torchvision.datasets.CIFAR100(root='./data/cifar-100-python', train=True, download=True, transform=transform_train)
+        # self.trainset = torchvision.datasets.ImageFolder(root='./data/cifar-100-python', transform=transform_train)
         self.trainloader = DataLoader(self.trainset, batch_size=self.batch_size, num_workers=5,
                                       worker_init_fn=self.worker_init_fn, generator=g, pin_memory=True, shuffle=False)
 
@@ -95,7 +96,9 @@ class DummyTrainer:
             transforms.Normalize((0.50707516, 0.48654887, 0.44091785), (0.26733429, 0.25643846, 0.27615047))
         ])
         
-        self.testset = torchvision.datasets.CIFAR100(root='./data', train=False, download=True, transform=transform_test)
+        
+        self.testset = torchvision.datasets.CIFAR100(root='./data/cifar-100-python', train=False, download=True, transform=transform_test)
+        # self.testset = torchvision.datasets.ImageFolder(root='./data/cifar-100-python', transform=transform_train)
         self.testloader = DataLoader(self.testset, batch_size=self.batch_size, num_workers=5,
                                      worker_init_fn=self.worker_init_fn, generator=g, pin_memory=True)
     
