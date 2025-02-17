@@ -126,9 +126,13 @@ RUN pip install --upgrade pip \
     && pip install huggingface_hub[hf_transfer] \
     && rm -rf /root/.cache/pip/*
     
-CMD ["sh", "-c", "cd /workspace/ImageGenetic && ./download.sh"]
+# CMD ["sh", "-c", "cd /workspace/ImageGenetic && ./download.sh"]
 
 COPY . /workspace/ImageGenetic
+
+CMD [ "rm", "-rf", "./data/cifar-100-python/"]
+CMD ["python3", "-c", "import torchvision; torchvision.datasets.CIFAR100(root='./data', train=True, download=True)"]
+
 
 CMD ["sh", "-c", "cd /workspace/ImageGenetic && ./train_offline.sh"]
     
