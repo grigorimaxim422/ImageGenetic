@@ -2,7 +2,7 @@ __pycache__/
 model/__pycache__/
 *.pyc
 cache/
-data/
+# data/
 data100/
 data100v2/
 data100*/
