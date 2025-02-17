@@ -55,11 +55,20 @@ chmod +x ./*.sh
 ```
 ./train_offline.sh
 ```
+or 
+```
+python3 -m validate.offline_trainer --epochs 200 --validate_epochs 50 --learning_rate 0.025 --net_name dummy --model_path "saved_model/dummy.pt"
+```
 ### Validate a Pretrained model
 
 ```
 ./validate_offline.sh
 ```
+or
+```
+python3 -m validate.offline_vali_trainer --validate_epochs 50  --model_path  "saved_model/dummy.pt" --learning_rate 0.025
+```
+
 ### Train an NSGA-Net V1 Model(Non-TorchScript)
 
 ```
