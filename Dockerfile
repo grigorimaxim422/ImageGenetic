@@ -119,13 +119,13 @@ FROM pytorch/pytorch:2.5.0-cuda11.8-cudnn9-runtime
 
 WORKDIR /workspace
 
-RUN conda init bash
+RUN conda init 
 
-COPY ./requirements.txt /workspace/requirements.txt
+COPY ./requirements.txt /workspace/requirements2.txt
 
 RUN pip install --upgrade pip \
     && pip install --upgrade pip setuptools \
-    && pip install -r /workspace/requirements.txt  \    
+    && pip install -r /workspace/requirements2.txt  \    
     && rm -rf /root/.cache/pip/*
     
 # CMD [ "rm", "-rf", "./data/cifar-100-python/"]
