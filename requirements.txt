@@ -1,6 +1,6 @@
 numpy
 pymoo
-torch
+torch==2.5.0
 torchvision
 pandas==2.2.3
 pynvml==11.5.0

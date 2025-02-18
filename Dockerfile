@@ -1,9 +1,9 @@
-# syntax=docker/dockerfile:1
+# # # syntax=docker/dockerfile:1
 
-# NOTE: Building this image require's docker version >= 23.0.
-#
-# For reference:
-# - https://docs.docker.com/build/dockerfile/frontend/#stable-channel
+# # # NOTE: Building this image require's docker version >= 23.0.
+# # #
+# # # For reference:
+# # # - https://docs.docker.com/build/dockerfile/frontend/#stable-channel
 
 # ARG BASE_IMAGE=ubuntu:22.04
 # ARG PYTHON_VERSION=3.11
@@ -56,7 +56,7 @@
 # RUN make triton
 # RUN --mount=type=cache,target=/opt/ccache \
 #     export eval ${CMAKE_VARS} && \
-#     TORCH_CUDA_ARCH_LIST="7.0 7.2 7.5 8.0 8.6 8.7 8.9 9.0 9.0a" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+#     TORCH_CUDA_ARCH_LIST="8.0 9.0" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
 #     CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
 #     python setup.py install
 
@@ -112,19 +112,20 @@
 # # Should override the already installed version from the official-image stage
 # COPY --from=build /opt/conda /opt/conda
 
-# Use the official PyTorch image with GPU support
+# # # Use the official PyTorch image with GPU support
 
 FROM pytorch/pytorch:2.5.0-cuda11.8-cudnn9-runtime
 
 
 WORKDIR /workspace
 
+RUN conda init bash
+
 COPY ./requirements.txt /workspace/requirements.txt
 
 RUN pip install --upgrade pip \
     && pip install --upgrade pip setuptools \
-    && pip install -r /workspace/requirements.txt  \
-    && pip install huggingface_hub[hf_transfer] \
+    && pip install -r /workspace/requirements.txt  \    
     && rm -rf /root/.cache/pip/*
     
 # CMD [ "rm", "-rf", "./data/cifar-100-python/"]
