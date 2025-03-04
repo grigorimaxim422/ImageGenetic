@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
+import torch.nn.utils.prune as prune
 from torch.utils.data import DataLoader
 import logging
 import os
@@ -78,8 +79,14 @@ class DummyTrainer:
         self.model = self.model.to(self.device)
         
         self.criterion = nn.CrossEntropyLoss()
-        self.optimizer = optim.SGD(self.model.parameters(), lr=self.learning_rate, momentum=self.momentum, weight_decay=self.weight_decay)
-        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, self.epochs,eta_min=0.0001)
+        self.optimizer = optim.SGD(self.model.parameters(),
+                                   lr=self.learning_rate, 
+                                   momentum=self.momentum,
+                                   weight_decay=self.weight_decay)
+
+        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer,
+                                                                    self.epochs,
+                                                                    eta_min=0.0001)
 
         # Data loading and normalization
         transform_train = transforms.Compose([
@@ -152,12 +159,13 @@ class DummyTrainer:
                 if i % 100 == 99:  # Print every 100 mini-batches
                     print(f'Epoch [{epoch + 1}, {i + 1}] loss: {running_loss / 100:.3f}')
                     running_loss = 0.0
-
+            
+            prune.l1_unstructured(self.model, name="weight", amount=0.5)
             acc = self.test()
             if acc > best_acc:
                 best_acc = acc
                 if acc > 50.:
-                    best_acc = acc
+                    best_acc = acc                    
                     scripted_model = torch.jit.script(self.model)
                     scripted_model.save(f"{save_path}.best")
                     print(f"model saved into {save_path}.best...")

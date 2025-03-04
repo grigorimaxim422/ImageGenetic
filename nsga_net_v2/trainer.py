@@ -37,6 +37,8 @@ logging.basicConfig(level=logging.INFO)
 log_format = '%(asctime)s %(message)s'
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format=log_format, datefmt='%m/%d %I:%M:%S %p')
+if not os.path.exists(args.save_dir):
+    os.makedirs(args.save_dir)
 fh = logging.FileHandler(os.path.join(args.save_dir, 'log.txt'))
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
@@ -138,7 +140,8 @@ class NSGANetV2Trainer:
                           momentum=self.momentum,
                           weight_decay=self.weight_decay)
         
-        self.scheduler = optim.lr_scheduler.CosineAnnealingLR(self.optimizer, n_epochs)
+        self.scheduler = optim.lr_scheduler.CosineAnnealingLR(self.optimizer, 
+                                                              n_epochs)
         
     def _data_transforms(self):
         norm_mean = [0.49139968, 0.48215827, 0.44653124]
